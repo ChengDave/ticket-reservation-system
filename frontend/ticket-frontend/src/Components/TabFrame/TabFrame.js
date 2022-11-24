@@ -54,7 +54,6 @@ function TabFrame() {
 				<Tab label="Payment">
 					<div>
 						<Checkout/>
-						<p>Tab 5 content</p>
 					</div>
 				</Tab>
 			</Tabs>
