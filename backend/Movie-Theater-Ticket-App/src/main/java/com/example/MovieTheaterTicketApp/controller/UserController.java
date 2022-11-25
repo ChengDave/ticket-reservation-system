@@ -3,14 +3,12 @@ package com.example.MovieTheaterTicketApp.controller;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/vi/user")
+@RequestMapping(path = "api/vi/users")
 public class UserController {
 
     private final UserService userService;
@@ -20,9 +18,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping()
     public List<RegisteredUser> getUsers(){
         // return list of all registered users
         return userService.getUsers();
+    }
+
+    @PostMapping()
+    public void registerUser(@RequestBody RegisteredUser registerUser){
+        // register student
+         userService.register(registerUser);
     }
 }
