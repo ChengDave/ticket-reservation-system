@@ -1,4 +1,4 @@
-package com.example.MovieTheaterTicketApp;
+package com.example.MovieTheaterTicketApp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,18 +21,22 @@ public class RegisteredUser implements User{
     protected RegisteredUser() {
     }
 
+    @Override
+    public String toString() {
+        return "RegisteredUser{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
+    }
+
     public RegisteredUser(String firstName, String lastName, String email, boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.isAdmin = isAdmin;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
     }
 
     public Long getId() {

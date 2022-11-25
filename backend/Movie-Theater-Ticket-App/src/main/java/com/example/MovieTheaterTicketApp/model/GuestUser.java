@@ -1,10 +1,12 @@
-package com.example.MovieTheaterTicketApp;
+package com.example.MovieTheaterTicketApp.model;
+
+import com.example.MovieTheaterTicketApp.model.User;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class GuestUser implements User{
+public class GuestUser implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
