@@ -8,10 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.ComponentScan;
-import com.example.MovieTheaterTicketApp.user.User;
-import com.example.MovieTheaterTicketApp.user.UserRepository;
 
-@ComponentScan("user")
 
 @SpringBootApplication
 public class MovieTheaterTicketAppApplication {
@@ -28,11 +25,9 @@ public class MovieTheaterTicketAppApplication {
 	public CommandLineRunner demo(UserRepository repository) {
 		return (args) -> {
 			// save a few customers
-			repository.save(new User("Jack", "Bauer"));
-//			repository.save(new User("Chloe", "O'Brian"));
-//			repository.save(new User("Kim", "Bauer"));
-//			repository.save(new User("David", "Palmer"));
-//			repository.save(new User("Michelle", "Dessler"));
+			repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com"));
+			repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com"));
+			repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com"));
 //
 //			// fetch all customers
 //			log.info("Customers found with findAll():");
