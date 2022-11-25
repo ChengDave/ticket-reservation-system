@@ -15,14 +15,17 @@ public class RegisteredUser implements User{
 
     private String email;
 
+    private boolean isAdmin;
+
 
     protected RegisteredUser() {
     }
 
-    public RegisteredUser(String firstName, String lastName, String email) {
+    public RegisteredUser(String firstName, String lastName, String email, boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.isAdmin = isAdmin;
     }
 
     @Override

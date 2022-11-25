@@ -10,6 +10,7 @@ public class GuestUser implements User{
     private Long id;
     private String email;
 
+
     protected GuestUser() {
     }
 
