@@ -7,16 +7,19 @@ function Checkout() {
   return (
     <form>
       <InputField label = "Email" className="full"/>
-      <InputField label = "First Name" className="two-wide-left"/>
-      <InputField label = "Last Name" className="two-wide-right"/>
+      <InputField label = "First Name" className="two-wide left"/>
+      <InputField label = "Last Name" className="two-wide right"/>
 
       <InputField label = "Address" className="full"/>
       
-      <InputField label = "City" className="three-wide-left"/>
-      <InputField label = "Province/State" className="three-wide-middle"/>
-      <InputField label = "Country" className="three-wide-right"/>
+      <InputField label = "City" className="two-wide left"/>
+      <InputField label = "Province/State" className="two-wide right"/>
+      <InputField label = "Country" className="two-wide left"/>
 
-      <InputField label = "Postal Code" className="full"/>
+      <InputField label = "Postal Code" className="two-wide right"/>
+
+      <button className='checkout-button'>Purchase</button>
+      <button className='checkout-button'>Cancel</button>
       
     </form>
   )

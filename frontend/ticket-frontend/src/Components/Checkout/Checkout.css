@@ -20,31 +20,34 @@ form {
 	clear: both;
 }
 
-.two-wide-left {
-	width: 49%;
+.two-wide {
+	width: 49.5%;
+}
+
+.left {
 	float: left;
 }
 
-.two-wide-right {
-	width: 49%;
+.right {
 	float: right;
 }
 
-.three-wide-left {
-	width: 32%;
-	float: left;
-}
-
-.three-wide-right {
-	width: 32%;
+.checkout-button {
+	margin-right: 0%;
+	margin-left: 1%;
 	float: right;
-	vertical-align: text-top;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #90e0ef;
+	color: black;
+	font-size: 15px;
+	border-radius: 5px 5px 5px 5px;
+	border: 2px solid #03045e;
 }
 
-.three-wide-middle {
-	width: 32%;
-	margin-left: auto;
-	margin-right: auto;
+.checkout-button:hover{
+	border: 3px solid whitesmoke;
+	color: whitesmoke;
 }
 
 
