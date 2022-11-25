@@ -1,14 +1,20 @@
 package com.example.MovieTheaterTicketApp.service;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.model.User;
+import com.example.MovieTheaterTicketApp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
+    private final UserRepository userRepository;
 
-    public List<User> getUsers(){
-        return List.of(new RegisteredUser("Kim", "Bauer","test3@gmail.com",true));
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public List<RegisteredUser> getUsers(){
+        return (List<RegisteredUser>) userRepository.findAll();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.MovieTheaterTicketApp.controller;
 
-import com.example.MovieTheaterTicketApp.model.User;
+import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +20,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers(){
+    @GetMapping("/getall")
+    public List<RegisteredUser> getUsers(){
         // return list of all registered users
         return userService.getUsers();
     }
