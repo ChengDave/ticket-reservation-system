@@ -22,12 +22,12 @@ public class MovieTheaterTicketAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserRepository repository) {
+	public CommandLineRunner DataLoader(UserRepository user_repository) {
 		return (args) -> {
 			// save a few customers
-			repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com"));
-			repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com"));
-			repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com"));
+			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com"));
+			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com"));
+			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com"));
 //
 //			// fetch all customers
 //			log.info("Customers found with findAll():");
