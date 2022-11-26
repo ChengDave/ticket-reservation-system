@@ -1,25 +1,30 @@
 package com.example.MovieTheaterTicketApp.service;
 
-import com.example.MovieTheaterTicketApp.model.RegisteredUser;
-import com.example.MovieTheaterTicketApp.repository.UserRepository;
+import com.example.MovieTheaterTicketApp.model.Movie;
+import com.example.MovieTheaterTicketApp.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MovieService {
-    private final UserRepository movieRepository;
+    private final MovieRepository movieRepository;
 
-    public MovieService(UserRepository userRepository) {
-        this.movieRepository = userRepository;
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
-    public List<RegisteredUser> getUsers(){
-        return (List<RegisteredUser>) movieRepository.findAll();
+    public List<Movie> getMovies(){
+        return (List<Movie>) movieRepository.findAll();
     }
 
-    public void register(RegisteredUser registerUser) {
+    public void addMovie(Movie movie) {
         //TODO: Need error handling if movie name is already taken
-        movieRepository.save(registerUser);
+        movieRepository.save(movie);
+    }
+
+    public void removeMovie(Movie movie) {
+        //TODO: Need error handling if movie name does not exist
+        movieRepository.save(movie);
     }
 }

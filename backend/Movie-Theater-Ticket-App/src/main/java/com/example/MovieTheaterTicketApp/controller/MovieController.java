@@ -1,5 +1,6 @@
 package com.example.MovieTheaterTicketApp.controller;
 
+import com.example.MovieTheaterTicketApp.model.Movie;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.service.MovieService;
 import com.example.MovieTheaterTicketApp.service.UserService;
@@ -18,14 +19,14 @@ public class MovieController {
     }
 
     @GetMapping()
-    public List<RegisteredUser> getUsers(){
+    public List<Movie> getMovies(){
         // return list of all registered users
-        return movieService.getUsers();
+        return movieService.getMovies();
     }
 
     @PostMapping()
-    public void registerUser(@RequestBody RegisteredUser registerUser){
+    public void addMovie(@RequestBody Movie movie){
         // register student
-        movieService.register(registerUser);
+        movieService.addMovie(movie);
     }
 }
