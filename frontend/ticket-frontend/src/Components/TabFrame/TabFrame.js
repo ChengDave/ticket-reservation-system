@@ -2,10 +2,12 @@ import './TabFrame.css';
 import React, { useState, useEffect } from 'react';
 import TileGrid from "../TileGrid/TileGrid"
 import Checkout from "../Checkout/Checkout"
+import AccordianList from "../AccordionList/AccordionList"
 
 function TabFrame() {
 
 	const [count, setCount] = useState(0);
+	const [parameters, setParameters] = useState({movie: '', theater: ""})
 
 	let movies = []
 	for (let i = 1; i <= 16; i++) {
@@ -33,22 +35,19 @@ function TabFrame() {
 			<Tabs count = {count} setCount = {setCount}>
 				<Tab label="Movie">
 					<div>
-						<TileGrid  count = {count} setCount = {setCount} items = {movies}/>
-					</div>
-				</Tab>
-				<Tab label="Theater">
-					<div>
-						<TileGrid  count = {count} setCount = {setCount} items = {theaters}/>
+						<TileGrid count = {count} setCount = {setCount} items = {movies} params = {parameters} setParams = {setParameters}/>
 					</div>
 				</Tab>
 				<Tab label="Showtime">
 					<div>
-						<TileGrid  count = {count} setCount = {setCount} items = {showtimes}/>
+						<AccordianList count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}></AccordianList>
+						{/* <TileGrid  count = {count} setCount = {setCount} items = {theaters} params = {parameters} setParams = {setParameters}/> */}
 					</div>
 				</Tab>
 				<Tab label="Seat">
 					<div>
-						<TileGrid  count = {count} setCount = {setCount} items = {seats}/>
+						<p>Select Seat</p>
+						{/* <TileGrid  count = {count} setCount = {setCount} items = {seats} params = {parameters} setParams = {setParameters}/> */}
 					</div>
 				</Tab>
 				<Tab label="Payment">
@@ -65,7 +64,7 @@ class Tabs extends React.Component{
 	
 
 	state = {
-		activeTab: this.props.children[0].props.label
+		activeTab: this.props.children[this.props.count].props.label
 	};
 
 	nextTab = () => {
