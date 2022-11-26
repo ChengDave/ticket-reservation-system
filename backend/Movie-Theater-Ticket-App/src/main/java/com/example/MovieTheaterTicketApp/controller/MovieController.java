@@ -1,9 +1,6 @@
 package com.example.MovieTheaterTicketApp.controller;
-
 import com.example.MovieTheaterTicketApp.model.Movie;
-import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.service.MovieService;
-import com.example.MovieTheaterTicketApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +17,19 @@ public class MovieController {
 
     @GetMapping()
     public List<Movie> getMovies(){
-        // return list of all registered users
+        // return list of all movies
         return movieService.getMovies();
     }
 
     @PostMapping()
     public void addMovie(@RequestBody Movie movie){
-        // register student
+        // add movie to db
         movieService.addMovie(movie);
+    }
+
+    @DeleteMapping()
+    public void removeMovie(@RequestBody Movie movie){
+        // remove movie from db
+        movieService.removeMovie(movie);
     }
 }

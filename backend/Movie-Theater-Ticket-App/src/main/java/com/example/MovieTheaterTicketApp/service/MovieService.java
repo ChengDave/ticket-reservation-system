@@ -1,5 +1,4 @@
 package com.example.MovieTheaterTicketApp.service;
-
 import com.example.MovieTheaterTicketApp.model.Movie;
 import com.example.MovieTheaterTicketApp.repository.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,6 @@ public class MovieService {
 
     public void removeMovie(Movie movie) {
         //TODO: Need error handling if movie name does not exist
-        movieRepository.save(movie);
+        movieRepository.delete(movie);
     }
 }
