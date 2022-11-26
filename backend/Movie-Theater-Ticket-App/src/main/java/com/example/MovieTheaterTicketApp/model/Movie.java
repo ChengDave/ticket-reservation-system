@@ -15,6 +15,13 @@ public class Movie {
     )
     private String movieTitle;
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", movieTitle='" + movieTitle + '\'' +
+                '}';
+    }
 
     public Movie() {
 
