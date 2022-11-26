@@ -26,9 +26,9 @@ public class MovieTheaterTicketAppApplication {
 	public CommandLineRunner DataLoader(UserRepository user_repository) {
 		return (args) -> {
 			// save a few customers
-			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com",false));
-			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com",false));
-			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com",true));
+			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com","123" ,false));
+			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com","123",false));
+			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com","123",true));
 
 			// fetch all customers
 			log.info("Users found with findAll():");
