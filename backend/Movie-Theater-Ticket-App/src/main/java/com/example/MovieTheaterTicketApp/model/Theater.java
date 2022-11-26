@@ -2,33 +2,33 @@ package com.example.MovieTheaterTicketApp.model;
 
 import javax.persistence.*;
 
-@Entity(name = "Movie")
-public class Movie {
+@Entity(name = "Theater")
+public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(
-            name = "movieTitle",
+            name = "theaterTitle",
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private String movieTitle;
+    private String theaterTitle;
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Theater{" +
                 "id=" + id +
-                ", movieTitle='" + movieTitle + '\'' +
+                ", theaterTitle='" + theaterTitle + '\'' +
                 '}';
     }
 
-    public Movie() {
+    public Theater() {
 
     }
 
-    public Movie(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public Theater(String theaterTitle) {
+        this.theaterTitle = theaterTitle;
     }
 
 
@@ -42,11 +42,11 @@ public class Movie {
         return id;
     }
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public String getTheaterTitle() {
+        return theaterTitle;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public void setTheaterTitle(String movieTitle) {
+        this.theaterTitle = movieTitle;
     }
 }
