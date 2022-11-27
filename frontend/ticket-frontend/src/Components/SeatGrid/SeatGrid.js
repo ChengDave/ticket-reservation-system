@@ -27,8 +27,6 @@ const SeatGrid = (props) => {
 			return
 		}
 
-		console.log(selection)
-
 		p.seats = selection
 		props.setParams(p)
 
