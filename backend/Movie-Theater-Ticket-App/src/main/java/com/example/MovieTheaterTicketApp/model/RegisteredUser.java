@@ -3,11 +3,6 @@ package com.example.MovieTheaterTicketApp.model;
 import javax.persistence.*;
 
 @Entity(name = "RegisteredUser")
-@Table(name="registeredUser",
-        uniqueConstraints = {
-        @UniqueConstraint(name="email_unque",columnNames = "email")
-        }
-)
 public class RegisteredUser implements User{
 
     @Id

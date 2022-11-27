@@ -10,34 +10,36 @@ public class Showtime {
     private Long id;
 
     @ManyToOne
-    private Movie movieID;
+    @JoinColumn(name="movieId")
+    private Movie movie;
 
     @ManyToOne
-    private Theater theaterID;
+    @JoinColumn(name="theaterId")
+    private Theater theater;
 
     @Column(name = "local_date_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime localDateTime;
 
-    public Showtime(Movie movieID, Theater theaterID, LocalDateTime localDateTime) {
-        this.movieID = movieID;
-        this.theaterID = theaterID;
+    public Showtime(Movie movie, Theater theater, LocalDateTime localDateTime) {
+        this.movie = movie;
+        this.theater = theater;
         this.localDateTime = localDateTime;
     }
 
-    public Movie getMovieID() {
-        return movieID;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieID(Movie movieID) {
-        this.movieID = movieID;
+    public void setMovieID(Movie movie) {
+        this.movie = movie;
     }
 
-    public Theater getTheaterID() {
-        return theaterID;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTheaterID(Theater theaterID) {
-        this.theaterID = theaterID;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -50,15 +52,6 @@ public class Showtime {
 
     public Showtime() {
 
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
     }
 
 }
