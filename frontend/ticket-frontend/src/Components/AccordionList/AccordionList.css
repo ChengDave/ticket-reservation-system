@@ -14,6 +14,14 @@ body {
 	max-height: 9999px;
 }
 
+.🔽 {
+	background-color: pink;
+}
+
+.🔽:hover {
+	background-color: whitesmoke;
+}
+
 .accordion-item.collapsed {
 	max-height: 0;
 	transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);

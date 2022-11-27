@@ -25,17 +25,19 @@ const TileGrid = (props) => {
 
 	let labels = []
 	let labels_temp = []
+	let j = 0;
 
 	for (let i = 0; i < props.items.length; i++) {
-		labels_temp.push(<Tile label = {movies[i]} count = {props.count} setCount = {props.setCount} params = {props.params} setParams = {props.setParams}/>)
+		labels_temp.push(<Tile label = {movies[i]} count = {props.count} setCount = {props.setCount} params = {props.params} setParams = {props.setParams} key = {i}/>)
 
 		if (i % 4 === 3) {
-			labels.push(<div className="table-row">{labels_temp}</div>)
+			labels.push(<div className="table-row" key = {j}>{labels_temp}</div>)
+			j++
 			labels_temp = []
 		}
 	}
 	
-	labels.push(<div className="table-row">{labels_temp}</div>)
+	labels.push(<div className="table-row" key = {j}>{labels_temp}</div>)
 
 	return(
 			<div className="table">

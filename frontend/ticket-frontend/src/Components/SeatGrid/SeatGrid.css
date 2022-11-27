@@ -1,0 +1,68 @@
+.seat-button {
+	background-color: #0077b6;
+	border: 2px solid black;
+	color: white;
+	padding: 0px;
+	text-align: center;
+	vertical-align: top;
+	font-size: 16px;
+	margin: 4px 6px;
+	width: 3vw;
+	height: 3vw;
+	transition-duration: 0ms;
+	border-radius: 20%;
+}
+  
+.seat-grid {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.taken {
+	background-color: #0077b6;
+}
+
+.available { 
+	background-color: rgb(0, 128, 34);
+}
+
+h2 {
+	text-align: middle;
+	line-height: 60px;
+	height: 60px;
+}
+
+.green-square {
+	background-color: rgb(0, 128, 34);
+	border: 2px solid black;
+	color: white;
+	padding: 0px;
+	text-align: center;
+	vertical-align: top;
+	font-size: 16px;
+	margin: 4px 6px;
+	width: 80px;
+	height: 50px;
+	transition-duration: 0ms;
+	border-radius: 10px;
+}
+
+.blue-square {
+	background-color: #0077b6;
+	color: white;
+	padding: 0px;
+	text-align: center;
+	vertical-align: top;
+	font-size: 16px;
+	margin: 4px 6px;
+	width: 50px;
+	height: 50px;
+	transition-duration: 0ms;
+	border-radius: 10px;
+}
+
+.selected {
+	background-color: #FAC898;
+	color: #000;
+}
