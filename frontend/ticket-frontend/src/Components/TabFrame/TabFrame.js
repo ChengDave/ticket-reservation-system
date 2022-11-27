@@ -80,7 +80,6 @@ class Tabs extends React.Component{
 
 	static getDerivedStateFromProps(nextProps, state) {
 		state.activeTab = nextProps.children[nextProps.count].props.label
-		console.log(state)
 		return state
 	}
 

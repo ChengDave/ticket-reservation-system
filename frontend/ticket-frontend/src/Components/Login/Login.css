@@ -1,0 +1,69 @@
+.login-border {
+	font-weight: 900;
+	height: 80vh;
+}
+
+.login-form {
+    margin-left:auto;
+    margin-right:auto;
+
+	width: fit-content;
+	height: fit-content;
+
+	padding: 30px;
+	background: #90e0ef;
+	opacity: 50;
+	border-radius: 10px;
+	border:5px black;
+	border-style: outset;
+
+	position: relative;
+	top: 35%;
+	vertical-align: middle;
+}
+
+.login-label {
+	font-family:Helvetica;
+	font-size: 24px;
+	color: black;
+	padding-right: 50px;
+}
+
+.login-input {
+	font-family:Helvetica;
+	font-size: 24px;
+	float: right;
+	background-color: #caf0f8;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.signin-button {
+	margin-right: 0%;
+	margin-left: 1%;
+	float: right;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #90e0ef;
+	color: black;
+	font-size: 15px;
+	border-radius: 5px 5px 5px 5px;
+	border: 2px solid #03045e;
+}
+
+.signin-button:hover{
+	border: 3px solid whitesmoke;
+	color: whitesmoke;
+}
+
+.text-button {
+	float: left;
+	color: black;
+	font-size: 16px;
+	padding: 0px;
+	padding-top: 10px;
+}
+
+.text-button:hover {
+	color: whitesmoke;
+}
