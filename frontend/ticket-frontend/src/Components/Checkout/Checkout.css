@@ -1,9 +1,23 @@
-form {
+p {
+	text-align: left;
+}
+.division {
 	width: 65vw;
 	margin-left: auto;
 	margin-right: auto;
 }
 
+h4 {
+	margin-top: 2rem;
+	text-align: left;
+}
+ 
+
+table{
+	width: 75%;
+	/* border-collapse: collapse; */
+	padding: 10px;
+}
 
 .field_input-wrapper{
 	margin-bottom: 10px;
@@ -30,6 +44,10 @@ form {
 
 .right {
 	float: right;
+}
+
+.right-align {
+	text-align: right;
 }
 
 .checkout-button {
@@ -75,6 +93,10 @@ form {
 	color: black;
 	width: 98%;
 	border: none;
+	background-color: #90e0ef;
+}
+
+.order {
 	background-color: #90e0ef;
 }
 

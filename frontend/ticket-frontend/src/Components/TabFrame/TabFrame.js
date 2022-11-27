@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import TileGrid from "../TileGrid/TileGrid"
 import Checkout from "../Checkout/Checkout"
 import AccordianList from "../AccordionList/AccordionList"
+import SeatGrid from '../SeatGrid/SeatGrid';
 
 function TabFrame() {
 
 	const [count, setCount] = useState(0);
-	const [parameters, setParameters] = useState({movie: '', theater: ""})
+	const [parameters, setParameters] = useState({movie: '', theater: "", showtime: "", seats: []})
 
 	let movies = []
 	for (let i = 1; i <= 16; i++) {
@@ -41,18 +42,16 @@ function TabFrame() {
 				<Tab label="Showtime">
 					<div>
 						<AccordianList count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}></AccordianList>
-						{/* <TileGrid  count = {count} setCount = {setCount} items = {theaters} params = {parameters} setParams = {setParameters}/> */}
 					</div>
 				</Tab>
 				<Tab label="Seat">
 					<div>
-						<p>Select Seat</p>
-						{/* <TileGrid  count = {count} setCount = {setCount} items = {seats} params = {parameters} setParams = {setParameters}/> */}
+						<SeatGrid count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}></SeatGrid>
 					</div>
 				</Tab>
 				<Tab label="Payment">
 					<div>
-						<Checkout/>
+						<Checkout count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}/>
 					</div>
 				</Tab>
 			</Tabs>
@@ -79,13 +78,11 @@ class Tabs extends React.Component{
 		this.props.setCount(next_index)
 	}
 
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps.count)
-		if (nextProps.count !== this.props.count)
-			this.setState({activeTab: nextProps.children[nextProps.count].props.label});
-			this.render()
-	};
-
+	static getDerivedStateFromProps(nextProps, state) {
+		state.activeTab = nextProps.children[nextProps.count].props.label
+		console.log(state)
+		return state
+	}
 
 	render(){
 		let content;

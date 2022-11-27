@@ -14,12 +14,14 @@ const AccordionList = (props) => {
 	]
 
 	let labels = []
+	let open = true
 
-	times.forEach((theater) => {
+	times.forEach((theater, index) => {
 		labels.push(
-		<Accordion title = {theater.name}>
-			<Buttons props = {props} times = {theater.times}></Buttons>
+		<Accordion title = {theater.name} key = {index} open = {open}>
+			<Buttons props = {props} times = {theater.times} theaterName = {theater.name} key = {"button" + index}></Buttons>
 		</Accordion>)
+		open = false
 	})
 
 	return (
@@ -30,7 +32,7 @@ const AccordionList = (props) => {
 };
 
 
-const Accordion = ({ title, children, open }) => {
+const Accordion = ({title, children, open}) => {
 
 	const [isOpen, setOpen] = React.useState(open);
 	
@@ -51,23 +53,24 @@ const Accordion = ({ title, children, open }) => {
 	);
 };
 
-const Buttons = ({props, times}) => {
+const Buttons = ({props, times, theaterName}) => {
 	
-	const clicked = () => {
+	const clicked = (time) => {
 
 		const next_index = props.count + 1
 		if (next_index > 3) return
 		props.setCount(next_index)
 		
 		let p = props.params
-		p.movie = props.label.name
+		p.showtime = time
+		p.theater = theaterName
 		props.setParams(p)
 	};
 
 	let buttons = []
 
-	times.forEach((time) => {
-		buttons.push(<button className='time-button' onClick={clicked}>{time}</button>)
+	times.forEach((time, index) => {
+		buttons.push(<button className='time-button' onClick={() => clicked(time)} key = {index}>{time}</button>)
 	})
 
 
