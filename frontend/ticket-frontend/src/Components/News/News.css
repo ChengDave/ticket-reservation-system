@@ -1,0 +1,31 @@
+
+h2 {
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.news {
+	display: table-cell;
+	color: black;
+	background-color: #90e0ef;
+	margin-left: 10px;
+	margin-right: 10px;
+	box-shadow: 7px 7px 8px #00b4d8;
+	border-radius: 7px 7px 7px 7px;
+	width: 80vw;
+}
+
+.story-border {
+	border: 3px solid black;
+	margin: 15px;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.story {
+	text-align: justify;
+	margin-top: 0px;
+	margin-bottom: 1rem;
+	margin-left: 1.5rem;
+	margin-right: 1.5rem;
+}
