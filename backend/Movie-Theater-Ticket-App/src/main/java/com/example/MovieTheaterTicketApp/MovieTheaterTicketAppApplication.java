@@ -11,8 +11,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -23,7 +27,17 @@ public class MovieTheaterTicketAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieTheaterTicketAppApplication.class);
+	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*");
+				WebMvcConfigurer.super.addCorsMappings(registry);
+			}
+		};
 	}
 
 	@Bean
@@ -41,21 +55,34 @@ public class MovieTheaterTicketAppApplication {
 			Theater theater2 = new Theater("Theater2");
 			Theater theater3 = new Theater("Theater3");
 
-			Movie movie1 = new Movie("Movie1");
-			Movie movie2 = new Movie("Movie3");
-			Movie movie3 = new Movie("Movie2");
+			List<Movie> movies = new ArrayList<>();
+			movies.add(new Movie("Avatar: The Way of Water"));
+			movies.add(new Movie("Black Adam"));
+			movies.add(new Movie("Black Panther: Wakanda Forever"));
+			movies.add(new Movie("Bones and All"));
+			movies.add(new Movie("Devotion"));
+			movies.add(new Movie("Glass Onion: A Knives Out Mystery"));
+			movies.add(new Movie("Guillermo Del Toro's Pinocchio"));
+			movies.add(new Movie("I Wanna Dance With Somebody"));
+			movies.add(new Movie("Puss In Boots: The Last Wish"));
+			movies.add(new Movie("She Said"));
+			movies.add(new Movie("Strange World"));
+			movies.add(new Movie("The Banshee Of Inisherin"));
+			movies.add(new Movie("The Fabelmans"));
+			movies.add(new Movie("The Menu"));
+			movies.add(new Movie("Ticket to Paradise"));
+			movies.add(new Movie("Violent Night"));
 
 			theater_repository.save(theater1);
 			theater_repository.save(theater2);
 			theater_repository.save(theater3);
 
-			movie_repository.save(movie1);
-			movie_repository.save(movie2);
-			movie_repository.save(movie3);
+			for (Movie movie: movies)
+				movie_repository.save(movie);
 
 			LocalDateTime datetime1 = LocalDateTime.of(2017, 1, 14, 10, 34);
 
-			Showtime showtime1 = new Showtime(movie1, theater1, datetime1);
+			Showtime showtime1 = new Showtime(movies.get(1), theater1, datetime1);
 			showtime_repository.save(showtime1);
 
 			// fetch all customers
