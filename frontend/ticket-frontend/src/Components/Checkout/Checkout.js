@@ -1,5 +1,6 @@
 import './Checkout.css';
 import React, { useState } from 'react';
+import UserInformation from './UserInformation';
 
 function Checkout(props) {
 
@@ -72,48 +73,13 @@ function Checkout(props) {
           </tbody>
         </table>
       </div>
-      <form>
-          <h4>Credit Card Information</h4>
-          <InputField label = "Card Number" className="full" info = {info} setInfo = {setInfo}/>
-          <InputField label = "Name on Card" className="full" info = {info} setInfo = {setInfo}/>
-          <InputField label = "Expiration Date" className="two-wide left" info = {info} setInfo = {setInfo}/>
-          <InputField label = "Security Code" className="two-wide right" info = {info} setInfo = {setInfo}/>
-
-          <h4>Billing Address</h4>
-          <InputField label = "Email" className="full" info = {info} setInfo = {setInfo}/>
-          <InputField label = "First Name" className="two-wide left" info = {info} setInfo = {setInfo}/>
-          <InputField label = "Last Name" className="two-wide right" info = {info} setInfo = {setInfo}/>
-
-          <InputField label = "Address" className="full" info = {info} setInfo = {setInfo}/>
-          
-          <InputField label = "City" className="two-wide left" info = {info} setInfo = {setInfo}/>
-          <InputField label = "Province/State" className="two-wide right" info = {info} setInfo = {setInfo}/>
-          <InputField label = "Country" className="two-wide left" info = {info} setInfo = {setInfo}/>
-
-          <InputField label = "Postal Code" className="two-wide right" info = {info} setInfo = {setInfo}/>
-      </form>
+      <UserInformation info = {info} setInfo = {setInfo}/>
       <button className='checkout-button' onClick={clicked}>Purchase</button>
       <button className='checkout-button' onClick={canceled}>Cancel</button>
     </div>
   )
 }
 
-function InputField(props) {
-
-  let classes = 'field_input-wrapper ' + props.className
-
-  const update = (x) => {
-    let p = props.info
-    p[props.label] = x
-  }
-
-  return (
-		<div className={classes}>
-      <label className='field-label'>{props.label}</label>
-      <input className='field-input' onChange={(e) => {update(e.target.value)}}></input>
-		</div>
-	)
-}
 
 
 export default Checkout

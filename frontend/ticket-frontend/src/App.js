@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <NavBar setDisplay = {setActiveDisplay}/>
-      <Display display = {activeDisplay} />
+      <Display display = {activeDisplay} setDisplay = {setActiveDisplay} />
     </div>
   );
 }

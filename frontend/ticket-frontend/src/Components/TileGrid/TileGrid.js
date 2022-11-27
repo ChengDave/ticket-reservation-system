@@ -24,9 +24,6 @@ const TileGrid = (props) => {
 	let labels_temp = []
 	let j = 0;
 
-	console.log("M2")
-	console.log(movies[0])
-
 	for (let i = 0; i < movies.length; i++) {
 		labels_temp.push(<Tile label = {movies[i]} count = {props.count} setCount = {props.setCount} params = {props.params} setParams = {props.setParams} key = {i}/>)
 

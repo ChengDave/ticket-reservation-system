@@ -1,7 +1,7 @@
 import './Login.css';
 import React, {useState} from "react"
 
-const Login = () => {
+const Login = (props) => {
 
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
@@ -12,7 +12,7 @@ const Login = () => {
 	}
 
 	const register = () => {
-
+		props.setDisplay("Register")
 	}
 
 	return (
@@ -31,7 +31,6 @@ const Login = () => {
 				</form>
 
 				<br></br>
-					{/* <a>Register for an Account</a> */}
 					<button className="signin-button" onClick={signIn}>Sign In</button>
 					<button className="text-button" onClick={register}>Register for an Account</button>
 				<br></br>
