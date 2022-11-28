@@ -1,14 +1,26 @@
 import './Login.css';
-import React, {useState} from "react"
+import React, {useRef} from "react"
 
 const Login = (props) => {
 
-	const [username, setUsername] = useState("")
-	const [password, setPassword] = useState("")
+	const username = useRef()
+	const password = useRef()
 
 	const signIn = () => {
-		console.log(username)
-		console.log(password)
+
+		let credentials = ""
+		credentials += "/USERNAME/" + username.current.value
+		credentials += "/PASSWORD/" + password.current.value
+
+		fetch("http://localhost:8080/api/vi/users" + credentials, {
+			method: "GET",
+			headers:{"Content-Type":"application/json"},
+		})
+		.then((response) => {response.text()})
+		.then(data => {
+			console.log(data)
+		})
+
 	}
 
 	const register = () => {
@@ -21,12 +33,12 @@ const Login = (props) => {
 				<form>
 					<div>
 						<label className='login-label'>Username:</label>
-						<input className='login-input' onChange={(e) => setUsername(e.target.value)}></input>
+						<input className='login-input' ref = {username}></input>
 					</div>
 					<br></br>
 					<div>
 						<label className='login-label'>Password:</label>
-						<input className='login-input'onChange={(e) => setPassword(e.target.value)} type="password"></input>
+						<input className='login-input' ref = {password} type="password"></input>
 					</div>
 				</form>
 
