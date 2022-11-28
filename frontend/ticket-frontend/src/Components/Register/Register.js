@@ -7,8 +7,17 @@ const Register = () => {
 	const [info, setInfo] = useState({})
 
 	const clicked = () => {
-		console.log(info)
+
+		fetch("http://localhost:8080/api/vi/users/", {
+			method: "POST",
+			headers:{"Content-Type":"application/json"},
+			body: JSON.stringify(info)
+		})
 	}
+
+	
+
+
 
 	return (
 		<div className="wrapper">

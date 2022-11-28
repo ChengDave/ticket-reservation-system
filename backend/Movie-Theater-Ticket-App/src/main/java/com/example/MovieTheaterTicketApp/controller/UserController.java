@@ -25,8 +25,11 @@ public class UserController {
     }
 
     @PostMapping()
-    public void registerUser(@RequestBody RegisteredUser registerUser){
-        // register student
-         userService.register(registerUser);
+    public void registerUser(@RequestBody String request) { //RegisteredUser registerUser){
+
+        // TODO: Deal with this input to make a new Registered User
+        System.out.println(request);
+
+        //  userService.register(registerUser);
     }
 }
