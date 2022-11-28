@@ -81,9 +81,20 @@ public class MovieTheaterTicketAppApplication {
 				movie_repository.save(movie);
 
 			LocalDateTime datetime1 = LocalDateTime.of(2017, 1, 14, 10, 34);
-
+			
 			Showtime showtime1 = new Showtime(movies.get(1), theater1, datetime1);
 			showtime_repository.save(showtime1);
+
+			for (int i = 0; i < movies.size(); i++) {
+				List<Showtime> showtimes = new ArrayList<>();
+				for (int hour = 10; hour < 23; hour++) {
+					showtimes.add(new Showtime(movies.get(i), theater1, LocalDateTime.of(2017, 1, 14, hour, 30+i)));
+					showtimes.add(new Showtime(movies.get(i), theater2, LocalDateTime.of(2017, 1, 14, hour, 00+i)));
+					showtimes.add(new Showtime(movies.get(i), theater3, LocalDateTime.of(2017, 1, 14, hour, 40+i)));
+				}
+				showtime_repository.saveAll(showtimes);
+			}
+
 
 			// fetch all customers
 			log.info("Users found with findAll():");

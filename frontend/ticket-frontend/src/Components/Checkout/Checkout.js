@@ -80,6 +80,4 @@ function Checkout(props) {
   )
 }
 
-
-
 export default Checkout

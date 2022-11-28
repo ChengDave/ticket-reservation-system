@@ -22,6 +22,11 @@ public class ShowtimeController {
         return showtimeService.getShowtimes();
     }
 
+    @GetMapping(value = "/MOVIE/{movieTitle}")
+    public List<Showtime> getShowtimes(@PathVariable("movieTitle") String movieTitle) {
+        return showtimeService.getShowtimes(movieTitle);
+    }
+
     @PostMapping()
     public void addMovie(@RequestBody Showtime showtime){
         // add movie to db

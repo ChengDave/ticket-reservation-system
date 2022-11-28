@@ -2,7 +2,7 @@ import UserInformation from "../Checkout/UserInformation"
 import InputField from "../Checkout/InputField"
 import React, {useState} from "react"
 
-const Register = (props) => {
+const Register = () => {
 
 	const [info, setInfo] = useState({})
 

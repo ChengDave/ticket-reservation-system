@@ -18,6 +18,10 @@ public class ShowtimeService {
         return (List<Showtime>) showtimeRepository.findAll();
     }
 
+    public List<Showtime> getShowtimes(String movieTitle) {
+        return (List<Showtime>) showtimeRepository.findByMovieTitle(movieTitle);
+    }
+
     public void addShowtime(Showtime showtime) {
         //TODO: Need error handling if showtime is already taken
         showtimeRepository.save(showtime);

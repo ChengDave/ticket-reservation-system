@@ -1,17 +1,35 @@
 import './AccordionList.css';
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 
 const AccordionList = (props) => {
 	
-	let times = [
-		{name: "Downtown Theater",
-			times: ["10:00 AM", "12:00 PM", "1:00 PM", "2:30 PM", "5:00 PM", "6:00 PM", "7:00 PM", "7:30 PM", "8:00 PM", "9:00 PM", "10:00 PM"]},
-		{name: "Uptown Theater",
-			times: ["10:00 AM", "1:00 PM", "2:30 PM", "5:00 PM", "6:00 PM", "7:00 PM", "7:30 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM"]},
-		{name: "North West Theater",
-			times: ["12:00 PM", "1:00 PM", "2:30 PM", "5:00 PM", "6:00 PM", "7:00 PM", "7:30 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM"]},
-	]
+	const [times, setTimes] = useState([])
+
+	useEffect(() => {
+		fetch("http://localhost:8080/api/vi/showtime/MOVIE/"+props.params.movie, {
+			method: "GET",
+			headers:{"Content-Type":"application/json"},
+		})
+		.then((response) => response.json())
+		.then(data => {
+			
+			let d2 = data.map(({["movie"]:m_data, ["theater"]: t_data, ["localDateTime"]: ti_data}) => ({["theater"]: t_data.theaterTitle, ['time']:ti_data}))
+			console.log(d2)
+
+			let time_temp = []
+			d2.forEach((element) => {
+				if (!(element.theater in time_temp)) {
+					time_temp[element.theater] = {"name": element.theater, "times": []}
+				}
+				time_temp[element.theater].times.push(new Date(element.time))
+			})
+			setTimes(Object.values(time_temp))
+		})
+		.catch((e) => {
+			console.error(e)
+		});
+	}, [])
 
 	let labels = []
 	let open = true
@@ -55,6 +73,19 @@ const Accordion = ({title, children, open}) => {
 
 const Buttons = ({props, times, theaterName}) => {
 	
+	const timeFromUnix = (date) => {
+		const hours = String(date.getHours())
+		const minutes = String(date.getMinutes()).padStart(2, "0")
+		return hours + ":" + minutes
+	}
+
+	const dayFromUnix = (date) => {
+		const year = String(date.getFullYear())
+		const month = String(date.getMonth() + 1).padStart(2, "0") // Add 1 since JS returns 0-11
+		const day = String(date.getDate()).padStart(2, "0")
+		return year + "-" + month + "-" + day
+	}
+
 	const clicked = (time) => {
 
 		const next_index = props.count + 1
@@ -62,21 +93,38 @@ const Buttons = ({props, times, theaterName}) => {
 		props.setCount(next_index)
 		
 		let p = props.params
-		p.showtime = time
+		p.showtime = dayFromUnix(time) + " " + timeFromUnix(time)
 		p.theater = theaterName
 		props.setParams(p)
 	};
 
-	let buttons = []
+	let buttons = {}
 
 	times.forEach((time, index) => {
-		buttons.push(<button className='time-button' onClick={() => clicked(time)} key = {index}>{time}</button>)
+
+		let date = dayFromUnix(time)
+		if (!(date in buttons)) {
+			buttons[date] = []
+		}
+		buttons[date].push(<button className='time-button' onClick={() => clicked(time)} key = {index}>{timeFromUnix(time)}</button>)
 	})
 
+	let display = []
 
+	for (const key in buttons) {
+		display.push(
+			<div key = {key}>
+				<h4 className='time-button'>{key}</h4>
+				{buttons[key]}
+			</div>
+		)
+	}
+
+	console.log(buttons)
 	return (
 		<div>
-			{buttons}
+			{display}
+			{/* {buttons} */}
 		</div>
 	)
 }
