@@ -24,6 +24,7 @@ public class ShowtimeController {
 
     @GetMapping(value = "/MOVIE/{movieTitle}")
     public List<Showtime> getShowtimes(@PathVariable("movieTitle") String movieTitle) {
+        
         return showtimeService.getShowtimes(movieTitle);
     }
 

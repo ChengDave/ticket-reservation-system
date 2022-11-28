@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShowtimeRepository extends CrudRepository<Showtime, Long>{
 
-	@Query("SELECT s.theater, s.localDateTime FROM Showtime s WHERE s.movie = (SELECT id FROM Movie m WHERE m.movieTitle = ?1)")
-	public List<Showtime> findByMovieTitle(String movieTitle);
+	// @Query("SELECT s.theater.theaterTitle, s.localDateTime FROM Showtime s WHERE s.movie = (SELECT id FROM Movie m WHERE m.movieTitle = ?1)")
+	// @Query("select s.theaterId, s.local_date_time from Showtime s where s.movie = (SELECT id FROM Movie m WHERE m.movieTitle = ?1)")
+	// public List<Showtime> findByMovieTitle(String movieTitle);
+
+	public List<Showtime> findShowtimeByMovie_MovieTitle(String movieTitle);
 }

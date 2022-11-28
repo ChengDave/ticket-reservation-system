@@ -19,7 +19,7 @@ public class ShowtimeService {
     }
 
     public List<Showtime> getShowtimes(String movieTitle) {
-        return (List<Showtime>) showtimeRepository.findByMovieTitle(movieTitle);
+        return (List<Showtime>) showtimeRepository.findShowtimeByMovie_MovieTitle(movieTitle);
     }
 
     public void addShowtime(Showtime showtime) {
