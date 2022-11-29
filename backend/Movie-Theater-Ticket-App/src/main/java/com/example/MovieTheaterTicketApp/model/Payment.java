@@ -1,0 +1,110 @@
+package com.example.MovieTheaterTicketApp.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+public class Payment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    Long creditCardNo;
+    int cvv;
+    String creditCardExpDate;
+    String paymentDate;
+    String paymentTime;
+    Double paymentAmount;
+    String UserId;
+
+    public Payment(){
+        super();
+    }
+
+    public Payment(Long id, @JsonProperty("creditCardNo")Long creditCardNo, @JsonProperty("cvv")int cvv, 
+            @JsonProperty("creditCardExpDate")String creditCardExpDate, String paymentDate,
+            String paymentTime, @JsonProperty("paymentAmount")Double paymentAmount, 
+            @JsonProperty("userId")String userId) {
+        this.id = id;
+        this.creditCardNo = creditCardNo;
+        this.cvv = cvv;
+        this.creditCardExpDate = creditCardExpDate;
+        this.paymentDate = paymentDate;
+        this.paymentTime = paymentTime;
+        this.paymentAmount = paymentAmount;
+        UserId = userId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCreditCardNo() {
+        return creditCardNo;
+    }
+
+    public void setCreditCardNo(Long creditCardNo) {
+        this.creditCardNo = creditCardNo;
+    }
+
+    public int getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(int cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getCreditCardExpDate() {
+        return creditCardExpDate;
+    }
+
+    public void setCreditCardExpDate(String creditCardExpDate) {
+        this.creditCardExpDate = creditCardExpDate;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getPaymentTime() {
+        return paymentTime;
+    }
+
+    public void setPaymentTime(String paymentTime) {
+        this.paymentTime = paymentTime;
+    }
+
+    public Double getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(Double paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
+
+
+
+    
+    
+}
