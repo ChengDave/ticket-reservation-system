@@ -1,6 +1,8 @@
 package com.example.MovieTheaterTicketApp.controller;
 import com.example.MovieTheaterTicketApp.model.Seat;
 import com.example.MovieTheaterTicketApp.service.SeatService;
+import com.example.MovieTheaterTicketApp.service.TicketService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +12,11 @@ import java.util.List;
 @RequestMapping(path = "api/vi/seats")
 public class SeatController {
     private final SeatService seatService;
+    private final TicketService ticketService;
     @Autowired
-    public SeatController(SeatService seatService) {
+    public SeatController(SeatService seatService, TicketService ticketService) {
         this.seatService = seatService;
+        this.ticketService = ticketService;
     }
 
     @GetMapping()
@@ -37,5 +41,12 @@ public class SeatController {
     public void registerSeat(@RequestBody Seat seat){
         // set seat to taken
         seatService.registerSeat(seat);
+    }
+
+    @PostMapping(path = "seatId/{seatId}/TicketId/{ticketId}")
+    public void selectMovieToView(@PathVariable("seatId") Long seatId,
+                                @PathVariable("ticketId") Long ticketId){
+        // choose a movie to view and update that info in the ticket
+        ticketService.updateTicketMovie(ticketId, seatId);
     }
 }

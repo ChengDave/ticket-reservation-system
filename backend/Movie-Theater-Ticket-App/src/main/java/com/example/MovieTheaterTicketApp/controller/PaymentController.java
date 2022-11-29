@@ -14,16 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MovieTheaterTicketApp.model.Payment;
 import com.example.MovieTheaterTicketApp.model.Receipt;
+import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.service.PaymentService;
+import com.example.MovieTheaterTicketApp.service.UserService;
 
 @RequestMapping("api/v1/payment")
 @RestController
 public class PaymentController {
 
     PaymentService paymentService;
+    UserService userService;
     @Autowired
-    public PaymentController(PaymentService PaymentService) {
-        this.paymentService = PaymentService;
+    public PaymentController(PaymentService paymentService, UserService userService) {
+        this.paymentService = paymentService;
+        this.userService = userService;
     }
     
     @PostMapping
@@ -36,7 +40,11 @@ public class PaymentController {
         payment.setPaymentDate(dtf.format(now).substring(0,10));
         payment.setPaymentTime(dtf.format(now).substring(11));
         paymentService.addPayment(payment);
-        paymentService.genReceipt(payment);
+        Long receiptId = paymentService.genReceipt(payment);
+        
+        //Adding receipt to User
+        RegisteredUser user = userService.getUser(payment.getUserId());
+        userService.addReceipt(user, receiptId);
     }
     
     // @CrossOrigin(origins = "http://127.0.0.1:5501")

@@ -5,6 +5,7 @@ import com.example.MovieTheaterTicketApp.repository.ShowtimeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShowtimeService {
@@ -20,6 +21,14 @@ public class ShowtimeService {
 
     public List<Showtime> getShowtimes(String movieTitle) {
         return (List<Showtime>) showtimeRepository.findShowtimeByMovie_MovieTitle(movieTitle);
+    }
+
+    public Showtime getShowtime(Long id){
+        Optional<Showtime> showtime = showtimeRepository.findById(id);
+        if (showtime != null){
+            return showtime.get();
+        }
+        return null;
     }
 
     public void addShowtime(Showtime showtime) {

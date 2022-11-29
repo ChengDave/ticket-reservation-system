@@ -39,4 +39,13 @@ public class Theater {
     public void setTheaterTitle(String movieTitle) {
         this.theaterTitle = movieTitle;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
 }

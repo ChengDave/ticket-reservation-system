@@ -40,11 +40,12 @@ public class PaymentService {
         paymentRepo.deleteById(id);
     }
 
-    public void genReceipt(Payment payment){
+    public Long genReceipt(Payment payment){
         Receipt receipt = new Receipt((long) 1234, payment.getPaymentAmount(), 
             payment.getPaymentDate(), "user", payment.getId());
 
         receiptRepo.save(receipt);
+        return receipt.getId();
     }
 
     public Optional<Receipt> getRecieptById(Long id){

@@ -20,14 +20,16 @@ public class Ticket {
     Long showtimeId;
     Long theaterId;
     Long seatId;
+    Long user;
 
     public Ticket(){
         super();
     }
 
-    public Ticket(Long ticketNo, String date) {
+    public Ticket(Long ticketNo, String date, Long user) {
         this.ticketNo = ticketNo;
         this.date = date;
+        this.user = user;
     }
 
     public Long getTicketNo() {
@@ -92,6 +94,14 @@ public class Ticket {
 
     public void setSeatId(Long seatId) {
         this.seatId = seatId;
+    }
+
+    public Long getUser() {
+        return user;
+    }
+
+    public void setUser(Long user) {
+        this.user = user;
     }
 
     

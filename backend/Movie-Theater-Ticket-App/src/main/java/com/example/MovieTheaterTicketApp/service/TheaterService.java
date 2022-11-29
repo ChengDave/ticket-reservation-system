@@ -4,6 +4,7 @@ import com.example.MovieTheaterTicketApp.repository.TheaterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TheaterService {
@@ -15,6 +16,14 @@ public class TheaterService {
 
     public List<Theater> getTheaters(){
         return (List<Theater>) theaterRepository.findAll();
+    }
+
+    public Theater getTheater(Long id){
+        Optional<Theater> theater = theaterRepository.findById(id);
+        if (theater != null){
+            return theater.get();
+        }
+        return null;
     }
 
     public void addTheater(Theater theater) {

@@ -1,6 +1,8 @@
 package com.example.MovieTheaterTicketApp.controller;
 import com.example.MovieTheaterTicketApp.model.Movie;
 import com.example.MovieTheaterTicketApp.service.MovieService;
+import com.example.MovieTheaterTicketApp.service.TicketService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +12,11 @@ import java.util.List;
 @RequestMapping(path = "api/vi/movies")
 public class MovieController {
     private final MovieService movieService;
+    private final TicketService ticketService;
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, TicketService ticketService) {
         this.movieService = movieService;
+        this.ticketService = ticketService;
     }
 
     @GetMapping()
@@ -31,5 +35,12 @@ public class MovieController {
     public void removeMovie(@RequestBody Movie movie){
         // remove movie from db
         movieService.removeMovie(movie);
+    }
+
+    @PostMapping(path = "movieId/{movieId}/TicketId/{ticketId}")
+    public void selectMovieToView(@PathVariable("movieId") Long movieId,
+                                @PathVariable("ticketId") Long ticketId){
+        // choose a movie to view and update that info in the ticket
+        ticketService.updateTicketMovie(ticketId, movieId);
     }
 }

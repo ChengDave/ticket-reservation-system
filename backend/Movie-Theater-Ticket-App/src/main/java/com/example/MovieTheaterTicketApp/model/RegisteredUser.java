@@ -45,6 +45,20 @@ public class RegisteredUser implements User{
     )
     private boolean isAdmin;
 
+    @Column(
+            name = "ticketNo",
+            nullable = true,
+            columnDefinition = "LONG"
+    )
+    private Long ticketNo;
+
+    @Column(
+            name = "receiptNo",
+            nullable = true,
+            columnDefinition = "LONG"
+    )
+    private Long receiptNo;
+
 
     protected RegisteredUser() {
     }
@@ -80,17 +94,31 @@ public class RegisteredUser implements User{
     public void setCreditCard(String creditCard) {
         this.creditCard = creditCard;
     }
+    
+
+    public Long getTicketNo() {
+        return ticketNo;
+    }
+
+    public void setTicketNo(Long ticketNo) {
+        this.ticketNo = ticketNo;
+    }
+
+    public Long getReceiptNo() {
+        return receiptNo;
+    }
+
+    public void setReceiptNo(Long receiptNo) {
+        this.receiptNo = receiptNo;
+    }
 
     @Override
     public String toString() {
-        return "RegisteredUser{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", creditCard='" + creditCard + '\'' +
-                ", isAdmin=" + isAdmin +
-                '}';
+        return "RegisteredUser [id=" + id + ", firstName=" + firstName + ", creditCard=" + creditCard + ", lastName="
+                + lastName + ", email=" + email + ", isAdmin=" + isAdmin + ", ticketNo=" + ticketNo + ", receiptNo="
+                + receiptNo + "]";
     }
+
+    
 }
 

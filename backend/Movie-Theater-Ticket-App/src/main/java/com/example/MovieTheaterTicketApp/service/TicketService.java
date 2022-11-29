@@ -43,13 +43,16 @@ public class TicketService {
         Optional<Ticket> ticket = ticketRepository.findById(ticketId);
         if (ticket != null){
             ticket.get().setMovieId(movieId);
+            ticketRepository.save(ticket.get());
         }
+        
     }
 
     public void updateTicketShowtime(Long ticketId, Long showtimeId){
         Optional<Ticket> ticket = ticketRepository.findById(ticketId);
         if (ticket != null){
             ticket.get().setMovieId(showtimeId);
+            ticketRepository.save(ticket.get());
         }
     }
 
@@ -57,6 +60,7 @@ public class TicketService {
         Optional<Ticket> ticket = ticketRepository.findById(ticketId);
         if (ticket != null){
             ticket.get().setMovieId(theaterId);
+            ticketRepository.save(ticket.get());
         }
     }
 
@@ -64,6 +68,15 @@ public class TicketService {
         Optional<Ticket> ticket = ticketRepository.findById(ticketId);
         if (ticket != null){
             ticket.get().setMovieId(seatId);
+            ticketRepository.save(ticket.get());
+        }
+    }
+
+    public void updateTicketUserId(Long ticketId, Long userId){
+        Optional<Ticket> ticket = ticketRepository.findById(ticketId);
+        if (ticket != null){
+            ticket.get().setUser(userId);
+            ticketRepository.save(ticket.get());
         }
     }
 

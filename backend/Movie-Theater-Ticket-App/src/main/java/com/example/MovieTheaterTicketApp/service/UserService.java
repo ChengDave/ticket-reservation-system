@@ -5,6 +5,7 @@ import com.example.MovieTheaterTicketApp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,6 +21,25 @@ public class UserService {
 
     public void register(RegisteredUser registerUser) {
         //TODO: Need error handling if user email is already taken
+        userRepository.save(registerUser);
+    }
+
+    public RegisteredUser getUser(Long id){
+        Optional<RegisteredUser> user = userRepository.findById(id);
+        if (user != null){
+            return user.get();
+        }
+        else 
+        {return null;}
+    }
+
+    public void addTicket(RegisteredUser registerUser, Long ticketNo){
+        registerUser.setTicketNo(ticketNo);
+        userRepository.save(registerUser);
+    }
+
+    public void addReceipt(RegisteredUser registerUser, Long receiptNo){
+        registerUser.setTicketNo(receiptNo);
         userRepository.save(registerUser);
     }
 }

@@ -19,7 +19,7 @@ public class Payment {
     String paymentDate;
     String paymentTime;
     Double paymentAmount;
-    String UserId;
+    Long UserId;
 
     public Payment(){
         super();
@@ -28,7 +28,7 @@ public class Payment {
     public Payment(Long id, @JsonProperty("creditCardNo")Long creditCardNo, @JsonProperty("cvv")int cvv, 
             @JsonProperty("creditCardExpDate")String creditCardExpDate, String paymentDate,
             String paymentTime, @JsonProperty("paymentAmount")Double paymentAmount, 
-            @JsonProperty("userId")String userId) {
+            @JsonProperty("userId")Long userId) {
         this.id = id;
         this.creditCardNo = creditCardNo;
         this.cvv = cvv;
@@ -95,11 +95,11 @@ public class Payment {
         this.paymentAmount = paymentAmount;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return UserId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         UserId = userId;
     }
 
