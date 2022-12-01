@@ -45,6 +45,7 @@ const SeatGrid = (props) => {
 			</div>
 			<div className="seat-grid">
 				{buttons}
+				<br></br>
 				<button className='checkout-button' onClick={selectSeats}>Confirm Selection</button>
 			</div>
 		</div>

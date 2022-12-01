@@ -44,14 +44,17 @@ function Checkout(props) {
     
     today = mm + '/' + dd + '/' + yyyy;
 
+    // TODO: Check if I can delete times
+    
+
     let payment = {
       "creditCardExpDate": info["Expiration Date"],
       "creditCardNo": parseInt(info["Card Number"]),
       "cvv": parseInt(info["Security Code"]),
-      "id":15,
+      "id":null,
       "paymentAmount": parseInt(total),
-      "paymentDate": today,
-      "paymentTime": time,
+      "paymentDate": null,
+      "paymentTime": null,
       "userId":1
     }
 
