@@ -42,4 +42,8 @@ public class UserService {
         registerUser.setTicketNo(receiptNo);
         userRepository.save(registerUser);
     }
+
+    public List<RegisteredUser> getUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
 }

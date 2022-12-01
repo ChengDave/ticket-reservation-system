@@ -5,12 +5,14 @@ import com.example.MovieTheaterTicketApp.service.UserService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/vi/users")
+@RequestMapping(path = "api/v1/users")
 public class UserController {
 
     private final UserService userService;
@@ -43,4 +45,14 @@ public class UserController {
 
         //  userService.register(registerUser);
     }
+
+    @GetMapping(value = "email/{email}")
+    public List<RegisteredUser> getUserByEmail(@PathVariable("email") String email){
+        if (email == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course does not exist");
+        }
+        return userService.getUserByEmail(email);
+    }
+
+  
 }
