@@ -36,7 +36,7 @@ const AccordionList = (props) => {
 
 	times.forEach((theater, index) => {
 		labels.push(
-		<Accordion title = {theater.name} key = {index} open = {open}>
+		<Accordion className = "wrapper" title = {theater.name} key = {index} open = {open}>
 			<Buttons props = {props} times = {theater.times} theaterName = {theater.name} key = {"button" + index}></Buttons>
 		</Accordion>)
 		open = false
@@ -50,13 +50,13 @@ const AccordionList = (props) => {
 };
 
 
-const Accordion = ({title, children, open}) => {
+const Accordion = ({className, title, children, open}) => {
 
 	const [isOpen, setOpen] = React.useState(open);
 	
 	return (
-		<div className="wrapper">
-			<div className="accordion-wrapper">
+		<div className = {className}>
+			<div>
 				<div
 					className={`accordion-title ${isOpen ? "open" : ""}`}
 					onClick={() => setOpen(!isOpen)}
@@ -73,10 +73,19 @@ const Accordion = ({title, children, open}) => {
 
 const Buttons = ({props, times, theaterName}) => {
 	
-	const timeFromUnix = (date) => {
+	const timeFromUnix = (date, format) => {
 		const hours = String(date.getHours())
 		const minutes = String(date.getMinutes()).padStart(2, "0")
-		return hours + ":" + minutes
+
+		if (!format)
+			return hours + ":" + minutes
+
+		if (hours <= 12) {
+			return hours + ":" + minutes + " AM"
+		}
+
+		return hours-12 + ":" + minutes + " PM"
+
 	}
 
 	const dayFromUnix = (date) => {
@@ -93,7 +102,7 @@ const Buttons = ({props, times, theaterName}) => {
 		props.setCount(next_index)
 		
 		let p = props.params
-		p.showtime = dayFromUnix(time) + " " + timeFromUnix(time)
+		p.showtime = dayFromUnix(time) + " " + timeFromUnix(time, false)
 		p.theater = theaterName
 		props.setParams(p)
 	};
@@ -106,7 +115,7 @@ const Buttons = ({props, times, theaterName}) => {
 		if (!(date in buttons)) {
 			buttons[date] = []
 		}
-		buttons[date].push(<button className='time-button' onClick={() => clicked(time)} key = {index}>{timeFromUnix(time)}</button>)
+		buttons[date].push(<button className='time-button' onClick={() => clicked(time)} key = {index}>{timeFromUnix(time, true)}</button>)
 	})
 
 	let display = []
@@ -114,8 +123,9 @@ const Buttons = ({props, times, theaterName}) => {
 	for (const key in buttons) {
 		display.push(
 			<div key = {key}>
-				<h4 className='time-button'>{key}</h4>
-				{buttons[key]}
+				<Accordion className = "inner-wrapper"  title = {key}>{buttons[key]}</Accordion>
+				{/* <h4 className='time-button'>{key}</h4> */}
+				{/* {buttons[key]} */}
 			</div>
 		)
 	}
@@ -124,7 +134,6 @@ const Buttons = ({props, times, theaterName}) => {
 	return (
 		<div>
 			{display}
-			{/* {buttons} */}
 		</div>
 	)
 }

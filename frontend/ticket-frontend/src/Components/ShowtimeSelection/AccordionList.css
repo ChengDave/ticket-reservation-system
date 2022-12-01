@@ -3,7 +3,11 @@ body {
 }
 
 .wrapper {
-	width: 80vw;
+	width: 80%;
+	margin: 0 auto;
+}
+.inner-wrapper {
+	width: 95%;
 	margin: 0 auto;
 }
 
@@ -14,25 +18,18 @@ body {
 	max-height: 9999px;
 }
 
-.🔽 {
-	background-color: pink;
-}
-
-.🔽:hover {
-	background-color: whitesmoke;
-}
-
 .accordion-item.collapsed {
 	max-height: 0;
 	transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
 }
+
 
 .accordion-title {
 	margin-top: 10px;
 	font-weight: 600;
 	color: rgb(73, 73, 73);
 	padding: 0.5em 1.5em;
-	border: solid 1px #ccc;
+	border: solid 1px rgb(144, 144, 144);
 	border-radius: 8px 8px 8px 8px;
 	background-color: #00b4d8;
 	display: flex;
@@ -63,7 +60,7 @@ body {
 .accordion-content {
 	padding: 1em 1.5em;
 	border-radius: 0px 0px 8px 8px;
-	background-color: #90e0ef;
+	border: solid 1px rgb(144, 144, 144);
 } 
 
 .time-button {
@@ -71,12 +68,9 @@ body {
 	color: whitesmoke;
 	font-family:Helvetica;
 	margin-left: 10px;
-	font-size:15px;
-	border-radius: 5px 5px 5px 5px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 10px;
-	padding-right: 10px;
+	font-size:24px;
+	border-radius: 2px 2px 2px 2px;
+	padding: 20px;
 	border: 2px solid whitesmoke;
 	margin-bottom: 5px;
 	margin-top: 5px;
@@ -86,4 +80,8 @@ body {
 	background-color: whitesmoke;
 	border-color: #00b4d8;
 	color: #00b4d8;
+}
+
+.dark-blue {
+	background-color: blue;
 }

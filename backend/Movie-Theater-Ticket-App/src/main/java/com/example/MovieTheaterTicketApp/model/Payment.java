@@ -13,6 +13,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     Long creditCardNo;
     int cvv;
     String creditCardExpDate;
@@ -25,9 +26,13 @@ public class Payment {
         super();
     }
 
-    public Payment(Long id, @JsonProperty("creditCardNo")Long creditCardNo, @JsonProperty("cvv")int cvv, 
-            @JsonProperty("creditCardExpDate")String creditCardExpDate, String paymentDate,
-            String paymentTime, @JsonProperty("paymentAmount")Double paymentAmount, 
+    public Payment(Long id, 
+            @JsonProperty("creditCardNo")Long creditCardNo, 
+            @JsonProperty("cvv")int cvv, 
+            @JsonProperty("creditCardExpDate")String creditCardExpDate, 
+            String paymentDate,
+            String paymentTime, 
+            @JsonProperty("paymentAmount")Double paymentAmount, 
             @JsonProperty("userId")Long userId) {
         this.id = id;
         this.creditCardNo = creditCardNo;
@@ -103,6 +108,14 @@ public class Payment {
         UserId = userId;
     }
 
+    @Override
+    public String toString() {
+        return "Payment{id=" + id + ", creditCardNo=" + creditCardNo + ", cvv=" + cvv + ", creditCardExpDate="
+                + creditCardExpDate + ", paymentDate=" + paymentDate + ", paymentTime=" + paymentTime
+                + ", paymentAmount=" + paymentAmount + ", UserId=" + UserId + "}";
+    }
+
+    
 
 
     

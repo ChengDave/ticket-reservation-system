@@ -2,7 +2,7 @@ import './TabFrame.css';
 import React, { useState, useEffect } from 'react';
 import TileGrid from "../TileGrid/TileGrid"
 import Checkout from "../Checkout/Checkout"
-import AccordianList from "../AccordionList/AccordionList"
+import AccordianList from "../ShowtimeSelection/AccordionList"
 import SeatGrid from '../SeatGrid/SeatGrid';
 
 function TabFrame() {

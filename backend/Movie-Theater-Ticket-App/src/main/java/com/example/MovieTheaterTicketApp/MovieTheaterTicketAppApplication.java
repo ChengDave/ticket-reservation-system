@@ -51,9 +51,9 @@ public class MovieTheaterTicketAppApplication {
 			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com","123",false));
 			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com","123",true));
 
-			Theater theater1 = new Theater("Theater1");
-			Theater theater2 = new Theater("Theater2");
-			Theater theater3 = new Theater("Theater3");
+			Theater theater1 = new Theater("Calgary Market Mall");
+			Theater theater2 = new Theater("Crowfoot Crossing");
+			Theater theater3 = new Theater("Chinook");
 
 			List<Movie> movies = new ArrayList<>();
 			movies.add(new Movie("Avatar: The Way of Water"));
@@ -77,22 +77,21 @@ public class MovieTheaterTicketAppApplication {
 			theater_repository.save(theater2);
 			theater_repository.save(theater3);
 
-			for (Movie movie: movies)
-				movie_repository.save(movie);
-
-			LocalDateTime datetime1 = LocalDateTime.of(2017, 1, 14, 10, 34);
+			movie_repository.saveAll(movies);
 			
-			Showtime showtime1 = new Showtime(movies.get(1), theater1, datetime1);
-			showtime_repository.save(showtime1);
 
 			for (int i = 0; i < movies.size(); i++) {
 				List<Showtime> showtimes = new ArrayList<>();
 				for (int hour = 10; hour < 23; hour++) {
-					showtimes.add(new Showtime(movies.get(i), theater1, LocalDateTime.of(2017, 1, 14, hour, 30+i)));
-					showtimes.add(new Showtime(movies.get(i), theater2, LocalDateTime.of(2017, 1, 14, hour, 00+i)));
-					showtimes.add(new Showtime(movies.get(i), theater3, LocalDateTime.of(2017, 1, 14, hour, 40+i)));
+					for (int day = 7; day < 15; day ++) {
+						showtimes.add(new Showtime(movies.get(i), theater1, LocalDateTime.of(2022, 12, day, hour, 30+i)));
+						showtimes.add(new Showtime(movies.get(i), theater2, LocalDateTime.of(2022, 12, day, hour, 00+i)));
+						showtimes.add(new Showtime(movies.get(i), theater3, LocalDateTime.of(2022, 12, day, hour, 40+i)));
+					}
 				}
+
 				showtime_repository.saveAll(showtimes);
+
 			}
 
 
