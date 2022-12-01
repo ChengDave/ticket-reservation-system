@@ -37,21 +37,25 @@ public class UserController {
         return "Valid or Not as JSON";
     }
 
-    @PostMapping()
-    public void registerUser(@RequestBody String request) { //RegisteredUser registerUser){
-
+    @PostMapping(path = "/registeredUser")
+    public void registerUser(@RequestBody RegisteredUser user) { 
         // TODO: Deal with this input to make a new Registered User
-        System.out.println(request);
-
-        //  userService.register(registerUser);
+        userService.register(user);
     }
 
     @GetMapping(value = "email/{email}")
     public List<RegisteredUser> getUserByEmail(@PathVariable("email") String email){
         if (email == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
         }
         return userService.getUserByEmail(email);
+    }
+
+    @PostMapping(path = "/guestUser")
+    public void guestUser(@RequestBody RegisteredUser user) { 
+        // TODO: Deal with this input to make a new guest User
+        user.setRegistered(false);
+        userService.register(user);
     }
 
   
