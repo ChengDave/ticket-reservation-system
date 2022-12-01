@@ -69,14 +69,14 @@ public class RegisteredUser implements User{
     @Column(
         name = "nameOnCard",
         nullable = true,
-        columnDefinition = "String"
+        columnDefinition = "varchar(255)"
     )
     private String nameOnCard;
 
     @Column(
         name = "cardExpirationDate",
         nullable = true,
-        columnDefinition = "String"
+        columnDefinition = "varchar(255)"
     )
     private String cardExpirationDate;
 
