@@ -5,6 +5,7 @@ import UserInformation from './UserInformation';
 function Checkout(props) {
 
   const [info, setInfo] = useState({})
+  const [userId, setUserId] = useState("none")
 
   const numTickets = props.params.seats.length
   const ticketPrice = 19.99
@@ -45,7 +46,25 @@ function Checkout(props) {
     today = mm + '/' + dd + '/' + yyyy;
 
     // TODO: Check if I can delete times
+
     
+    
+    fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
+      method: "GET",
+      headers:{"Content-Type":"application/json"},
+    })
+    .then((response) => response.json())
+		.then((data) => {
+      if (data.length > 0) {
+        setUserId(data[0].id)
+      } else {
+        setUserId("none")
+      }
+    })
+
+    if (userId === "none") {
+      console.log("Need User")
+    }
 
     let payment = {
       "creditCardExpDate": info["Expiration Date"],
