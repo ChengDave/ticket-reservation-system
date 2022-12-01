@@ -2,6 +2,8 @@ package com.example.MovieTheaterTicketApp.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity(name = "RegisteredUser")
 public class RegisteredUser implements User{
 
@@ -87,6 +89,12 @@ public class RegisteredUser implements User{
     )
     private int cardCVV;
     
+    @Column(
+        name = "isRegistered",
+        nullable = true,
+        columnDefinition = "BOOLEAN"
+    )
+    private boolean isRegistered;
 
 
     protected RegisteredUser() {
@@ -99,21 +107,27 @@ public class RegisteredUser implements User{
                           boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.email =  email;
         this.creditCard = creditCard;
         this.isAdmin = isAdmin;
+        this.isRegistered = true;
     }
+
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getCreditCard() {
@@ -123,7 +137,30 @@ public class RegisteredUser implements User{
     public void setCreditCard(String creditCard) {
         this.creditCard = creditCard;
     }
-    
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     public Long getTicketNo() {
         return ticketNo;
@@ -139,6 +176,46 @@ public class RegisteredUser implements User{
 
     public void setReceiptNo(Long receiptNo) {
         this.receiptNo = receiptNo;
+    }
+
+    public Long getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(Long creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
+
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
+    }
+
+    public String getCardExpirationDate() {
+        return cardExpirationDate;
+    }
+
+    public void setCardExpirationDate(String cardExpirationDate) {
+        this.cardExpirationDate = cardExpirationDate;
+    }
+
+    public int getCardCVV() {
+        return cardCVV;
+    }
+
+    public void setCardCVV(int cardCVV) {
+        this.cardCVV = cardCVV;
+    }
+
+    public boolean isRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(boolean isRegistered) {
+        this.isRegistered = isRegistered;
     }
 
     @Override
