@@ -59,6 +59,35 @@ public class RegisteredUser implements User{
     )
     private Long receiptNo;
 
+    @Column(
+        name = "creditCardNumber",
+        nullable = true,
+        columnDefinition = "LONG"
+    )
+    private Long creditCardNumber;
+
+    @Column(
+        name = "nameOnCard",
+        nullable = true,
+        columnDefinition = "String"
+    )
+    private String nameOnCard;
+
+    @Column(
+        name = "cardExpirationDate",
+        nullable = true,
+        columnDefinition = "String"
+    )
+    private String cardExpirationDate;
+
+    @Column(
+        name = "cardCVV",
+        nullable = true,
+        columnDefinition = "INT"
+    )
+    private int cardCVV;
+    
+
 
     protected RegisteredUser() {
     }
