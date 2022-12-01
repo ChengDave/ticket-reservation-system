@@ -1,7 +1,9 @@
 package com.example.MovieTheaterTicketApp.controller;
 
+import java.io.Console;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,10 @@ public class PaymentController {
     
     @PostMapping
     public void addPayment(@RequestBody Payment payment){
+
+        // TODO: Garnet's Comments. I don't like that this takes the id and userID. I think it should take the user/username and look that up. I currently have 1 hardcoded.
+        // TODO: Need a response confirming the payment was good or not. Might need to hard code it but we are supposed to display that to the user
+
         // Check if the credit card has enough money for the payment to go through 
         
         //generate date and time and add to the created payment object
@@ -52,6 +58,16 @@ public class PaymentController {
     public List<Payment> getAllPayments(){
         return paymentService.getAllPayments();
     }
+
+    
+    // @GetMapping()
+    // public List<Payment> getAllPayments(){
+    //     List<Payment> test = new ArrayList<>();
+    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
+    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
+    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
+    //     return (List<Payment>) test;
+    // }
 
     // @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping(path = "{id}")

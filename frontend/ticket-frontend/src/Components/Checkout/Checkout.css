@@ -27,6 +27,7 @@ table{
 	text-align: left;
 	border-radius: 5px 5px 5px 5px;
 	border: 2px solid #03045e;
+	float: top left;
 }
 
 .full {

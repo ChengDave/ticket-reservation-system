@@ -34,6 +34,33 @@ function Checkout(props) {
       alert("Missing Required Entries")
       return
     }
+    
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0') + 1;
+    let yyyy = today.getFullYear();
+    
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    
+    today = mm + '/' + dd + '/' + yyyy;
+
+    let payment = {
+      "creditCardExpDate": info["Expiration Date"],
+      "creditCardNo": parseInt(info["Card Number"]),
+      "cvv": parseInt(info["Security Code"]),
+      "id":15,
+      "paymentAmount": parseInt(total),
+      "paymentDate": today,
+      "paymentTime": time,
+      "userId":1
+    }
+
+    fetch("http://localhost:8080/api/v1/payment/", {
+      method: "POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payment)
+    })
+
   }
 
   const canceled = () => {
@@ -45,6 +72,7 @@ function Checkout(props) {
     <div className='division'>
       <h4>Order Summary</h4>
       <div>
+        <div>
         <table className='field_input-wrapper'>
           <tbody>
             <tr>
@@ -72,8 +100,11 @@ function Checkout(props) {
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
+
       <UserInformation info = {info} setInfo = {setInfo}/>
+      
       <button className='checkout-button' onClick={clicked}>Purchase</button>
       <button className='checkout-button' onClick={canceled}>Cancel</button>
     </div>
