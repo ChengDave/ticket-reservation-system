@@ -2,6 +2,9 @@ import Login from "../Login/Login"
 import TabFrame from "../TabFrame/TabFrame"
 import News from "../News/News"
 import Register from "../Register/Register"
+import CancelTicket from "../CancelTicket/CancelTicket"
+import Profile from "../Profile/Profile"
+
 
 const Display = (props) => {
 	
@@ -15,6 +18,10 @@ const Display = (props) => {
 				return <Login setDisplay = {props.setDisplay}></Login>
 			case "Register":
 				return <Register></Register>
+			case "Cancel":
+				return <CancelTicket></CancelTicket>
+			case "Profile":
+				return <Profile></Profile>
 		}
 		
 	}

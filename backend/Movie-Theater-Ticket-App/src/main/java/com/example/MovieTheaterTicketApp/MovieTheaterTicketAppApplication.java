@@ -47,9 +47,10 @@ public class MovieTheaterTicketAppApplication {
 										ShowtimeRepository showtime_repository) {
 		return (args) -> {
 			// save a few customers
-			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com","123" ,false));
-			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com","123",false));
-			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com","123",true));
+			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com", "pass1", "123" ,false));
+			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com", "pass2", "123",false));
+			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com", "pass3", "123",true));
+			user_repository.save(new RegisteredUser("Garnet", "Crookes","u", "1", "123",true));
 
 			Theater theater1 = new Theater("Calgary Market Mall");
 			Theater theater2 = new Theater("Crowfoot Crossing");

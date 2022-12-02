@@ -28,13 +28,17 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping(value = "/USERNAME/{username}/PASSWORD/{password}")
-    public String checkCredentials(@PathVariable("username") String username, @PathVariable("password") String password) {
+    @GetMapping(value = "/ID/{id}")
+    public RegisteredUser getUserById(@PathVariable("id") int id) {
+        System.out.println("Here");
+        return userService.getUserById(id);
+    }
 
-        
-        // TODO: Check if these credentials are valid for any of the registered users
-        System.out.println("Username " + username + ", password " + password);
-        return "Valid or Not as JSON";
+    @GetMapping(value = "/USERNAME/{username}/PASSWORD/{password}")
+    public RegisteredUser checkCredentials(@PathVariable("username") String username, @PathVariable("password") String password) {
+        return userService.checkCredentials(username, password);
+        // RegisteredUser user = userService.checkCredentials(username, password);
+        // return user;
     }
 
     @PostMapping(path = "/registeredUser")

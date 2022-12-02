@@ -1,10 +1,13 @@
 import './TileGrid.css';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import Tile from "./Tile"
 
 
 const TileGrid = (props) => {
 
 	const [movies, setMovies] = useState([])
+	const [searchValue, setSearchValue] = useState("")
+	const searchParameter = useRef("")
 	
 	useEffect(() => {
 		fetch("http://localhost:8080/api/vi/movies", {
@@ -13,16 +16,33 @@ const TileGrid = (props) => {
 		})
 		.then((response) => response.json())
 		.then(data => {
-			setMovies(data)
+			setMovies(filterList(data))
+			console.log("test")
 		})
 		.catch((e) => {
 			console.error(e)
 		});
-	}, [])
+	}, [searchValue])
 
 	let labels = []
 	let labels_temp = []
 	let j = 0;
+
+	const filterList = (movieList) => {
+
+		if (searchValue === "")
+			return movieList
+
+		let newMovies = []
+		movieList.forEach(movie => {
+			const title = movie["movieTitle"]
+			if (title.substring(0, searchValue.length).toLowerCase() === searchValue.toLowerCase()) {
+				newMovies.push(movie)
+			}
+		})
+
+		return newMovies;
+	}
 
 	for (let i = 0; i < movies.length; i++) {
 		labels_temp.push(<Tile label = {movies[i]} count = {props.count} setCount = {props.setCount} params = {props.params} setParams = {props.setParams} key = {i}/>)
@@ -37,39 +57,30 @@ const TileGrid = (props) => {
 	labels.push(<div className="table-row" key = {j}>{labels_temp}</div>)
 
 	return(
+		<div>
+			<Search search = {setSearchValue}></Search>
+			<p>{searchParameter.current.value}</p>
 			<div className="table">
 				{labels}
 			</div>
+		</div>
 	)
 }
 
-class Tile extends React.Component{
+const Search = (props) => {
 
-	state = {
-		test: 0
-	}
+	return (
+		<div className='wrapper'>
+			<div className='search-outline'>
+				<input className='movie-search' 
+				onChange={(e) => {props.search(e.target.value)}}
+				></input>
+				<button className='search-button'>🔍</button>
+			</div>
+		</div>
+	)
+  
+};
 
-	clicked = () => {
-		const next_index = this.props.count + 1
-		if (next_index > 3) return
-		this.props.setCount(next_index)
-
-		
-		let p = this.props.params
-		p.movie = this.props.label.movieTitle
-		this.props.setParams(p)
-	};
-
-	render(){
-		return (
-			<React.Fragment>
-				<div className="tile">
-					<img src={process.env.PUBLIC_URL + '/images/' + this.props.label.movieTitle.replace(/[^a-zA-Z0-9\s]/g, "") + ".jpeg"} alt={this.props.label.movieTitle + " Movie Poster"} onClick={this.clicked}></img>
-					<button className = "b" onClick={this.clicked}><u>{this.props.label.movieTitle}</u></button>
-				</div>
-			</React.Fragment>
-		)
-	}
-}
 
 export default TileGrid

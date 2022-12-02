@@ -46,4 +46,25 @@ public class UserService {
     public List<RegisteredUser> getUserByEmail(String email){
         return userRepository.findByEmail(email);
     }
+
+	public RegisteredUser checkCredentials(String username, String password) {
+        List <RegisteredUser> users = userRepository.findByEmail(username);
+
+        if (users.size() != 1) {
+            return null;
+        }
+
+        RegisteredUser user = users.get(0);
+
+        if(!user.getPassword().equals(password)) {
+            return null;
+        }
+
+        return user;
+
+	}
+
+    public RegisteredUser getUserById(int id) {
+        return userRepository.findById(id);
+    }
 }

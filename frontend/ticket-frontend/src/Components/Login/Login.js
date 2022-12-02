@@ -1,7 +1,10 @@
 import './Login.css';
-import React, {useRef} from "react"
+import React, {useContext, useRef} from "react"
+import { UserContext } from '../../UserContext';
 
 const Login = (props) => {
+
+	const {user, setUser} = useContext(UserContext)
 
 	const username = useRef()
 	const password = useRef()
@@ -12,15 +15,18 @@ const Login = (props) => {
 		credentials += "/USERNAME/" + username.current.value
 		credentials += "/PASSWORD/" + password.current.value
 
-		fetch("http://localhost:8080/api/vi/users" + credentials, {
+		fetch("http://localhost:8080/api/v1/users" + credentials, {
 			method: "GET",
 			headers:{"Content-Type":"application/json"},
 		})
-		.then((response) => {response.text()})
+		.then((response) => response.json())
 		.then(data => {
-			console.log(data)
+			setUser(data["id"])
 		})
-
+		.catch(() => {
+			alert("Invalid Username/Password Combination")
+			setUser("none")
+		})
 	}
 
 	const register = () => {

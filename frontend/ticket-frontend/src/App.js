@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './App.css';
 import Display from './Components/Display/Display';
 
+import { UserContext } from './UserContext';
+
 import NavBar from "./Components/NavBar/NavBar"
-import TabFrame from './Components/TabFrame/TabFrame';
 
 function App() {
 
-  const [activeDisplay, setActiveDisplay] = useState("Tab")
+  const [user, setUser] = useState("none")
 
+  const [activeDisplay, setActiveDisplay] = useState("Tab")
+  
   return (
     <div>
-      <NavBar setDisplay = {setActiveDisplay}/>
-      <Display display = {activeDisplay} setDisplay = {setActiveDisplay} />
+      <UserContext.Provider value = {{user, setUser}}>
+        <NavBar setDisplay = {setActiveDisplay}/>
+        <Display display = {activeDisplay} setDisplay = {setActiveDisplay} />
+      </UserContext.Provider>
     </div>
   );
 }

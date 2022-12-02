@@ -2,8 +2,6 @@ package com.example.MovieTheaterTicketApp.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 @Entity(name = "RegisteredUser")
 public class RegisteredUser implements User{
 
@@ -39,6 +37,13 @@ public class RegisteredUser implements User{
             columnDefinition = "TEXT"
     )
     private String email;
+
+    @Column(
+            name = "password",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String password;
 
     @Column(
             name = "isAdmin",
@@ -103,11 +108,13 @@ public class RegisteredUser implements User{
     public RegisteredUser(String firstName,
                           String lastName,
                           String email,
+                          String password,
                           String creditCard,
                           boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email =  email;
+        this.password = password;
         this.creditCard = creditCard;
         this.isAdmin = isAdmin;
         this.isRegistered = true;
@@ -153,6 +160,8 @@ public class RegisteredUser implements User{
     public void setEmail(String email) {
         this.email = email;
     }
+
+    
 
     public boolean isAdmin() {
         return isAdmin;
@@ -225,6 +234,13 @@ public class RegisteredUser implements User{
                 + receiptNo + "]";
     }
 
-    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
 

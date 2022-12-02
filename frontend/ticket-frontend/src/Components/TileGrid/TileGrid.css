@@ -5,10 +5,12 @@
 	box-sizing: border-box;
 }
 
+
+
 .table {
 	display: table;
 	border-spacing: 1rem 2rem;
-	width: 85%;
+	/* width: 85%; */
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -28,6 +30,7 @@
 	box-shadow: 7px 7px 8px #00b4d8;
 	border-radius: 7px 7px 7px 7px;
 	border: 2px solid rgb(173, 173, 173);
+	max-width: 20vw;
 }
 
 .table-nest {
@@ -53,4 +56,33 @@ img {
 	height: 50vh;
 	width: auto;
 	margin-top: 10px;
+}
+
+.search-outline {
+	border: 2px solid rgb(173, 173, 173);
+	border-radius: 10em;
+	background-color:#90e0ef;
+	padding: 5px;
+	width: fit-content !important;
+	margin-top: 2rem; 
+	margin-bottom: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 7px 7px 8px #00b4d8;
+
+}
+
+.movie-search {
+	background-color:#90e0ef;
+	outline: none;
+	border: none;
+	text-align: center;
+	flex: left;
+	font-size: 25px;
+	color: rgb(75, 75, 75);
+	
+}
+
+.search-button {
+	flex: right;
 }
