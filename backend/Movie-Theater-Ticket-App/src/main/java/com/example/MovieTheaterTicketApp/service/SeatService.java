@@ -22,9 +22,15 @@ public class SeatService {
         return seatRepository.findByShowtime(show);
     }
 
+
     public List<Seat> findByShowtime_id(Long id){
         return seatRepository.findByshowtime_id(id);
     }
+
+    public Seat findById(Long id){
+        return seatRepository.findSeatById(id);
+    }
+
 
     public void addSeat(Seat seat) {
         //TODO: Need error handling if movie name is already taken
