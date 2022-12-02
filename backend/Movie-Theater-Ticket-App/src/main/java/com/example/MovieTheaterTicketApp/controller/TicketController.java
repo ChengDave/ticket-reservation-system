@@ -41,6 +41,7 @@ public class TicketController {
         //Adding a ticket to the user
         RegisteredUser user = userService.getUser(ticket.getUser());
         userService.addTicket(user, ticket.getTicketNo());
+        
     }
     
     // @CrossOrigin(origins = "http://127.0.0.1:5501")
