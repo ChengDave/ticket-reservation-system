@@ -35,4 +35,12 @@ public class MovieService {
         //TODO: Need error handling if movie name does not exist
         movieRepository.delete(movie);
     }
+
+    public Movie getMovieByMovieTitle(String movieTitle){
+        return movieRepository.findByMovieTitle(movieTitle);
+    }
+
+    public List<Movie> getMovieByPartialMovieTitle(String partialMovieTitle){
+        return movieRepository.findByMovieTitleStartsWith(partialMovieTitle);
+    }
 }

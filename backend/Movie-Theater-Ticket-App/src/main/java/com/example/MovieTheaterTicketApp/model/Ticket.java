@@ -1,11 +1,7 @@
 package com.example.MovieTheaterTicketApp.model;
 
 import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 public class Ticket {
@@ -13,98 +9,46 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long ticketNo;
-    String date;
-    boolean receiptSent;
-    boolean completed;
-    Long movieId;
-    Long showtimeId;
-    Long theaterId;
-    Long seatId;
-    Long user;
 
-    public Ticket(){
-        super();
+    @OneToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name="userId")
+    private RegisteredUser user;
+
+    @OneToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name="showtimeId")
+    private Seat seat;
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketNo=" + ticketNo +
+                ", user=" + user +
+                ", seat=" + seat +
+                '}';
     }
 
-    public Ticket(Long ticketNo, String date, Long user) {
-        this.ticketNo = ticketNo;
-        this.date = date;
+    public Ticket(RegisteredUser user, Seat seat) {
         this.user = user;
+        this.seat = seat;
     }
 
-    public Long getTicketNo() {
-        return ticketNo;
-    }
-
-    public void setTicketNo(Long ticketNo) {
-        this.ticketNo = ticketNo;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public boolean isReceiptSent() {
-        return receiptSent;
-    }
-
-    public void setReceiptSent(boolean receiptSent) {
-        this.receiptSent = receiptSent;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
-
-    public Long getShowtimeId() {
-        return showtimeId;
-    }
-
-    public void setShowtimeId(Long showtimeId) {
-        this.showtimeId = showtimeId;
-    }
-
-    public Long getTheaterId() {
-        return theaterId;
-    }
-
-    public void setTheaterId(Long theaterId) {
-        this.theaterId = theaterId;
-    }
-
-    public Long getSeatId() {
-        return seatId;
-    }
-
-    public void setSeatId(Long seatId) {
-        this.seatId = seatId;
-    }
-
-    public Long getUser() {
+    public RegisteredUser getUser() {
         return user;
     }
 
-    public void setUser(Long user) {
+    public void setUser(RegisteredUser user) {
         this.user = user;
     }
 
-    
+    public Seat getSeat() {
+        return seat;
+    }
 
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public Ticket(){
+    }
 
 }

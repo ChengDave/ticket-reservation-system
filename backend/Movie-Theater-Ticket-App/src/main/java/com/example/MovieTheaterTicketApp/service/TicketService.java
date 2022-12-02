@@ -3,7 +3,6 @@ package com.example.MovieTheaterTicketApp.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.MovieTheaterTicketApp.model.Ticket;
@@ -11,10 +10,8 @@ import com.example.MovieTheaterTicketApp.repository.TicketRepository;
 
 @Service
 public class TicketService {
-
     private final TicketRepository ticketRepository;
 
-    @Autowired
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
@@ -23,62 +20,24 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public void addTicket(Ticket ticket) {
-        ticketRepository.save(ticket);
-    }
-
     public Optional<Ticket> getTicketById(Long id) {
         return ticketRepository.findById(id);
     }
 
-    public void deleteTicket(Long id){
+    public void addTicket(Ticket ticket) {
+        ticketRepository.save(ticket);
+    }
+
+    public void deleteTicketById(Long id){
         ticketRepository.deleteById(id);
     }
+
 
     public void deleteAll(){
         ticketRepository.deleteAll();
     }
 
-    public void updateTicketMovie(Long ticketId, Long movieId){
-        Optional<Ticket> ticket = ticketRepository.findById(ticketId);
-        if (ticket != null){
-            ticket.get().setMovieId(movieId);
-            ticketRepository.save(ticket.get());
-        }
-        
-    }
 
-    public void updateTicketShowtime(Long ticketId, Long showtimeId){
-        Optional<Ticket> ticket = ticketRepository.findById(ticketId);
-        if (ticket != null){
-            ticket.get().setMovieId(showtimeId);
-            ticketRepository.save(ticket.get());
-        }
-    }
-
-    public void updateTicketTheaterId(Long ticketId, Long theaterId){
-        Optional<Ticket> ticket = ticketRepository.findById(ticketId);
-        if (ticket != null){
-            ticket.get().setMovieId(theaterId);
-            ticketRepository.save(ticket.get());
-        }
-    }
-
-    public void updateTicketSeatId(Long ticketId, Long seatId){
-        Optional<Ticket> ticket = ticketRepository.findById(ticketId);
-        if (ticket != null){
-            ticket.get().setMovieId(seatId);
-            ticketRepository.save(ticket.get());
-        }
-    }
-
-    public void updateTicketUserId(Long ticketId, Long userId){
-        Optional<Ticket> ticket = ticketRepository.findById(ticketId);
-        if (ticket != null){
-            ticket.get().setUser(userId);
-            ticketRepository.save(ticket.get());
-        }
-    }
 
     
 }

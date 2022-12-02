@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.MovieTheaterTicketApp.model.Payment;
 import com.example.MovieTheaterTicketApp.model.Receipt;
@@ -33,7 +35,7 @@ public class PaymentController {
     }
     
     @PostMapping
-    public void addPayment(@RequestBody Payment payment){
+    public Payment addPayment(@RequestBody Payment payment){
 
         // TODO: Garnet's Comments. I don't like that this takes the id and userID. I think it should take the user/username and look that up. I currently have 1 hardcoded.
         // TODO: Need a response confirming the payment was good or not. Might need to hard code it but we are supposed to display that to the user
@@ -55,6 +57,12 @@ public class PaymentController {
         
         //Adding receipt to User
         userService.addReceipt(user, receiptId);
+        if (payment.getId() == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");
+        }
+        else{
+           return payment; 
+        }  
     }
     
     // @CrossOrigin(origins = "http://127.0.0.1:5501")

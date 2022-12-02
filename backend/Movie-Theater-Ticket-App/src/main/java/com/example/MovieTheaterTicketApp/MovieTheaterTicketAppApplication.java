@@ -42,7 +42,8 @@ public class MovieTheaterTicketAppApplication {
 										TheaterRepository theater_repository,
 										MovieRepository movie_repository,
 										ShowtimeRepository showtime_repository,
-										SeatRepository seat_repository) {
+										SeatRepository seat_repository,
+										TicketRepository ticket_repository){
 		return (args) -> {
 			// save a few customers
 			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com", "pass1", "123" ,false));
@@ -93,7 +94,7 @@ public class MovieTheaterTicketAppApplication {
 						showtimes.add(showtime2);
 						// showtimes.add(showtime3);
 
-						for(int s=1; s<50; s++){
+						for(int s=1; s<10; s++){
 							seats.add(new Seat(false, (double) 12.5, s, showtime1));
 							seats.add(new Seat(false, (double) 12.5, s, showtime2));
 							// seats.add(new Seat(false, (double) 12.5, s, showtime3));
@@ -102,7 +103,13 @@ public class MovieTheaterTicketAppApplication {
 				}
 				seat_repository.saveAll(seats);
 				showtime_repository.saveAll(showtimes);
+			}
 
+			List<Seat> seatsForShow25 = seat_repository.findByshowtime_id((long) 25);
+			RegisteredUser testUser = user_repository.findById((long)2);
+
+			for(int i=0;i<(seatsForShow25.size()-5);i++){
+				ticket_repository.save(new Ticket(testUser,seatsForShow25.get(i)));
 			}
 
 			// fetch all customers
