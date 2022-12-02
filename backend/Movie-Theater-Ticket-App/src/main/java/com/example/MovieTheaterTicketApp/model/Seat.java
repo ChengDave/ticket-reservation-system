@@ -9,28 +9,34 @@ public class Seat {
     private Long id;
 
     @Column(
-            name = "isTaken",
-            nullable = false,
-            columnDefinition = "Boolean"
+            name = "isTaken"
     )
     private boolean isTaken;
 
     @Column(
-            name = "price",
-            nullable = false,
-            columnDefinition = "price"
+            name = "price"
     )
     private double price;
 
     @Column(
-            name = "seatNumber",
-            nullable = false,
-            columnDefinition = "seatNumber"
+            name = "seatNumber"
     )
-    private Integer seatNumber;
+    private int seatNumber;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="showtimeId")
+    private Showtime showtime;
 
     public boolean isTaken() {
         return isTaken;
+    }
+
+    public Showtime getShowtime() {
+        return showtime;
+    }
+
+    public void setShowtime(Showtime showtime) {
+        this.showtime = showtime;
     }
 
     public void setTaken(boolean taken) {
@@ -45,11 +51,11 @@ public class Seat {
         this.price = price;
     }
 
-    public Integer getSeatNumber() {
+    public int getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatNumber(Integer seatNumber) {
+    public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
 
@@ -57,10 +63,15 @@ public class Seat {
         return id;
     }
 
-    public Seat(boolean isTaken, float price, Integer seatNumber) {
+    public Seat(boolean isTaken, double price, int seatNumber, Showtime showtime) {
         this.isTaken = isTaken;
         this.price = price;
         this.seatNumber = seatNumber;
+        this.showtime = showtime;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Seat() {
