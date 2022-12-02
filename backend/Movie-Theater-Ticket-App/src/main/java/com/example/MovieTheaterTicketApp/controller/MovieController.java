@@ -25,6 +25,16 @@ public class MovieController {
         return movieService.getMovies();
     }
 
+    @GetMapping(path = "movieTitle/{movieTitle}")
+    public Movie getMovies(@PathVariable("movieTitle") String movieTitle){
+        return movieService.getMovieByMovieTitle(movieTitle);
+    }
+
+    @GetMapping(path = "partialMovieTitle/{pMovieTitle}")
+    public List<Movie> getPartialMovieNames(@PathVariable("pMovieTitle") String movieTitle){
+        return movieService.getMovieByPartialMovieTitle(movieTitle);
+    }
+
     @PostMapping()
     public void addMovie(@RequestBody Movie movie){
         // add movie to db
@@ -43,4 +53,6 @@ public class MovieController {
         // choose a movie to view and update that info in the ticket
         ticketService.updateTicketMovie(ticketId, movieId);
     }
+
+
 }
