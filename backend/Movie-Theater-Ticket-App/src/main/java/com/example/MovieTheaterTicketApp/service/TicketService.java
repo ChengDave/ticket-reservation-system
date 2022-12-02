@@ -31,6 +31,13 @@ public class TicketService {
     public void deleteTicketById(Long id){
         ticketRepository.deleteById(id);
     }
+    public void deleteTicket(Ticket ticket){
+        ticketRepository.delete(ticket);
+    }
+
+    public Ticket getTicketBySeatId(Long seatId){
+        return ticketRepository.getTicketBySeatId(seatId);
+    }
 
 
     public void deleteAll(){

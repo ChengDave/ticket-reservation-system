@@ -105,11 +105,14 @@ public class MovieTheaterTicketAppApplication {
 				showtime_repository.saveAll(showtimes);
 			}
 
-			List<Seat> seatsForShow25 = seat_repository.findByshowtime_id((long) 25);
+			List<Seat> seatsForShow25 = seat_repository.findByshowtime_id((long)1214);
 			RegisteredUser testUser = user_repository.findById((long)2);
 
 			for(int i=0;i<(seatsForShow25.size()-5);i++){
 				ticket_repository.save(new Ticket(testUser,seatsForShow25.get(i)));
+				Seat testSeat = seatsForShow25.get(i);
+				testSeat.setTaken(true);
+				seat_repository.save(testSeat);
 			}
 
 			// fetch all customers

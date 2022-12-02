@@ -11,7 +11,7 @@ import java.util.List;
 public interface SeatRepository extends CrudRepository<Seat, Long>{
     List<Seat> findByShowtime(Showtime show);
     List<Seat> findByshowtime_id(Long id);
-
     Seat findSeatById(Long id);
+
 
 }

@@ -7,5 +7,6 @@ import com.example.MovieTheaterTicketApp.model.Ticket;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long>{
-    
+    Ticket getTicketBySeatId(Long id);
+
 }
