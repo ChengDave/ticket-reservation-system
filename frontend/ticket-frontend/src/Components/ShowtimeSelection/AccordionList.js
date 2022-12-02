@@ -94,14 +94,14 @@ const Buttons = ({props, times, theaterName}) => {
 		return year + "-" + month + "-" + day
 	}
 
-	const clicked = (id) => {
+	const clicked = (id, time) => {
 
 		const next_index = props.count + 1
 		if (next_index > 3) return
 		props.setCount(next_index)
 		
 		let p = props.params
-		p.showtime = id
+		p.showtime = {"id": id, "time": timeFromUnix(time, true)}
 		p.theater = theaterName
 		props.setParams(p)
 	};
@@ -114,7 +114,7 @@ const Buttons = ({props, times, theaterName}) => {
 		if (!(date in buttons)) {
 			buttons[date] = []
 		}
-		buttons[date].push(<button className='time-button' onClick={() => clicked(id)} key = {index}>{timeFromUnix(time, true)}</button>)
+		buttons[date].push(<button className='time-button' onClick={() => clicked(id, time)} key = {index}>{timeFromUnix(time, true)}</button>)
 	})
 
 	let display = []

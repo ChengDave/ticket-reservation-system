@@ -145,7 +145,7 @@ function Checkout(props) {
             </tr>
             <tr>
               <td className='left'>Time:</td>
-              <td className='right-align'>{props.params.showtime}</td>
+              <td className='right-align'>{props.params.showtime.time}</td>
             </tr>
             <tr><td>&emsp;</td></tr>
             <tr>

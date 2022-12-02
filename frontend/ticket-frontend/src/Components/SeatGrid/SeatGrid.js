@@ -7,7 +7,7 @@ const SeatGrid = (props) => {
 	const [seats, setSeats] = useState([])
 
 	useEffect(() => {
-		fetch("http://localhost:8080/api/v1/seat/"+props.params.showtime,{})
+		fetch("http://localhost:8080/api/v1/seat/"+props.params.showtime.id,{})
 		.then((response) => response.json())
 		.then(async (json) => {
 
