@@ -43,7 +43,12 @@ public class UserController {
 
     @PostMapping(path = "/registeredUser")
     public void registerUser(@RequestBody RegisteredUser user) { 
-        // TODO: Deal with this input to make a new Registered User
+        userService.register(user);
+    }
+
+    @PostMapping(path = "/guestUser")
+    public void guestUser(@RequestBody RegisteredUser user) { 
+        user.setRegistered(false);
         userService.register(user);
     }
 
@@ -55,12 +60,7 @@ public class UserController {
         return userService.getUserByEmail(email);
     }
 
-    @PostMapping(path = "/guestUser")
-    public void guestUser(@RequestBody RegisteredUser user) { 
-        // TODO: Deal with this input to make a new guest User
-        user.setRegistered(false);
-        userService.register(user);
-    }
+
 
   
 }

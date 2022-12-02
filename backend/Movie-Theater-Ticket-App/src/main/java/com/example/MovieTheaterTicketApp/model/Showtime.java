@@ -26,6 +26,17 @@ public class Showtime {
         this.localDateTime = localDateTime;
     }
 
+    
+    public Long getId() {
+        return id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
     public Movie getMovie() {
         return movie;
     }

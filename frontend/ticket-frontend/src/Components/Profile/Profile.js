@@ -14,7 +14,6 @@ const Display = (props) => {
 		})
 		.then((response) => response.json())
 		.then(data => {
-			console.log(data)
 			if (typeof data !== 'undefined') {
 				let d = {firstName: data["firstName"], lastName: data["lastName"], email: data["email"]}
 				setUserData(d)
@@ -24,8 +23,6 @@ const Display = (props) => {
 	}, [])
 
 
-	// console.log(userObject)
-	// console.log(userData)
 
 	return (
 		<div className="wrapper">

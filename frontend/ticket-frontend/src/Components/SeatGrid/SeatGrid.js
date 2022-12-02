@@ -1,23 +1,31 @@
 import "./SeatGrid.css"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const SeatGrid = (props) => {
 
 	const [selection, setSelection] = useState([])
+	const [seats, setSeats] = useState([])
+
+	useEffect(() => {
+		fetch("http://localhost:8080/api/v1/seat/"+props.params.showtime,{})
+		.then((response) => response.json())
+		.then(async (json) => {
+
+			let newSeats = []
+			json.forEach(element => {
+				newSeats.push({"taken": element.taken, "id": element.id, "number": element.seatNumber, "price": element.price})	
+			});
+			
+			setSeats(newSeats)
+		})
+	}, [])
 
 	let buttons = []
-
-	let seats = new Array(168).fill(false)
-
-	seats[10] = true
-	seats[20] = true
-	seats[33] = true
-	seats[50] = true
-	seats[100] = true
 	
-	for (let i = 1; i <= seats.length; i++) {
-		buttons.push(<Button i = {i} selected = {seats[i]} selection = {selection} setSelection = {setSelection} key = {i}/>)
-	}
+	seats.forEach((seat, index) => {
+		buttons.push(<Button seat = {seat} selection = {selection} setSelection = {setSelection} key = {index}/>)
+	})
+
 	
 	const selectSeats = () => {
 		let p = props.params
@@ -34,6 +42,7 @@ const SeatGrid = (props) => {
 		if (next_index > 3) return
 		props.setCount(next_index)
 	}
+
 
 	return (
 		<div>
@@ -55,7 +64,9 @@ const SeatGrid = (props) => {
 
 const Button = (props) => {
 
-	const [available, setAvailable] = useState(props.selected ? "taken" : "available")
+	console.log(props.seat)
+
+	const [available, setAvailable] = useState(props.seat.taken ? "taken" : "available")
 
 	const clicked = () => {
 		if (available === "taken") return;
@@ -63,14 +74,14 @@ const Button = (props) => {
 		setAvailable("selected")
 
 		let selection = props.selection
-		selection.push(props.i)
+		selection.push(props.seat.id)
 		props.setSelection(selection)
 	}
 
 	return (
 		<button className={`seat-button ${available}`}
 				onClick = {clicked}>
-			{props.i}
+			{props.seat.number}
 		</button>
 	)
 }

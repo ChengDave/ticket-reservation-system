@@ -7,22 +7,21 @@ const AccordionList = (props) => {
 	const [times, setTimes] = useState([])
 
 	useEffect(() => {
-		fetch("http://localhost:8080/api/vi/showtime/MOVIE/"+props.params.movie, {
+		fetch("http://localhost:8080/api/v1/showtime/MOVIE/"+props.params.movie, {
 			method: "GET",
 			headers:{"Content-Type":"application/json"},
 		})
 		.then((response) => response.json())
 		.then(data => {
 			
-			let d2 = data.map(({["movie"]:m_data, ["theater"]: t_data, ["localDateTime"]: ti_data}) => ({["theater"]: t_data.theaterTitle, ['time']:ti_data}))
-			console.log(d2)
+			let d2 = data.map(({["id"]:id, ["theater"]: t_data, ["localDateTime"]: ti_data}) => ({["id"]:id, ["theater"]: t_data.theaterTitle, ['time']:ti_data}))
 
 			let time_temp = []
 			d2.forEach((element) => {
 				if (!(element.theater in time_temp)) {
 					time_temp[element.theater] = {"name": element.theater, "times": []}
 				}
-				time_temp[element.theater].times.push(new Date(element.time))
+				time_temp[element.theater].times.push({"time": new Date(element.time), "id": element.id})
 			})
 			setTimes(Object.values(time_temp))
 		})
@@ -95,27 +94,27 @@ const Buttons = ({props, times, theaterName}) => {
 		return year + "-" + month + "-" + day
 	}
 
-	const clicked = (time) => {
+	const clicked = (id) => {
 
 		const next_index = props.count + 1
 		if (next_index > 3) return
 		props.setCount(next_index)
 		
 		let p = props.params
-		p.showtime = dayFromUnix(time) + " " + timeFromUnix(time, false)
+		p.showtime = id
 		p.theater = theaterName
 		props.setParams(p)
 	};
 
 	let buttons = {}
 
-	times.forEach((time, index) => {
+	times.forEach(({time, id}, index) => {
 
 		let date = dayFromUnix(time)
 		if (!(date in buttons)) {
 			buttons[date] = []
 		}
-		buttons[date].push(<button className='time-button' onClick={() => clicked(time)} key = {index}>{timeFromUnix(time, true)}</button>)
+		buttons[date].push(<button className='time-button' onClick={() => clicked(id)} key = {index}>{timeFromUnix(time, true)}</button>)
 	})
 
 	let display = []
@@ -129,8 +128,6 @@ const Buttons = ({props, times, theaterName}) => {
 			</div>
 		)
 	}
-
-	console.log(buttons)
 	return (
 		<div>
 			{display}

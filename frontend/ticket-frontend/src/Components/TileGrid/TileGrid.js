@@ -17,7 +17,6 @@ const TileGrid = (props) => {
 		.then((response) => response.json())
 		.then(data => {
 			setMovies(filterList(data))
-			console.log("test")
 		})
 		.catch((e) => {
 			console.error(e)

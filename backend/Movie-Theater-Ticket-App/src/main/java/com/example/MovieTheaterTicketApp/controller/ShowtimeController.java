@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/vi/showtime")
+@RequestMapping(path = "api/v1/showtime")
 public class ShowtimeController {
     private final ShowtimeService showtimeService;
     private final TicketService ticketService;

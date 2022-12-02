@@ -59,22 +59,22 @@ public class MovieTheaterTicketAppApplication {
 			movies.add(new Movie("Black Adam"));
 			movies.add(new Movie("Black Panther: Wakanda Forever"));
 			movies.add(new Movie("Bones and All"));
-			movies.add(new Movie("Devotion"));
-			movies.add(new Movie("Glass Onion: A Knives Out Mystery"));
-			movies.add(new Movie("Guillermo Del Toro's Pinocchio"));
-			movies.add(new Movie("I Wanna Dance With Somebody"));
-			movies.add(new Movie("Puss In Boots: The Last Wish"));
-			movies.add(new Movie("She Said"));
-			movies.add(new Movie("Strange World"));
-			movies.add(new Movie("The Banshee Of Inisherin"));
-			movies.add(new Movie("The Fabelmans"));
-			movies.add(new Movie("The Menu"));
-			movies.add(new Movie("Ticket to Paradise"));
-			movies.add(new Movie("Violent Night"));
+			// movies.add(new Movie("Devotion"));
+			// movies.add(new Movie("Glass Onion: A Knives Out Mystery"));
+			// movies.add(new Movie("Guillermo Del Toro's Pinocchio"));
+			// movies.add(new Movie("I Wanna Dance With Somebody"));
+			// movies.add(new Movie("Puss In Boots: The Last Wish"));
+			// movies.add(new Movie("She Said"));
+			// movies.add(new Movie("Strange World"));
+			// movies.add(new Movie("The Banshee Of Inisherin"));
+			// movies.add(new Movie("The Fabelmans"));
+			// movies.add(new Movie("The Menu"));
+			// movies.add(new Movie("Ticket to Paradise"));
+			// movies.add(new Movie("Violent Night"));
 
 			theater_repository.save(theater1);
 			theater_repository.save(theater2);
-			theater_repository.save(theater3);
+			// theater_repository.save(theater3);
 			movie_repository.saveAll(movies);
 			
 
@@ -82,21 +82,21 @@ public class MovieTheaterTicketAppApplication {
 				List<Showtime> showtimes = new ArrayList<>();
 				List<Seat> seats = new ArrayList<>();
 
-				for (int hour = 10; hour < 23; hour++) {
-					for (int day = 7; day < 15; day ++) {
+				for (int hour = 15; hour < 23; hour++) {
+					for (int day = 7; day < 9; day ++) {
 						Showtime showtime1 = (new Showtime(movies.get(i), theater1, LocalDateTime.of(2022, 12, day, hour, 30+i)));
 						Showtime showtime2 = (new Showtime(movies.get(i), theater2, LocalDateTime.of(2022, 12, day, hour, 00+i)));
-						Showtime showtime3 = (new Showtime(movies.get(i), theater3, LocalDateTime.of(2022, 12, day, hour, 40+i)));
+						// Showtime showtime3 = (new Showtime(movies.get(i), theater3, LocalDateTime.of(2022, 12, day, hour, 40+i)));
 
 
 						showtimes.add(showtime1);
 						showtimes.add(showtime2);
-						showtimes.add(showtime3);
+						// showtimes.add(showtime3);
 
 						for(int s=1; s<50; s++){
 							seats.add(new Seat(false, (double) 12.5, s, showtime1));
 							seats.add(new Seat(false, (double) 12.5, s, showtime2));
-							seats.add(new Seat(false, (double) 12.5, s, showtime3));
+							// seats.add(new Seat(false, (double) 12.5, s, showtime3));
 						}
 					}
 				}
