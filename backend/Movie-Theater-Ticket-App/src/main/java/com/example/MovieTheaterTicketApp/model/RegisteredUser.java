@@ -40,7 +40,7 @@ public class RegisteredUser implements User{
 
     @Column(
             name = "password",
-            nullable = false,
+            nullable = true,
             columnDefinition = "TEXT"
     )
     private String password;

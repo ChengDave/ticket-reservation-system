@@ -1,15 +1,15 @@
 import './Checkout.css';
-import React, { useState } from 'react';
+import React, {useState, useContext} from 'react';
 import UserInformation from './UserInformation';
+import {UserContext} from '../../UserContext';
 
 function Checkout(props) {
 
   const [info, setInfo] = useState({})
-  // const [userId, setUserId] = useState("none")
+	const {user, setUser} = useContext(UserContext)
 
   const numTickets = props.params.seats.length
-  const ticketPrice = 19.99
-  let value = ticketPrice * numTickets
+  let value = props.params.price
   let gst = value * 0.05
   let total = value + gst
 
@@ -35,19 +35,6 @@ function Checkout(props) {
       alert("Missing Required Entries")
       return
     }
-    
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0') + 1;
-    let yyyy = today.getFullYear();
-    
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    
-    today = mm + '/' + dd + '/' + yyyy;
-
-    // TODO: Check if I can delete times
-
-    
     
     let userId = await fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
       method: "GET",
@@ -85,7 +72,7 @@ function Checkout(props) {
       })          
       .catch((e) => console.error(e))
       
-      let userId = await fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
+      userId = await fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
         method: "GET",
         headers:{"Content-Type":"application/json"},
       })
@@ -100,6 +87,18 @@ function Checkout(props) {
       .catch((e) => console.error(e))
 
     }
+
+    console.log(props.params.seats)
+    console.log(userId)
+
+    props.params.seats.forEach(seatid => {
+      fetch("http://localhost:8080/api/v1/ticket/user/" + userId + "/seat/" + seatid, {
+        method: "POST",
+        headers:{"Content-Type":"application/json"},
+      })
+
+      console.log("Making Ticket")
+    });
 
     let payment = {
       "creditCardExpDate": info["Expiration Date"],
@@ -149,7 +148,7 @@ function Checkout(props) {
             </tr>
             <tr><td>&emsp;</td></tr>
             <tr>
-              <td className='left'>Items: Ticket (x{numTickets}) $19.99</td>
+              <td className='left'>Items: Ticket (x{numTickets})</td>
               <td className='right-align'>${value}</td>
             </tr>
             <tr className="underlined">
@@ -167,6 +166,14 @@ function Checkout(props) {
       
       <button className='checkout-button' onClick={clicked}>Purchase</button>
       <button className='checkout-button' onClick={canceled}>Cancel</button>
+    </div>
+  )
+}
+
+const summary = () => {
+  return (
+    <div>
+      
     </div>
   )
 }

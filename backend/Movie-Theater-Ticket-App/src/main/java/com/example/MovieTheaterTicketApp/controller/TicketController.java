@@ -34,6 +34,7 @@ public class TicketController {
         
         // seatService.registerSeat(seat); // sets seat to istaken
         ticketService.addTicket(new Ticket(user, seat));
+        System.out.println("Here");
     }
 
 //    @DeleteMapping

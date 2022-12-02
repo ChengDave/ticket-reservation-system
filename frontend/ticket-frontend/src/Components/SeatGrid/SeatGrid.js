@@ -35,6 +35,15 @@ const SeatGrid = (props) => {
 			return
 		}
 
+		let price = 0;
+
+		seats.forEach(seat => {
+			if (selection.includes(seat.id)){
+				price += seat.price;
+			}
+		})
+		
+		p.price = price
 		p.seats = selection
 		props.setParams(p)
 
@@ -64,18 +73,29 @@ const SeatGrid = (props) => {
 
 const Button = (props) => {
 
-	console.log(props.seat)
-
 	const [available, setAvailable] = useState(props.seat.taken ? "taken" : "available")
 
 	const clicked = () => {
 		if (available === "taken") return;
 		
-		setAvailable("selected")
-
+		
 		let selection = props.selection
-		selection.push(props.seat.id)
-		props.setSelection(selection)
+
+		if (available === "selected") {
+			let newSeats = []
+			selection.forEach(element =>{
+				if (element !== props.seat.id){
+					newSeats.push(element)
+				}
+			})
+			
+			props.setSelection(newSeats)
+			setAvailable("available")
+		} else {
+			setAvailable("selected")
+			selection.push(props.seat.id)
+			props.setSelection(selection)
+		}
 	}
 
 	return (
