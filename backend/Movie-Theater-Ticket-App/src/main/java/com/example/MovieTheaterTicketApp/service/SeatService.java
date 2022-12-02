@@ -35,18 +35,13 @@ public class SeatService {
         //TODO: Need error handling if movie name does not exist
         seatRepository.delete(seat);
     }
-
     public void registerSeat(Seat seat) {
-        //TODO: Need error handling if movie name does not exist
-        Seat userSeat = seatRepository.findById(seat.getId()).get();
-
-        if (userSeat.isTaken()==true){
-            // if seat already taken then return and don't update
-            // TODO: figure out how to send message back to client that seat could not be updated for user
-            return;
-        }
-        userSeat.setTaken(true);
-        seatRepository.save(userSeat);
+        seat.setTaken(true);
+        seatRepository.save(seat);
     }
 
+    public void unregisterSeat(Seat seat) {
+        seat.setTaken(false);
+        seatRepository.save(seat);
+    }
 }
