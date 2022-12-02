@@ -1,5 +1,7 @@
 package com.example.MovieTheaterTicketApp.model;
 
+import java.beans.Transient;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,8 @@ public class Payment {
     String paymentTime;
     Double paymentAmount;
     Long UserId;
+    
+    private transient CreditCard creditCard;
 
     public Payment(){
         super();
@@ -41,7 +45,7 @@ public class Payment {
         this.paymentDate = paymentDate;
         this.paymentTime = paymentTime;
         this.paymentAmount = paymentAmount;
-        UserId = userId;
+        this.UserId = userId;
     }
 
     public Long getId() {
@@ -106,6 +110,14 @@ public class Payment {
 
     public void setUserId(Long userId) {
         UserId = userId;
+    }
+
+    public void setCreditCardStrategy(CreditCard creditCard){
+        this.creditCard = creditCard;
+    }
+
+    public void debitCreditCard(){
+        creditCard.debitCard(paymentAmount);
     }
 
     @Override

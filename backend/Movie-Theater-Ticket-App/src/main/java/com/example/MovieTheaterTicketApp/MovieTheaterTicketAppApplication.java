@@ -1,10 +1,7 @@
 package com.example.MovieTheaterTicketApp;
 
 import com.example.MovieTheaterTicketApp.model.*;
-import com.example.MovieTheaterTicketApp.repository.MovieRepository;
-import com.example.MovieTheaterTicketApp.repository.ShowtimeRepository;
-import com.example.MovieTheaterTicketApp.repository.TheaterRepository;
-import com.example.MovieTheaterTicketApp.repository.UserRepository;
+import com.example.MovieTheaterTicketApp.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -44,7 +41,8 @@ public class MovieTheaterTicketAppApplication {
 	public CommandLineRunner DataLoader(UserRepository user_repository,
 										TheaterRepository theater_repository,
 										MovieRepository movie_repository,
-										ShowtimeRepository showtime_repository) {
+										ShowtimeRepository showtime_repository,
+										SeatRepository seat_repository) {
 		return (args) -> {
 			// save a few customers
 			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com", "pass1", "123" ,false));
@@ -77,24 +75,35 @@ public class MovieTheaterTicketAppApplication {
 			theater_repository.save(theater1);
 			theater_repository.save(theater2);
 			theater_repository.save(theater3);
-
 			movie_repository.saveAll(movies);
 			
 
 			for (int i = 0; i < movies.size(); i++) {
 				List<Showtime> showtimes = new ArrayList<>();
+				List<Seat> seats = new ArrayList<>();
+
 				for (int hour = 10; hour < 23; hour++) {
 					for (int day = 7; day < 15; day ++) {
-						showtimes.add(new Showtime(movies.get(i), theater1, LocalDateTime.of(2022, 12, day, hour, 30+i)));
-						showtimes.add(new Showtime(movies.get(i), theater2, LocalDateTime.of(2022, 12, day, hour, 00+i)));
-						showtimes.add(new Showtime(movies.get(i), theater3, LocalDateTime.of(2022, 12, day, hour, 40+i)));
+						Showtime showtime1 = (new Showtime(movies.get(i), theater1, LocalDateTime.of(2022, 12, day, hour, 30+i)));
+						Showtime showtime2 = (new Showtime(movies.get(i), theater2, LocalDateTime.of(2022, 12, day, hour, 00+i)));
+						Showtime showtime3 = (new Showtime(movies.get(i), theater3, LocalDateTime.of(2022, 12, day, hour, 40+i)));
+
+
+						showtimes.add(showtime1);
+						showtimes.add(showtime2);
+						showtimes.add(showtime3);
+
+						for(int s=1; s<50; s++){
+							seats.add(new Seat(false, (double) 12.5, s, showtime1));
+							seats.add(new Seat(false, (double) 12.5, s, showtime2));
+							seats.add(new Seat(false, (double) 12.5, s, showtime3));
+						}
 					}
 				}
-
+				seat_repository.saveAll(seats);
 				showtime_repository.saveAll(showtimes);
 
 			}
-
 
 			// fetch all customers
 			log.info("Users found with findAll():");

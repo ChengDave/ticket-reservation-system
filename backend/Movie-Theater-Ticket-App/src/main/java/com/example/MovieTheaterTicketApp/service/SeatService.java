@@ -1,5 +1,6 @@
 package com.example.MovieTheaterTicketApp.service;
 import com.example.MovieTheaterTicketApp.model.Seat;
+import com.example.MovieTheaterTicketApp.model.Showtime;
 import com.example.MovieTheaterTicketApp.repository.SeatRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,14 @@ public class SeatService {
 
     public List<Seat> getSeats(){
         return (List<Seat>) seatRepository.findAll();
+    }
+
+    public List<Seat> getSeatsByShowtime(Showtime show){
+        return seatRepository.findByShowtime(show);
+    }
+
+    public List<Seat> findByShowtime_id(Long id){
+        return seatRepository.findByshowtime_id(id);
     }
 
     public void addSeat(Seat seat) {

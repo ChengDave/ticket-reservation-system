@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.MovieTheaterTicketApp.model.AmexCreditCard;
+import com.example.MovieTheaterTicketApp.model.MasterCardCreditCard;
 import com.example.MovieTheaterTicketApp.model.Payment;
 import com.example.MovieTheaterTicketApp.model.Receipt;
+import com.example.MovieTheaterTicketApp.model.VisaCreditCard;
 import com.example.MovieTheaterTicketApp.repository.PaymentRepository;
 import com.example.MovieTheaterTicketApp.repository.ReceiptRepository;
 
@@ -28,8 +31,23 @@ public class PaymentService {
         return paymentRepo.findAll();
     }
 
-    public void addPayment(Payment Payment) {
-        paymentRepo.save(Payment);
+    public void addPayment(Payment payment, Long creditCardNo) {
+        String ccn = String.valueOf(creditCardNo);
+
+        if (ccn.startsWith("3")){
+            payment.setCreditCardStrategy(new AmexCreditCard());
+        }
+
+        else if (ccn.startsWith("4")){
+            payment.setCreditCardStrategy(new VisaCreditCard());
+        }
+
+        else if (ccn.startsWith("5")){
+            payment.setCreditCardStrategy(new MasterCardCreditCard());
+        }
+    
+        payment.debitCreditCard();
+        paymentRepo.save(payment);
     }
 
     public Optional<Payment> getPaymentById(Long id) {
