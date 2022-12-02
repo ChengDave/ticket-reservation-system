@@ -5,7 +5,7 @@ import UserInformation from './UserInformation';
 function Checkout(props) {
 
   const [info, setInfo] = useState({})
-  const [userId, setUserId] = useState("none")
+  // const [userId, setUserId] = useState("none")
 
   const numTickets = props.params.seats.length
   const ticketPrice = 19.99
@@ -17,7 +17,7 @@ function Checkout(props) {
   gst = gst.toFixed(2)
   total = total.toFixed(2)
 
-  const clicked = () => {
+  const clicked = async () => {
     
     let valid = true
     if (Object.keys(info).length !== 12) {
@@ -49,21 +49,56 @@ function Checkout(props) {
 
     
     
-    fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
+    let userId = await fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
       method: "GET",
       headers:{"Content-Type":"application/json"},
     })
     .then((response) => response.json())
-		.then((data) => {
+		.then(data => {
       if (data.length > 0) {
-        setUserId(data[0].id)
+        return data[0].id
       } else {
-        setUserId("none")
+        return "none"
       }
     })
+    .catch((e) => console.error(e))
+    
 
     if (userId === "none") {
-      console.log("Need User")
+
+      let guestUser = {
+        "firstName": info["First Name"],
+        "creditCard": info["Card Number"],
+        "lastName": info["Last Name"],
+        "email": info["Email"],
+        "isAdmin": false
+      }
+
+      await fetch("http://localhost:8080/api/v1/users/guestUser", {
+      method: "POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(guestUser)
+      })  
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+      })          
+      .catch((e) => console.error(e))
+      
+      let userId = await fetch("http://localhost:8080/api/v1/users/email/" + info["Email"], {
+        method: "GET",
+        headers:{"Content-Type":"application/json"},
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length > 0) {
+          return data[0].id
+        } else {
+           return "none"
+        }
+      })
+      .catch((e) => console.error(e))
+
     }
 
     let payment = {
@@ -74,14 +109,17 @@ function Checkout(props) {
       "paymentAmount": parseInt(total),
       "paymentDate": null,
       "paymentTime": null,
-      "userId":1
+      "userId": userId
     }
 
-    fetch("http://localhost:8080/api/v1/payment/", {
+    await fetch("http://localhost:8080/api/v1/payment/", {
       method: "POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(payment)
     })
+    .catch((e) => console.error(e))
+
+    alert("Purchase Confirmed")
 
   }
 
