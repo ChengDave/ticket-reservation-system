@@ -45,11 +45,15 @@ public class PaymentController {
         LocalDateTime now = LocalDateTime.now();
         payment.setPaymentDate(dtf.format(now).substring(0,10));
         payment.setPaymentTime(dtf.format(now).substring(11));
-        paymentService.addPayment(payment);
+
+        // Assign credit card type based on the first digit of the credit card number.
+        RegisteredUser user = userService.getUser(payment.getUserId());
+        Long creditCardNo = user.getCreditCardNumber();
+
+        paymentService.addPayment(payment, creditCardNo);
         Long receiptId = paymentService.genReceipt(payment);
         
         //Adding receipt to User
-        RegisteredUser user = userService.getUser(payment.getUserId());
         userService.addReceipt(user, receiptId);
     }
     
