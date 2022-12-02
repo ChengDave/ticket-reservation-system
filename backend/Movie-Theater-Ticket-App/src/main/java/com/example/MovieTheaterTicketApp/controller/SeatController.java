@@ -58,10 +58,10 @@ public class SeatController {
         seatService.registerSeat(seat);
     }
 
-    @PostMapping(path = "seatId/{seatId}/TicketId/{ticketId}")
-    public void selectMovieToView(@PathVariable("seatId") Long seatId,
-                                @PathVariable("ticketId") Long ticketId){
-        // choose a movie to view and update that info in the ticket
-        ticketService.updateTicketMovie(ticketId, seatId);
-    }
+//    @PostMapping(path = "seatId/{seatId}/TicketId/{ticketId}")
+//    public void selectMovieToView(@PathVariable("seatId") Long seatId,
+//                                @PathVariable("ticketId") Long ticketId){
+//        // choose a movie to view and update that info in the ticket
+//        ticketService.updateTicketMovie(ticketId, seatId);
+//    }
 }

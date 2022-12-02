@@ -50,14 +50,14 @@ public class ShowtimeController {
         showtimeService.removeShowtime(showtime);
     }
 
-    @PostMapping(path = "showtimeId/{showtimeId}/TicketId/{ticketId}")
-    public void selectMovieToView(@PathVariable("showtimeId") Long showtimeId,
-                                @PathVariable("ticketId") Long ticketId){
-        // choose a showtime to view and update that info in the ticket
-        // We are also updating the theater information here since that 
-        // should be a component of the showtime already.
-        Showtime showtime = showtimeService.getShowtime(showtimeId);
-        ticketService.updateTicketShowtime(ticketId, showtimeId);
-        ticketService.updateTicketTheaterId(ticketId, showtime.getTheater().getId());
-    }
+//    @PostMapping(path = "showtimeId/{showtimeId}/TicketId/{ticketId}")
+//    public void selectMovieToView(@PathVariable("showtimeId") Long showtimeId,
+//                                @PathVariable("ticketId") Long ticketId){
+//        // choose a showtime to view and update that info in the ticket
+//        // We are also updating the theater information here since that
+//        // should be a component of the showtime already.
+//        Showtime showtime = showtimeService.getShowtime(showtimeId);
+//        ticketService.updateTicketShowtime(ticketId, showtimeId);
+//        ticketService.updateTicketTheaterId(ticketId, showtime.getTheater().getId());
+//    }
 }

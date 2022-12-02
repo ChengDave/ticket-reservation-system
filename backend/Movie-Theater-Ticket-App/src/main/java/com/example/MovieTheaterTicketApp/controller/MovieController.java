@@ -47,12 +47,12 @@ public class MovieController {
         movieService.removeMovie(movie);
     }
 
-    @PostMapping(path = "movieId/{movieId}/TicketId/{ticketId}")
-    public void selectMovieToView(@PathVariable("movieId") Long movieId,
-                                @PathVariable("ticketId") Long ticketId){
-        // choose a movie to view and update that info in the ticket
-        ticketService.updateTicketMovie(ticketId, movieId);
-    }
+//    @PostMapping(path = "movieId/{movieId}/TicketId/{ticketId}")
+//    public void selectMovieToView(@PathVariable("movieId") Long movieId,
+//                                @PathVariable("ticketId") Long ticketId){
+//        // choose a movie to view and update that info in the ticket
+//        ticketService.updateTicketMovie(ticketId, movieId);
+//    }
 
 
 }
