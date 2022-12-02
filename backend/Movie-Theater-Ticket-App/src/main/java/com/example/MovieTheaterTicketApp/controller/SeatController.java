@@ -40,6 +40,13 @@ public class SeatController {
         return seatService.findByShowtime_id(showTimeId);
     }
 
+
+    @GetMapping(path="/available/{showTimeId}")
+    public List<Seat> getAvailableSeatsByShowtimeId(@PathVariable("showTimeId") Long showTimeId){
+        // return list of all seats by ShowtimeId
+        return seatService.findByshowtime_idAndTAndTakenEqualsFalse(showTimeId);
+    }
+
     @PostMapping()
     public void addSeat(@RequestBody Seat seat){
         // add movie to db
