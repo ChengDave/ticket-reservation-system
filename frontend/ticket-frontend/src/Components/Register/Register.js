@@ -35,7 +35,12 @@ const Register = (props) => {
 			"nameOnCard": info["Name on Card"],
 			"cardExpirationDate": info["Expiration Date"],
 			"cardCVV": info["Security Code"],
-			"isRegistered": true
+			"isRegistered": true,
+			"address": info["Address"],
+			"city": info["City"],
+			"province": info["Province/State"],
+			"country": info["Country"],
+			"postal": info["Postal Code"]
 		}
 
 		// Create User

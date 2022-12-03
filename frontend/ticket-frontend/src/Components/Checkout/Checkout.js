@@ -6,8 +6,8 @@ import {UserContext} from '../../UserContext';
 function Checkout(props) {
 
   const [info, setInfo] = useState({})
-  const [total, setTotal] = useState(0)
 	const {user, setUser} = useContext(UserContext)
+
 
   const clicked = async () => {
 
@@ -31,17 +31,22 @@ function Checkout(props) {
       })
     });
 
+    
+    let totals = getTotals(props.params)
+
     // Setup the payment data
     let payment = {
       "creditCardExpDate": info["Expiration Date"],
       "creditCardNo": parseInt(info["Card Number"]),
       "cvv": parseInt(info["Security Code"]),
       "id":null,
-      "paymentAmount": parseInt(total),
+      "paymentAmount": parseInt(totals["total"]),
       "paymentDate": null,
       "paymentTime": null,
       "userId": userId
     }
+
+    console.log(payment)
 
     // Post the payment
     await fetch("http://localhost:8080/api/v1/payment/", {
@@ -71,13 +76,21 @@ function Checkout(props) {
     
       let userInfo = await response.json()
 
+      console.log(userInfo)
+
       let newInfo = {
         "Card Number": userInfo.creditCard,
         "Email": userInfo.email,
+        "Name on Card": userInfo.nameOnCard,
         "Expiration Date": userInfo.cardExpirationDate,
         "First Name": userInfo.firstName,
         "Last Name": userInfo.lastName,
-        "Security Code": userInfo.cardCVV
+        "Security Code": userInfo.cardCVV,
+        "Address": userInfo.address,
+        "City": userInfo.city,
+        "Province/State": userInfo.province,
+        "Country": userInfo.country,
+        "Postal Code": userInfo.postal
       }
 
       setInfo(newInfo)
@@ -91,7 +104,7 @@ function Checkout(props) {
 
   return (
     <div className='division'>
-      <Summary params = {props.params} setTotal = {setTotal}></Summary>
+      <Summary params = {props.params}></Summary>
 
       <UserInformation info = {info} setInfo = {setInfo}/>
       
@@ -101,19 +114,23 @@ function Checkout(props) {
   )
 }
 
-const Summary = (props) => {
+const getTotals = (params) => {
 
-  const numTickets = props.params.seats.length
-  let value = props.params.price
+  let value = params.price
   let gst = value * 0.05
   let total = value + gst
-
-  props.setTotal(total)
 
   value = value.toFixed(2)
   gst = gst.toFixed(2)
   total = total.toFixed(2)
-  
+
+  return {"value": value, "gst":gst, "total": total}
+}
+
+const Summary = (props) => {
+  let numTickets = props.params.seats.length
+  const totals = getTotals(props.params)
+
   return (
     <div>
       <h4>Order Summary</h4>
@@ -136,13 +153,13 @@ const Summary = (props) => {
             <tr><td>&emsp;</td></tr>
             <tr>
               <td className='left'>Items: Ticket (x{numTickets})</td>
-              <td className='right-align'>${value}</td>
+              <td className='right-align'>${totals["value"]}</td>
             </tr>
             <tr className="underlined">
-              <td className='left'>GST:</td><td className='right-align'>${gst}</td>
+              <td className='left'>GST:</td><td className='right-align'>${totals["gst"]}</td>
             </tr>
             <tr>
-              <td className='left'>Total:</td><td className='right-align'>${total}</td>
+              <td className='left'>Total:</td><td className='right-align'>${totals["total"]}</td>
             </tr>
           </tbody>
         </table>
