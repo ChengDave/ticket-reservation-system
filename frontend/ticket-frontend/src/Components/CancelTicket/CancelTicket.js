@@ -9,12 +9,25 @@ const CancelTicket = (props) => {
 	const [tickets, setTickets] = useState([])
 	const [ticketTiles, setTiles] = useState([])
 
+	const cancel = async (user, seat) => {
+
+		await fetch("http://localhost:8080/api/v1/ticket/user/" + user + "/seat/" + seat, {
+			method: "DELETE",
+			mode:'cors',
+			headers:{'Access-Control-Allow-Origin': '*'},
+		}).catch((e) => console.error(e))
+
+		let newTickets = await getTicketsByUserID(user).catch((e) => console.error(e))
+		setTickets(newTickets)
+		console.log(newTickets)
+
+	}
 
 	useEffect(() => {
 		let tiles = []
 		tickets.forEach(ticket => {
 			let showtime = ticket.seat.showtime
-			console.log(showtime)
+
 			tiles.push(<div className='ticket-item'>
 							<div className="left">
 										<p>Theater: {showtime.theater.theaterTitle}</p>
@@ -23,7 +36,7 @@ const CancelTicket = (props) => {
 										<p>Seat: {ticket.seat.seatNumber}</p>
 							</div>
 							<div className="right">
-								<button className='cancel-button'>Cancel</button>
+								<button className='cancel-button' onClick={() => cancel(ticket.user.id, ticket.seat.id)}>Cancel</button>
 							</div>
 							</div>)
 		})
@@ -65,19 +78,5 @@ const EnterEmail = (props) => {
 		</div>
 	)
 }
-
-const Tile = () => {
-
-	return (
-		<React.Fragment>
-			<div className="tile">
-				{/* <img src={process.env.PUBLIC_URL + '/images/' + this.props.label.movieTitle.replace(/[^a-zA-Z0-9\s]/g, "") + ".jpeg"} alt={this.props.label.movieTitle + " Movie Poster"} onClick={this.clicked}></img> */}
-
-				<button className = "b" ><u>{"TEST"}</u></button>
-			</div>
-		</React.Fragment>
-	)
-}
-
 
 export default CancelTicket;

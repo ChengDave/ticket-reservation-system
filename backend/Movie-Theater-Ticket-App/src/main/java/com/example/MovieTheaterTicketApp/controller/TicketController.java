@@ -41,6 +41,7 @@ public class TicketController {
 //        seatService.registerSeat(seat); // sets seat to istaken
 //    }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(value = "/user/{userId}/seat/{seatId}")
     public void deleteTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
 //        RegisteredUser user = userService.getUserById(userId);
@@ -76,4 +77,3 @@ public class TicketController {
     }
 
 }
-
