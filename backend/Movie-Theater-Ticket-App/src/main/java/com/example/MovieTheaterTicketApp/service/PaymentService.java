@@ -59,11 +59,11 @@ public class PaymentService {
             refund.setCreditCardStrategy(new AmexCreditCard());
         }
 
-        else if (ccn.charAt(0) == '3'){
+        else if (ccn.charAt(0) == '4'){
             refund.setCreditCardStrategy(new VisaCreditCard());
         }
 
-        else if (ccn.charAt(0) == '4'){
+        else if (ccn.charAt(0) == '5'){
             refund.setCreditCardStrategy(new MasterCardCreditCard());
         }
     
