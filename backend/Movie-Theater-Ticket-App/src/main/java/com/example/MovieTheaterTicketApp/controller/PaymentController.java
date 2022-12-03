@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.MovieTheaterTicketApp.model.Payment;
 import com.example.MovieTheaterTicketApp.model.Receipt;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
+import com.example.MovieTheaterTicketApp.service.EmailService;
 import com.example.MovieTheaterTicketApp.service.PaymentService;
 import com.example.MovieTheaterTicketApp.service.UserService;
 
@@ -26,15 +27,17 @@ public class PaymentController {
 
     PaymentService paymentService;
     UserService userService;
+    EmailService emailService;
 
     @Autowired
-    public PaymentController(PaymentService paymentService, UserService userService) {
+    public PaymentController(PaymentService paymentService, UserService userService, EmailService emailService) {
         this.paymentService = paymentService;
         this.userService = userService;
+        this.emailService = emailService;
     }
     
     @PostMapping
-    public Payment addPayment(@RequestBody Payment payment){
+    public Receipt addPayment(@RequestBody Payment payment){
 
         // TODO: Garnet's Comments. I don't like that this takes the id and userID. I think it should take the user/username and look that up. I currently have 1 hardcoded.
         // TODO: Need a response confirming the payment was good or not. Might need to hard code it but we are supposed to display that to the user
@@ -59,14 +62,19 @@ public class PaymentController {
 
         paymentService.addPayment(payment);
         Long receiptId = paymentService.genReceipt(payment);
+        Receipt receipt = paymentService.getRecieptById(receiptId).get();
         
         // Adding receipt to User
         userService.addReceipt(user, receiptId);
-        if (payment.getCreditCardNo() == null){
+
+        // invoke the email service
+        emailService.emailReceipt(user, receipt.toString());
+        
+        if (receipt.getAmount() == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");
         }
         else{
-           return payment; 
+           return receipt; 
         }  
     }
 
