@@ -1,5 +1,8 @@
 package com.example.MovieTheaterTicketApp.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.*;
 
 @Entity(name = "RegisteredUser")
@@ -151,6 +154,20 @@ public class RegisteredUser implements User{
     )
     private String postal;
 
+    @Column(
+        name = "registrationDate",
+        nullable = true,
+        columnDefinition = "TEXT"
+    )
+    private String registrationDate;
+
+    @Column(
+        name = "nextPaymentDue",
+        nullable = true,
+        columnDefinition = "TEXT"
+    )
+    private String nextPaymentDue;
+
     protected RegisteredUser() {
     }
 
@@ -169,6 +186,11 @@ public class RegisteredUser implements User{
         this.isRegistered = true;
         this.refund = false;
         this.credit = 0.0;
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        this.registrationDate = dtf.format(now);
+        this.nextPaymentDue = dtf.format(now);
     }
 
 
@@ -211,8 +233,6 @@ public class RegisteredUser implements User{
     public void setEmail(String email) {
         this.email = email;
     }
-
-    
 
     public boolean isAdmin() {
         return isAdmin;
@@ -349,6 +369,22 @@ public class RegisteredUser implements User{
 
     public void setPostal(String postal) {
         this.postal = postal;
+    }
+
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public String getNextPaymentDue() {
+        return nextPaymentDue;
+    }
+
+    public void setNextPaymentDue(String nextPaymentDue) {
+        this.nextPaymentDue = nextPaymentDue;
     }
 
     public double removeFromCredit(double amount) {

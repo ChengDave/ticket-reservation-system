@@ -10,13 +10,14 @@ const NavBar = (props) => {
 	return (
 		<header className='navbar'>
 			<div className='navbar__title navbar__item' onClick={() => {props.setDisplay("Tab")}}>Ticket Registration App</div>
-			<div className='navbar__item' onClick={() => {props.setDisplay("Cancel")}}>Cancel Reservation</div>
 			<div className='navbar__item' onClick={() => {props.setDisplay("News")}}>News</div>
 			{user === "none" ? (
-				<div className='navbar__item' onClick={() => {props.setDisplay("Login")}}>Login</div>  
+				
+				[<div key = {1} className='navbar__item' onClick={() => {props.setDisplay("Cancel")}}>Cancel Reservation</div>,
+				<div key = {2}className='navbar__item' onClick={() => {props.setDisplay("Login")}}>Login</div>]
 			):(
 				[<div key = {1} className='navbar__item' onClick={() => {props.setDisplay("Profile")}}>Profile</div>,
-					<div key = {2} className='navbar__item' onClick={() => {setUser("none"); props.setDisplay("Tab")}}>Logout</div> ]
+				<div key = {2} className='navbar__item' onClick={() => {setUser("none"); props.setDisplay("Tab")}}>Logout</div> ]
 			)}
 		</header>
 	)

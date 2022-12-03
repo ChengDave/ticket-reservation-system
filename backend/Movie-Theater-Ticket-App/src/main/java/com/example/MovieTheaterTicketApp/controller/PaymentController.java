@@ -1,14 +1,11 @@
 package com.example.MovieTheaterTicketApp.controller;
 
-import java.io.Console;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.MovieTheaterTicketApp.model.Payment;
 import com.example.MovieTheaterTicketApp.model.Receipt;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
-import com.example.MovieTheaterTicketApp.repository.UserRepository;
 import com.example.MovieTheaterTicketApp.service.PaymentService;
 import com.example.MovieTheaterTicketApp.service.UserService;
 
