@@ -52,7 +52,7 @@ const Display = (props) => {
 						<td className='right-align'>{userData.registrationDate}</td>
 					</tr>
 					<tr>
-						<td className='left'>Next Annual Fee:</td>
+						<td className='left'>Next Annual Fee Due:</td>
 						<td className='right-align'>{userData.nextPaymentDue}</td>
 					</tr>
 				</tbody>

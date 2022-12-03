@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -43,6 +45,12 @@ public class  UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path = "/registeredUser")
     public void registerUser(@RequestBody RegisteredUser user) { 
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        user.setRegistrationDate(dtf.format(now));
+        user.setNextPaymentDue(dtf.format(now));
+
         userService.register(user);
     }
 
