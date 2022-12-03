@@ -31,24 +31,28 @@ public class PaymentService {
         return paymentRepo.findAll();
     }
 
-    public void addPayment(Payment payment, Long creditCardNo) {
-        String ccn = String.valueOf(creditCardNo);
+    public void addPayment(Payment payment) {
+        String ccn = String.valueOf(payment.getCreditCardNo());
 
-        if (ccn.startsWith("3")){
+        if (ccn.charAt(0) == '3'){
             payment.setCreditCardStrategy(new AmexCreditCard());
         }
 
-        else if (ccn.startsWith("4")){
+        else if (ccn.charAt(0) == '3'){
             payment.setCreditCardStrategy(new VisaCreditCard());
         }
 
-        else if (ccn.startsWith("5")){
+        else if (ccn.charAt(0) == '4'){
             payment.setCreditCardStrategy(new MasterCardCreditCard());
         }
     
         payment.debitCreditCard();
         paymentRepo.save(payment);
     }
+
+    // public void addPayment(Payment payment) {
+    //     paymentRepo.save(payment);
+    // }
 
     public Optional<Payment> getPaymentById(Long id) {
         return paymentRepo.findById(id);

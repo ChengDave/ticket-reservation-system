@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ public class PaymentController {
 
     PaymentService paymentService;
     UserService userService;
+
     @Autowired
     public PaymentController(PaymentService paymentService, UserService userService) {
         this.paymentService = paymentService;
@@ -50,20 +52,24 @@ public class PaymentController {
 
         // Assign credit card type based on the first digit of the credit card number.
         RegisteredUser user = userService.getUser(payment.getUserId());
-        Long creditCardNo = user.getCreditCardNumber();
 
-        paymentService.addPayment(payment, creditCardNo);
+        paymentService.addPayment(payment);
         Long receiptId = paymentService.genReceipt(payment);
         
-        //Adding receipt to User
+        // Adding receipt to User
         userService.addReceipt(user, receiptId);
-        if (payment.getId() == null){
+        if (payment.getCreditCardNo() == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");
         }
         else{
            return payment; 
         }  
     }
+
+    // @PostMapping(value = "/makePayment", consumes = MediaType.APPLICATION_JSON_VALUE)
+    // public void getPayment(@RequestBody Payment payment){
+    //     paymentService.addPayment(payment);
+    // }
     
     // @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping

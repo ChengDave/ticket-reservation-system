@@ -1,5 +1,7 @@
 package com.example.MovieTheaterTicketApp.model;
 
+import javax.persistence.Entity;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -65,7 +67,7 @@ public class MasterCardCreditCard implements CreditCard{
 
     @Override
     public void debitCard(double amount) {
-        // TODO Auto-generated method stub
+        balance = balance - amount;
         
     }
     

@@ -29,13 +29,13 @@ public class Payment {
     }
 
     public Payment(Long id, 
-            @JsonProperty("creditCardNo")Long creditCardNo, 
-            @JsonProperty("cvv")int cvv, 
-            @JsonProperty("creditCardExpDate")String creditCardExpDate, 
+            Long creditCardNo, 
+            int cvv, 
+            String creditCardExpDate, 
             String paymentDate,
             String paymentTime, 
-            @JsonProperty("paymentAmount")Double paymentAmount, 
-            @JsonProperty("userId")Long userId) {
+            Double paymentAmount, 
+            Long userId) {
         this.id = id;
         this.creditCardNo = creditCardNo;
         this.cvv = cvv;
@@ -44,6 +44,16 @@ public class Payment {
         this.paymentTime = paymentTime;
         this.paymentAmount = paymentAmount;
         this.UserId = userId;
+    }
+
+   
+
+    public void setCreditCardStrategy(CreditCard creditCard){
+        this.creditCard = creditCard;
+    }
+
+    public void debitCreditCard(){
+        creditCard.debitCard(paymentAmount);
     }
 
     public Long getId() {
@@ -108,14 +118,6 @@ public class Payment {
 
     public void setUserId(Long userId) {
         UserId = userId;
-    }
-
-    public void setCreditCardStrategy(CreditCard creditCard){
-        this.creditCard = creditCard;
-    }
-
-    public void debitCreditCard(){
-        creditCard.debitCard(paymentAmount);
     }
 
     @Override

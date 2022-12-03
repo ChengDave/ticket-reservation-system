@@ -1,5 +1,7 @@
 package com.example.MovieTheaterTicketApp.model;
 
+import javax.persistence.Entity;
+
 import org.springframework.stereotype.Component;
 
 @Component
