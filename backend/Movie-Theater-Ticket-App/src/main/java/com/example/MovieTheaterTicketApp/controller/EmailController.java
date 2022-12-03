@@ -1,38 +1,49 @@
-// package com.example.MovieTheaterTicketApp.controller;
-
-// import com.example.MovieTheaterTicketApp.model.GuestUser;
-// import com.example.MovieTheaterTicketApp.model.RegisteredUser;
-// import com.example.MovieTheaterTicketApp.model.User;
-// import com.example.MovieTheaterTicketApp.service.EmailService;
-// import com.example.MovieTheaterTicketApp.service.UserService;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.*;
-
-// import java.util.List;
-
-// @RestController
-// @RequestMapping(path = "api/vi/users")
-// public class EmailController {
-
-//     private final EmailService emailService;
-
-//     @Autowired
-//     public EmailController(EmailService emailService) {
-//         this.emailService = emailService;
-//     }
+package com.example.MovieTheaterTicketApp.controller;
 
 
-//     @PostMapping()
-//     public void emailUser(@RequestBody User user, String email){
-//         // email the user
+import com.example.MovieTheaterTicketApp.model.GuestUser;
+import com.example.MovieTheaterTicketApp.model.RegisteredUser;
+import com.example.MovieTheaterTicketApp.model.User;
+import com.example.MovieTheaterTicketApp.service.EmailService;
+import com.example.MovieTheaterTicketApp.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-//          emailService.emailReceiptAndTicket(user,email);
-//     }
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "api/v1/email")
+public class EmailController {
+
+    private EmailService emailService;
+    private UserService userService;
+
+    @Autowired
+    public EmailController(EmailService emailService, UserService userService) {
+        this.emailService = emailService;
+        this.userService = userService;
+    }
+
+    @PostMapping(path = "userId/{userId}")
+    public RegisteredUser emailUser(@PathVariable("userId") Long userId){
+        // email the user
+        if (userId == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");
+        }
+        RegisteredUser user = userService.getUser(userId);
+        
+         emailService.emailReceiptAndTicket(user);
+        return user;
+    }
 
 
-//     @PostMapping()
-//     public void emailAllRegUsers(String news){
-//         // email all users
-//         emailService.emailAllRegUsers(news);
-//     }
-// }
+
+//    @PostMapping()
+//    public void emailAllRegUsers(String news){
+//        // email all users
+//        emailService.emailAllRegUsers(news);
+//    }
+}
+
