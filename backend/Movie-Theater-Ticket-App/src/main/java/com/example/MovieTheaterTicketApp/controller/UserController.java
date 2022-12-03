@@ -40,11 +40,13 @@ public class  UserController {
         // return user;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path = "/registeredUser")
     public void registerUser(@RequestBody RegisteredUser user) { 
         userService.register(user);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path = "/guestUser")
     public void guestUser(@RequestBody RegisteredUser user) { 
         user.setRegistered(false);

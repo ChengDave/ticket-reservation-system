@@ -1,7 +1,10 @@
+import { useRef } from "react"
 
 const InputField = (props) => {
 
 	let classes = 'field_input-wrapper ' + props.className
+	
+
   
 	const update = (x) => {
 	  let p = props.info
@@ -11,7 +14,7 @@ const InputField = (props) => {
 	return (
 		  <div className={classes}>
 		<label className='field-label'>{props.label}</label>
-		<input className='field-input' onChange={(e) => {update(e.target.value)}}></input>
+		<input className='field-input' onChange={(e) => {update(e.target.value)}} defaultValue = {props.children}></input>
 		  </div>
 	  )
 }
