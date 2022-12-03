@@ -53,6 +53,11 @@ public class PaymentController {
         // Assign credit card type based on the first digit of the credit card number.
         RegisteredUser user = userService.getUser(payment.getUserId());
 
+        if (user.isRefund() == true){
+            payment.setPaymentAmount(payment.getPaymentAmount() * 0.15);
+            user.setRefund(false);
+        }
+
         paymentService.addPayment(payment);
         Long receiptId = paymentService.genReceipt(payment);
         
@@ -65,6 +70,13 @@ public class PaymentController {
            return payment; 
         }  
     }
+
+    @PostMapping(path = "/refund/{userId}")
+    public void refundUser(@PathVariable("userId") Long userId){
+        RegisteredUser user = userService.getUser(userId);
+        user.setRefund(true);     
+    }
+
 
     // @PostMapping(value = "/makePayment", consumes = MediaType.APPLICATION_JSON_VALUE)
     // public void getPayment(@RequestBody Payment payment){

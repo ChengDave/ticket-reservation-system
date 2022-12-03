@@ -101,6 +101,13 @@ public class RegisteredUser implements User{
     )
     private boolean isRegistered;
 
+    @Column(
+        name = "refund",
+        nullable = true,
+        columnDefinition = "BOOLEAN"
+    )
+    private boolean refund;
+
 
     protected RegisteredUser() {
     }
@@ -118,6 +125,7 @@ public class RegisteredUser implements User{
         this.creditCard = creditCard;
         this.isAdmin = isAdmin;
         this.isRegistered = true;
+        this.refund = false;
     }
 
 
@@ -240,6 +248,14 @@ public class RegisteredUser implements User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isRefund() {
+        return refund;
+    }
+
+    public void setRefund(boolean refund) {
+        this.refund = refund;
     }
 
 }
