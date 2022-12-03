@@ -50,9 +50,25 @@ public class PaymentService {
         paymentRepo.save(payment);
     }
 
-    // public void addPayment(Payment payment) {
-    //     paymentRepo.save(payment);
-    // }
+    public void refund(Long creditCardNo, double amount){
+        String ccn = String.valueOf(creditCardNo);
+
+        Payment refund = new Payment();
+
+        if (ccn.charAt(0) == '3'){
+            refund.setCreditCardStrategy(new AmexCreditCard());
+        }
+
+        else if (ccn.charAt(0) == '3'){
+            refund.setCreditCardStrategy(new VisaCreditCard());
+        }
+
+        else if (ccn.charAt(0) == '4'){
+            refund.setCreditCardStrategy(new MasterCardCreditCard());
+        }
+    
+        refund.debitCreditCard();
+    }
 
     public Optional<Payment> getPaymentById(Long id) {
         return paymentRepo.findById(id);

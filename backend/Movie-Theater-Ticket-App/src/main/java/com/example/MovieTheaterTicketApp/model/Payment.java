@@ -56,6 +56,10 @@ public class Payment {
         creditCard.debitCard(paymentAmount);
     }
 
+    public void creditCreditCard(Double amount){
+        creditCard.creditTheCard(amount);
+    }
+
     public Long getId() {
         return id;
     }

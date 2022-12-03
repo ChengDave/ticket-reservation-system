@@ -70,6 +70,11 @@ public class MasterCardCreditCard implements CreditCard{
         balance = balance - amount;
         
     }
+
+    @Override
+    public void creditTheCard(double amount) {
+        balance = balance + amount;
+    }
     
 
 }
