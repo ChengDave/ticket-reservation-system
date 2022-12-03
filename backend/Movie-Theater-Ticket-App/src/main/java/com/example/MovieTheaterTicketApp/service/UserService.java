@@ -67,4 +67,21 @@ public class UserService {
     public RegisteredUser getUserById(int id) {
         return userRepository.findById(id);
     }
+
+    public void addToCredit(RegisteredUser user, double amount){
+        user.addToCredit(amount);
+        userRepository.save(user);
+
+    }
+
+    public double removeFromCredit(RegisteredUser user, double amount){
+        double balance = user.removeFromCredit(amount);
+        userRepository.save(user);
+        return balance;
+    }
+
+    public void setRefund(RegisteredUser user, boolean refund){
+        user.setRefund(refund);
+        userRepository.save(user);
+    }
 }

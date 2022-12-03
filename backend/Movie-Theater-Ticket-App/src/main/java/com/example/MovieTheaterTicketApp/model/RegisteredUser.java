@@ -108,6 +108,15 @@ public class RegisteredUser implements User{
     )
     private boolean refund;
 
+    @Column(
+        name = "credit",
+        nullable = true,
+        columnDefinition = "DOUBLE"
+    )
+    private double credit;
+
+
+
 
     protected RegisteredUser() {
     }
@@ -126,6 +135,7 @@ public class RegisteredUser implements User{
         this.isAdmin = isAdmin;
         this.isRegistered = true;
         this.refund = false;
+        this.credit = 0.0;
     }
 
 
@@ -256,6 +266,31 @@ public class RegisteredUser implements User{
 
     public void setRefund(boolean refund) {
         this.refund = refund;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public double removeFromCredit(double amount) {
+        double sub = 0.0;
+        if (credit < amount){
+           sub = credit - amount;
+           credit = 0.0;
+           return sub;
+        }
+        else if (credit >= amount){
+            credit = credit - amount;
+        }
+        return sub;
+    }
+
+    public void addToCredit(double amount) {
+        credit = credit + amount;
     }
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.MovieTheaterTicketApp.model.Payment;
 import com.example.MovieTheaterTicketApp.model.Receipt;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
+import com.example.MovieTheaterTicketApp.repository.UserRepository;
 import com.example.MovieTheaterTicketApp.service.PaymentService;
 import com.example.MovieTheaterTicketApp.service.UserService;
 
@@ -54,8 +55,10 @@ public class PaymentController {
         RegisteredUser user = userService.getUser(payment.getUserId());
 
         if (user.isRefund() == true){
-            payment.setPaymentAmount(payment.getPaymentAmount() * 0.15);
-            user.setRefund(false);
+            double residue = userService.removeFromCredit(user, payment.getPaymentAmount());
+            residue = Math.abs(residue);
+            payment.setPaymentAmount(residue);
+            userService.setRefund(user, false);
         }
 
         paymentService.addPayment(payment);
@@ -71,10 +74,12 @@ public class PaymentController {
         }  
     }
 
-    @PostMapping(path = "/refund/{userId}")
-    public void refundUser(@PathVariable("userId") Long userId){
+    @PostMapping(path = "/refund/{userId}/amount/{amount}")
+    public void refundUser(@PathVariable("userId") Long userId,
+                            @PathVariable("amount") double amount){
         RegisteredUser user = userService.getUser(userId);
-        user.setRefund(true);     
+        userService.setRefund(user, true);
+        userService.addToCredit(user, amount);     
     }
 
 
