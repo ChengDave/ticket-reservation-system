@@ -22,9 +22,12 @@ public class SeatService {
         return seatRepository.findByShowtime(show);
     }
 
-
     public List<Seat> findByShowtime_id(Long id){
         return seatRepository.findByshowtime_id(id);
+    }
+
+    public List<Seat> findByshowtime_idAndTAndTakenEqualsFalse(Long id){
+        return seatRepository.findByShowtime_idAndTAndIsTakenEqualsFalse(id);
     }
 
     public Seat findById(Long id){

@@ -31,8 +31,7 @@ public class TicketController {
     public void addTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
         RegisteredUser user = userService.getUserById(userId);
         Seat seat = seatService.findById(seatId);
-        
-        // seatService.registerSeat(seat); // sets seat to istaken
+        seatService.registerSeat(seat); // sets seat to taken
         ticketService.addTicket(new Ticket(user, seat));
     }
 
@@ -41,6 +40,15 @@ public class TicketController {
 //        Seat seat = ticket.getSeat();
 //        seatService.registerSeat(seat); // sets seat to istaken
 //    }
+
+    @DeleteMapping(value = "/user/{userId}/seat/{seatId}")
+    public void deleteTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
+//        RegisteredUser user = userService.getUserById(userId);
+        Ticket ticket = ticketService.getTicketBySeatId(seatId);
+        Seat seat = seatService.findById(seatId);
+        seatService.unregisterSeat(seat); // sets seat to not taken
+        ticketService.deleteTicket(ticket);
+    }
 
     @DeleteMapping(path = "/{id}")
     public void deleteTicketById(@PathVariable("id") Long id){
@@ -57,9 +65,15 @@ public class TicketController {
        return ticketService.getTicketById(id);
     }
 
-    @GetMapping(path = "user/{id}")
-    public  List<Ticket> getTicketByUser(@PathVariable("id") Long id){
-       return ticketService.getTicketByUser(id);
+    @GetMapping(path = "/user/{id}")
+    public List<Ticket> findByUser_id(@PathVariable("id") Long id){
+        return ticketService.findByUser_id(id);
     }
+
+    @GetMapping(path = "/usercancel/{id}")
+    public List<Ticket> findByUser_idtoCancel(@PathVariable("id") Long id){
+        return ticketService.findByUser_idToCancel(id);
+    }
+
 }
 
