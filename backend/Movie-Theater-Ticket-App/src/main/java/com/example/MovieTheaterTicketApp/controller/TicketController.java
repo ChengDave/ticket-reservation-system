@@ -70,6 +70,10 @@ public class TicketController {
         return ticketService.findByUser_id(id);
     }
 
+    @GetMapping(path = "/usercancel/{id}")
+    public List<Ticket> findByUser_idtoCancel(@PathVariable("id") Long id){
+        return ticketService.findByUser_idToCancel(id);
+    }
 
 }
 
