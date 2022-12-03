@@ -28,11 +28,18 @@ public class MovieController {
         this.userService = userService;
     }
 
-    @GetMapping()
-    public List<Movie> getMovies(){
+    @GetMapping(path = "registeredUser/")
+    public List<Movie> getRegisteredUserMovies(){
         // return list of all movies
-        return movieService.getMovies();
+        return movieService.getRegisteredUserMovies();
     }
+
+    @GetMapping(path = "guest/")
+    public List<Movie> getGuestMovies(){
+        // return list of movies that are post public announcement
+        return movieService.getGuestMovies();
+    }
+
 
     @GetMapping(path = "movieTitle/{movieTitle}")
     public Movie getMovies(@PathVariable("movieTitle") String movieTitle){

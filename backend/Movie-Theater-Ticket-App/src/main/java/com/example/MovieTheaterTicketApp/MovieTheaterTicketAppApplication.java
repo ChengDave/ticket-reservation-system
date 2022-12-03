@@ -56,10 +56,10 @@ public class MovieTheaterTicketAppApplication {
 			Theater theater3 = new Theater("Chinook");
 
 			List<Movie> movies = new ArrayList<>();
-			movies.add(new Movie("Avatar: The Way of Water"));
-			movies.add(new Movie("Black Adam"));
-			movies.add(new Movie("Black Panther: Wakanda Forever"));
-			movies.add(new Movie("Bones and All"));
+			movies.add(new Movie("Avatar: The Way of Water",LocalDateTime.of(2022, 12, 1, 0, 0)));
+			movies.add(new Movie("Black Adam",LocalDateTime.of(2022, 12, 1, 0, 0)));
+			movies.add(new Movie("Black Panther: Wakanda Forever",LocalDateTime.of(2022, 12, 1, 0, 0)));
+			movies.add(new Movie("Bones and All",LocalDateTime.of(2023, 3, 1, 0, 0)));// pre public announcement
 			// movies.add(new Movie("Devotion"));
 			// movies.add(new Movie("Glass Onion: A Knives Out Mystery"));
 			// movies.add(new Movie("Guillermo Del Toro's Pinocchio"));
