@@ -85,4 +85,9 @@ public class UserService {
         user.setRefund(refund);
         userRepository.save(user);
     }
+
+	public void payRegistration(RegisteredUser user, String date) {
+        user.setNextPaymentDue(date);
+        userRepository.save(user);
+	}
 }

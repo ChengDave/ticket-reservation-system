@@ -1,6 +1,6 @@
 .user-table{
 	margin-bottom: 10px;
-	margin-top: 2rem;
+	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 5px;
@@ -15,16 +15,48 @@
 	text-align: center;
 }
 
-.tickets{
-	margin-bottom: 10px;
+.header{
 	margin-top: 1rem;
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%;
+	width: 85%;
 	font-size: 28px;
 	padding: 5px;
 	background-color: #90e0ef;
 	border-radius: 5px 5px 5px 5px;
 	border: 5px solid black;
 	text-align: center;
+}
+
+.background {
+	background-color: #caf0f8;  
+	position:absolute;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
+}
+
+.profile-button {
+	margin-right: 0%;
+	margin-left: 1%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: red;
+	color: black;
+	font-size: 24px;
+	border-radius: 5px 5px 5px 5px;
+	border: 5px solid black;
+}
+
+.centered {
+	text-align: center;
+}
+
+.fit-width {
+	width: fit-content !important;
+}
+
+.red {
+	background-color: lightcoral;
 }

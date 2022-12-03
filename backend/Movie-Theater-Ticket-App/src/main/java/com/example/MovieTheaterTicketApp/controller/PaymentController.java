@@ -78,6 +78,54 @@ public class PaymentController {
         userService.addToCredit(user, amount);     
     }
 
+    @PostMapping(path = "/userfee/user/{userId}")
+    public void feePayment(@PathVariable("userId") Long userId) {
+
+        Double fee = 20.0;
+        
+        DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter time_format = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        LocalDateTime now = LocalDateTime.now();
+        String date = date_format.format(now);
+        String time = time_format.format(now);
+
+
+        // Get user
+        RegisteredUser user = userService.getUser(userId);
+        Double credit = user.getCredit();
+
+        // Try taking fee from credit first
+        if (credit > 0) {
+
+            if (credit < fee) {
+                fee -= credit;
+                userService.addToCredit(user, -credit); 
+            } else {
+                userService.addToCredit(user, -fee); 
+                fee = 0.0;
+            }
+        }
+
+        // Pay the remainder of the fee with the card on file
+        if (fee > 0) {
+            Payment payment = new Payment();
+            payment.setCreditCardNo(user.getCreditCardNumber());
+            payment.setCvv(user.getCardCVV());
+            payment.setCreditCardExpDate(user.getCardExpirationDate());
+            payment.setPaymentDate(date);
+            payment.setPaymentTime(time);
+            payment.setPaymentAmount(fee);
+            payment.setUserId(userId);
+    
+            paymentService.addPayment(payment);
+        }
+
+        // Update the users Registration Date
+        userService.payRegistration(user, date_format.format(now.plusYears(1l)));
+
+    }
+
 
     // @PostMapping(value = "/makePayment", consumes = MediaType.APPLICATION_JSON_VALUE)
     // public void getPayment(@RequestBody Payment payment){

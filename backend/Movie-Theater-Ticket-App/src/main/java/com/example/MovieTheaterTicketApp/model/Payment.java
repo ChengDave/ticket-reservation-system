@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Payment {
@@ -45,8 +44,6 @@ public class Payment {
         this.paymentAmount = paymentAmount;
         this.UserId = userId;
     }
-
-   
 
     public void setCreditCardStrategy(CreditCard creditCard){
         this.creditCard = creditCard;
@@ -130,10 +127,5 @@ public class Payment {
                 + creditCardExpDate + ", paymentDate=" + paymentDate + ", paymentTime=" + paymentTime
                 + ", paymentAmount=" + paymentAmount + ", UserId=" + UserId + "}";
     }
-
-    
-
-
-    
     
 }

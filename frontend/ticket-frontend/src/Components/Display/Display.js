@@ -4,6 +4,7 @@ import News from "../News/News"
 import Register from "../Register/Register"
 import CancelTicket from "../CancelTicket/CancelTicket"
 import Profile from "../Profile/Profile"
+import FeePayment from "../Profile/FeePayment"
 
 
 const Display = (props) => {
@@ -21,7 +22,9 @@ const Display = (props) => {
 			case "Cancel":
 				return <CancelTicket></CancelTicket>
 			case "Profile":
-				return <Profile></Profile>
+				return <Profile setDisplay = {props.setDisplay}></Profile>
+			case "Fee":
+				return <FeePayment setDisplay = {props.setDisplay}></FeePayment>
 		}
 		
 	}

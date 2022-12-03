@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from "react"
 import { UserContext } from '../../UserContext';
 import TicketList from "../CancelTicket/TicketList";
 import { getTicketsByUserID } from "../../APICalls/getTicketsByUserID";
+import UserTable from "./UserTable";
 
 const Display = (props) => {
 
@@ -17,48 +18,32 @@ const Display = (props) => {
 			let userData = await respone.json()
 
 			if (typeof userData !== 'undefined') {
-				console.log(userData)
 				setUserData(userData)
 			}
 
-			let tickets = await getTicketsByUserID(user)
-			setTickets(tickets)
+			let newTickets = await getTicketsByUserID(user)
+			setTickets(newTickets)
 		} 
 		
 		getUser(user)
 
 	}, [tickets.length])
 
+	if (new Date(userData.nextPaymentDue) < new Date()) {
 
+		props.setDisplay("Fee")
+
+		return (
+			<div></div>
+		)
+	}
 
 	return (
 		<div className="wrapper">
-			<table className='user-table'>
-				<tbody>
-					<tr>
-						<td className='left'>Name:</td>
-						<td className='right-align'>{userData.firstName} {userData.lastName}</td>
-					</tr>
-					<tr>
-						<td className='left'>Email:</td>
-						<td className='right-align'>{userData.email}</td>
-					</tr>
-					<tr>
-						<td className='left'>Account Credit:</td>
-						<td className='right-align'>${userData.credit.toFixed(2)}</td>
-					</tr>
-					<tr>
-						<td className='left'>Registered Since:</td>
-						<td className='right-align'>{userData.registrationDate}</td>
-					</tr>
-					<tr>
-						<td className='left'>Next Annual Fee Due:</td>
-						<td className='right-align'>{userData.nextPaymentDue}</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<p className='tickets'>
+
+			<UserTable userData = {userData}/>
+
+			<p className='header'>
 				Active Tickets:
 			</p>
 			<TicketList tickets = {tickets} setTickets = {setTickets}></TicketList>
