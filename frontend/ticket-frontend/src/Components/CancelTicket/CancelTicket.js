@@ -19,7 +19,6 @@ const CancelTicket = (props) => {
 
 		let newTickets = await getTicketsByUserID(user).catch((e) => console.error(e))
 		setTickets(newTickets)
-		console.log(newTickets)
 
 	}
 
@@ -27,17 +26,28 @@ const CancelTicket = (props) => {
 		let tiles = []
 		tickets.forEach(ticket => {
 			let showtime = ticket.seat.showtime
+			console.log(ticket)
+
+			let date = showtime.localDateTime.split('T')
+
+			let daysAway = (new Date(showtime.localDateTime) - new Date()) / 86400000
+			let minDays = 3
 
 			tiles.push(<div className='ticket-item'>
 							<div className="left">
 										<p>Theater: {showtime.theater.theaterTitle}</p>
 										<p>Movie:    {showtime.movie.movieTitle}</p>
-										<p>Time: {showtime.localDateTime.substring(11,16)}</p>
+										<p>Date: {date[0]}</p>
+										<p>Time: {date[1].substring(0,5)}</p>
 										<p>Seat: {ticket.seat.seatNumber}</p>
 							</div>
+							{daysAway >  minDays ? 
 							<div className="right">
 								<button className='cancel-button' onClick={() => cancel(ticket.user.id, ticket.seat.id)}>Cancel</button>
 							</div>
+							:
+							<div className="right"><p className='cancel-button'>Cannot Cancel<br></br>Tickets within {minDays}<br></br>days of showing</p></div>
+							}
 							</div>)
 		})
 		setTiles(tiles)

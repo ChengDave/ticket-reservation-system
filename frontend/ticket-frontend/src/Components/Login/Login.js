@@ -22,11 +22,13 @@ const Login = (props) => {
 		.then((response) => response.json())
 		.then(data => {
 			setUser(data["id"])
+			props.setDisplay("Profile")
 		})
 		.catch(() => {
 			alert("Invalid Username/Password Combination")
 			setUser("none")
 		})
+
 	}
 
 	const register = () => {
@@ -38,7 +40,7 @@ const Login = (props) => {
 			<div className='login-form'>
 				<form>
 					<div>
-						<label className='login-label'>Username:</label>
+						<label className='login-label'>Email:</label>
 						<input className='login-input' ref = {username}></input>
 					</div>
 					<br></br>

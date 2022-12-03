@@ -12,7 +12,7 @@
     margin-right:auto;
 	margin-top: 2rem;
 	width: 30rem;
-	height: 200px;
+	height: 225px;
 
 	padding: 30px;
 	background: #90e0ef;
@@ -38,6 +38,7 @@
 	border:3px black;
 	border-style: outset;
 
+	padding: 5px;
 	margin-left: auto; 
 	margin-right: 0;
 	margin-top: auto !important;

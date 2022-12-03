@@ -2,7 +2,6 @@ package com.example.MovieTheaterTicketApp.controller;
 
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.service.UserService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

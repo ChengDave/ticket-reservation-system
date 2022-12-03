@@ -17,7 +17,7 @@ const Display = (props) => {
 			case "Login":
 				return <Login setDisplay = {props.setDisplay}></Login>
 			case "Register":
-				return <Register></Register>
+				return <Register setDisplay = {props.setDisplay}></Register>
 			case "Cancel":
 				return <CancelTicket></CancelTicket>
 			case "Profile":
