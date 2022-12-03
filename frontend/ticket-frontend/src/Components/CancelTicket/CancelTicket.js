@@ -11,11 +11,22 @@ const CancelTicket = (props) => {
 
 	const cancel = async (user, seat) => {
 
-		await fetch("http://localhost:8080/api/v1/ticket/user/" + user + "/seat/" + seat, {
+		//cancel the ticket
+		await fetch("http://localhost:8080/api/v1/ticket/user/" + user + "/seat/" + seat.id, {
 			method: "DELETE",
 			mode:'cors',
 			headers:{'Access-Control-Allow-Origin': '*'},
 		}).catch((e) => console.error(e))
+
+
+		// Credit the user
+		await fetch("http://localhost:8080/api/v1/payment/refund/" + user + "/amount/" + seat.price * 1.05, {
+			method: "POST",
+			mode:'cors',
+			headers:{'Access-Control-Allow-Origin': '*'},
+		}).catch((e) => console.error(e))
+
+		
 
 		let newTickets = await getTicketsByUserID(user).catch((e) => console.error(e))
 		setTickets(newTickets)
@@ -43,7 +54,7 @@ const CancelTicket = (props) => {
 							</div>
 							{daysAway >  minDays ? 
 							<div className="right">
-								<button className='cancel-button' onClick={() => cancel(ticket.user.id, ticket.seat.id)}>Cancel</button>
+								<button className='cancel-button' onClick={() => cancel(ticket.user.id, ticket.seat)}>Cancel</button>
 							</div>
 							:
 							<div className="right"><p className='cancel-button'>Cannot Cancel<br></br>Tickets within {minDays}<br></br>days of showing</p></div>

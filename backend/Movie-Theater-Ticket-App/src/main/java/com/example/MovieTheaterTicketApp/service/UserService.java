@@ -69,7 +69,8 @@ public class UserService {
     }
 
     public void addToCredit(RegisteredUser user, double amount){
-        user.addToCredit(amount);
+        double credit = user.isRegistered() ? amount : amount * 0.85;
+        user.addToCredit(credit);
         userRepository.save(user);
 
     }

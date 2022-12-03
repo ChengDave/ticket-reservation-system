@@ -365,7 +365,7 @@ public class RegisteredUser implements User{
     }
 
     public void addToCredit(double amount) {
-        credit = credit + amount;
+        credit += amount;
     }
 
 }

@@ -40,7 +40,7 @@ function Checkout(props) {
       "creditCardNo": parseInt(info["Card Number"]),
       "cvv": parseInt(info["Security Code"]),
       "id":null,
-      "paymentAmount": parseInt(totals["total"]),
+      "paymentAmount": totals["total"],
       "paymentDate": null,
       "paymentTime": null,
       "userId": userId
