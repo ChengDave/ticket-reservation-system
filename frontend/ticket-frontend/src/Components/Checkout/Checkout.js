@@ -6,19 +6,11 @@ import {UserContext} from '../../UserContext';
 function Checkout(props) {
 
   const [info, setInfo] = useState({})
+  const [total, setTotal] = useState(0)
 	const {user, setUser} = useContext(UserContext)
 
-  const numTickets = props.params.seats.length
-  let value = props.params.price
-  let gst = value * 0.05
-  let total = value + gst
-
-  value = value.toFixed(2)
-  gst = gst.toFixed(2)
-  total = total.toFixed(2)
-
   const clicked = async () => {
-    
+
     let valid = true
     if (Object.keys(info).length !== 12) {
         valid = false
@@ -88,16 +80,11 @@ function Checkout(props) {
 
     }
 
-    console.log(props.params.seats)
-    console.log(userId)
-
     props.params.seats.forEach(seatid => {
       fetch("http://localhost:8080/api/v1/ticket/user/" + userId + "/seat/" + seatid, {
         method: "POST",
         headers:{"Content-Type":"application/json"},
       })
-
-      console.log("Making Ticket")
     });
 
     let payment = {
@@ -110,6 +97,9 @@ function Checkout(props) {
       "paymentTime": null,
       "userId": userId
     }
+
+    console.log("pay")
+    console.log(JSON.stringify(payment))
 
     await fetch("http://localhost:8080/api/v1/payment/", {
       method: "POST",
@@ -129,6 +119,31 @@ function Checkout(props) {
 
   return (
     <div className='division'>
+      <Summary params = {props.params} setTotal = {setTotal}></Summary>
+
+      <UserInformation info = {info} setInfo = {setInfo}/>
+      
+      <button className='checkout-button' onClick={clicked}>Purchase</button>
+      <button className='checkout-button' onClick={canceled}>Cancel</button>
+    </div>
+  )
+}
+
+const Summary = (props) => {
+
+  const numTickets = props.params.seats.length
+  let value = props.params.price
+  let gst = value * 0.05
+  let total = value + gst
+
+  props.setTotal(total)
+
+  value = value.toFixed(2)
+  gst = gst.toFixed(2)
+  total = total.toFixed(2)
+  
+  return (
+    <div>
       <h4>Order Summary</h4>
       <div>
         <div>
@@ -161,19 +176,6 @@ function Checkout(props) {
         </table>
         </div>
       </div>
-
-      <UserInformation info = {info} setInfo = {setInfo}/>
-      
-      <button className='checkout-button' onClick={clicked}>Purchase</button>
-      <button className='checkout-button' onClick={canceled}>Cancel</button>
-    </div>
-  )
-}
-
-const summary = () => {
-  return (
-    <div>
-      
     </div>
   )
 }

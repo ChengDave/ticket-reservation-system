@@ -67,7 +67,6 @@ const TileGrid = (props) => {
 }
 
 const Search = (props) => {
-
 	return (
 		<div className='wrapper'>
 			<div className='search-outline'>
@@ -78,7 +77,6 @@ const Search = (props) => {
 			</div>
 		</div>
 	)
-  
 };
 
 

@@ -34,7 +34,6 @@ public class TicketController {
         
         // seatService.registerSeat(seat); // sets seat to istaken
         ticketService.addTicket(new Ticket(user, seat));
-        System.out.println("Here");
     }
 
 //    @DeleteMapping
@@ -56,6 +55,11 @@ public class TicketController {
     @GetMapping(path = "/{id}")
     public Optional<Ticket> getTicketById(@PathVariable("id") Long id){
        return ticketService.getTicketById(id);
+    }
+
+    @GetMapping(path = "user/{id}")
+    public  List<Ticket> getTicketByUser(@PathVariable("id") Long id){
+       return ticketService.getTicketByUser(id);
     }
 }
 

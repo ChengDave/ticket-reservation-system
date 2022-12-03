@@ -1,7 +1,5 @@
 package com.example.MovieTheaterTicketApp.model;
 
-import java.beans.Transient;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
