@@ -4,6 +4,7 @@ import com.example.MovieTheaterTicketApp.model.User;
 import com.example.MovieTheaterTicketApp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,18 @@ public class UserService {
         return (List<RegisteredUser>) userRepository.findAll();
     }
 
+    public List<RegisteredUser> getRegUsers(){
+        List<RegisteredUser> all = (List<RegisteredUser>) userRepository.findAll();
+        List<RegisteredUser> regUsers = new ArrayList<>() ;
+        for (int i = 0; i < all.size(); i++){
+            if (all.get(i).isRegistered() == true){
+                regUsers.add(all.get(i));
+            }
+        }
+        return regUsers;
+    }
+
+    
     public void register(RegisteredUser registerUser) {
         //TODO: Need error handling if user email is already taken
         userRepository.save(registerUser);

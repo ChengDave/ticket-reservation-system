@@ -46,10 +46,10 @@ public class MovieTheaterTicketAppApplication {
 										TicketRepository ticket_repository){
 		return (args) -> {
 			// save a few customers
-			user_repository.save(new RegisteredUser("Jack", "Bauer", "test1@gmail.com", "pass1", "3333" ,false));
-			user_repository.save(new RegisteredUser("Chloe", "O'Brian","test2@gmail.com", "pass2", "423",false));
-			user_repository.save(new RegisteredUser("Kim", "Bauer","test3@gmail.com", "pass3", "523",true));
-			user_repository.save(new RegisteredUser("Garnet", "Crookes","u", "1", "423",true));
+			user_repository.save(new RegisteredUser("Jack", "Bauer", "akinbodesola@yahoo.co.uk", "pass1", "3333" ,false));
+			user_repository.save(new RegisteredUser("Chloe", "O'Brian","akinbodesola@yahoo.co.uk", "pass2", "423",false));
+			user_repository.save(new RegisteredUser("Kim", "Bauer","akinbodesola@yahoo.co.uk", "pass3", "523",true));
+			user_repository.save(new RegisteredUser("Garnet", "Crookes","akinbodesola@yahoo.co.uk", "1", "423",true));
 
 			Theater theater1 = new Theater("Calgary Market Mall");
 			Theater theater2 = new Theater("Crowfoot Crossing");

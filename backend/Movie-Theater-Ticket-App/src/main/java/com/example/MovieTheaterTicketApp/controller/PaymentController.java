@@ -78,42 +78,29 @@ public class PaymentController {
         userService.addToCredit(user, amount);     
     }
 
-
-    // @PostMapping(value = "/makePayment", consumes = MediaType.APPLICATION_JSON_VALUE)
-    // public void getPayment(@RequestBody Payment payment){
-    //     paymentService.addPayment(payment);
-    // }
     
     // @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping
     public List<Payment> getAllPayments(){
         return paymentService.getAllPayments();
     }
-
     
-    // @GetMapping()
-    // public List<Payment> getAllPayments(){
-    //     List<Payment> test = new ArrayList<>();
-    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
-    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
-    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
-    //     return (List<Payment>) test;
-    // }
-
+    
+    
     // @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping(path = "{id}")
     public Payment getPaymentById(@PathVariable("id") Long id){
- 
+        
         if (!paymentService.getPaymentById(id).isEmpty()){
             Payment  p = paymentService.getPaymentById(id).get();
             return p;
         }
         else{return null;}
     }
-
+    
     @GetMapping(path = "receipt/{id}")
     public Receipt getReciept(@PathVariable Long id){
- 
+        
         if (!paymentService.getRecieptById(id).isEmpty()){
             Receipt r = paymentService.getRecieptById(id).get();
             return r;
@@ -124,20 +111,30 @@ public class PaymentController {
     // @CrossOrigin(origins = "http://127.0.0.1:5501")
     // @DeleteMapping(path = "{id}")
     // public void deletePaymentById(@PathVariable("id") int id){
-    //     PaymentService.deletePayment (id);
-    // }
-
-    // @DeleteMapping
-    // public void deleteAll(){
-    //     PaymentService.deleteAll();
-    // }
-
-    // @PutMapping(path = "{id}")
-    // public void updatePayment (@PathVariable("id") int id, @Valid @NonNull @RequestBody Payment  Payment ToUpdate){
-    //     PaymentService.updatePayment (id, Payment ToUpdate);
-    // }
-    
-
-
-    
-}
+        //     PaymentService.deletePayment (id);
+        // }
+        
+        // @DeleteMapping
+        // public void deleteAll(){
+            //     PaymentService.deleteAll();
+            // }
+            
+            // @PutMapping(path = "{id}")
+            // public void updatePayment (@PathVariable("id") int id, @Valid @NonNull @RequestBody Payment  Payment ToUpdate){
+                //     PaymentService.updatePayment (id, Payment ToUpdate);
+                // }
+                
+                // @GetMapping()
+                // public List<Payment> getAllPayments(){
+                    //     List<Payment> test = new ArrayList<>();
+                    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
+                    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
+                    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
+                    //     return (List<Payment>) test;
+                    // }
+                    
+                    
+                    
+                
+                
+            }
