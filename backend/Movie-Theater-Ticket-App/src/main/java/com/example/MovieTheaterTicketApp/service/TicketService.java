@@ -39,6 +39,10 @@ public class TicketService {
         return ticketRepository.getTicketBySeatId(seatId);
     }
 
+    public List<Ticket> findByUser_id(Long userId){
+        return  ticketRepository.findByUser_id(userId);
+    }
+
 
     public void deleteAll(){
         ticketRepository.deleteAll();

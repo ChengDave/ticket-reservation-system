@@ -64,5 +64,12 @@ public class TicketController {
     public Optional<Ticket> getTicketById(@PathVariable("id") Long id){
        return ticketService.getTicketById(id);
     }
+
+    @GetMapping(path = "/user/{id}")
+    public List<Ticket> findByUser_id(@PathVariable("id") Long id){
+        return ticketService.findByUser_id(id);
+    }
+
+
 }
 
