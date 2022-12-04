@@ -20,6 +20,7 @@ public class PaymentService {
     private final PaymentRepository paymentRepo;
     private final ReceiptRepository receiptRepo;
 
+
     @Autowired
     public PaymentService(PaymentRepository paymentRepo, ReceiptRepository receiptRepo) {
         this.paymentRepo = paymentRepo;
@@ -38,11 +39,11 @@ public class PaymentService {
             payment.setCreditCardStrategy(new AmexCreditCard());
         }
 
-        else if (ccn.charAt(0) == '3'){
+        else if (ccn.charAt(0) == '4'){
             payment.setCreditCardStrategy(new VisaCreditCard());
         }
 
-        else if (ccn.charAt(0) == '4'){
+        else if (ccn.charAt(0) == '5'){
             payment.setCreditCardStrategy(new MasterCardCreditCard());
         }
     
@@ -66,7 +67,7 @@ public class PaymentService {
         else if (ccn.charAt(0) == '5'){
             refund.setCreditCardStrategy(new MasterCardCreditCard());
         }
-    
+        
         refund.debitCreditCard();
     }
 
@@ -80,7 +81,7 @@ public class PaymentService {
 
     public Receipt genReceipt(Payment payment){
         Receipt receipt = new Receipt((long) 1234, payment.getPaymentAmount(), 
-            payment.getPaymentDate(), "user", payment.getId());
+            payment.getPaymentDate(), null, payment.getId());
 
         receiptRepo.save(receipt);
         return receipt;

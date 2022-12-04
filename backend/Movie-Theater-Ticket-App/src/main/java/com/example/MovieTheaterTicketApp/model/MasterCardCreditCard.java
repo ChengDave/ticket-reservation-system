@@ -68,7 +68,6 @@ public class MasterCardCreditCard implements CreditCard{
     @Override
     public void debitCard(double amount) {
         balance = balance - amount;
-        
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.MovieTheaterTicketApp.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -69,8 +70,7 @@ public class Receipt {
 
     public String emailText(){
         String text = "ReceiptNo: " + receiptNo + "\n" + 
-                    "Amount: : " + amount + "\n" +
-                    "Name: " + user + "\n" +
+                    "Amount: : " + String.format("%.2f", amount) + "\n" +
                     "Date: " + date;
         return text;
     }
