@@ -1,6 +1,7 @@
 package com.example.MovieTheaterTicketApp.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "Movie")
 public class Movie {
@@ -15,22 +16,12 @@ public class Movie {
     )
     private String movieTitle;
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", movieTitle='" + movieTitle + '\'' +
-                '}';
-    }
+    @Column(name = "local_date_time", columnDefinition = "TIMESTAMP")
+    private LocalDateTime publicAnnouncement;
+
 
     public Movie() {
-
     }
-
-    public Movie(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
-
 
     public String getMovieTitle() {
         return movieTitle;
@@ -38,5 +29,18 @@ public class Movie {
 
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
+    }
+
+    public LocalDateTime getPublicAnnouncement() {
+        return publicAnnouncement;
+    }
+
+    public void setPublicAnnouncement(LocalDateTime releaseDate) {
+        this.publicAnnouncement = releaseDate;
+    }
+
+    public Movie(String movieTitle, LocalDateTime releaseDate) {
+        this.movieTitle = movieTitle;
+        this.publicAnnouncement = releaseDate;
     }
 }

@@ -71,6 +71,36 @@ public class EmailService {
 
     }
 
+    public void emailTicket(RegisteredUser user, String Ticket){
+
+        String body = "-------Here is your ticket------\n" + Ticket;
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("moussavitheaters@gmail.com");
+        message.setTo(user.getEmail());
+        message.setText(body);
+        message.setSubject("Ticket for your recent purchase");
+
+        mailSender.send(message);
+        this.status = "Sent";
+
+    }
+
+    public void emailReceipt(RegisteredUser user, String Receipt){
+
+        String body = "-------Here is your receipt------\n" + Receipt;
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("moussavitheaters@gmail.com");
+        message.setTo(user.getEmail());
+        message.setText(body);
+        message.setSubject("Receipt for your recent purchase");
+
+        mailSender.send(message);
+        this.status = "Sent";
+
+    }
+
     public void sendMovieNews(List<RegisteredUser> user, String movieTitle){
         RegisteredUser regUser;
         SimpleMailMessage message;

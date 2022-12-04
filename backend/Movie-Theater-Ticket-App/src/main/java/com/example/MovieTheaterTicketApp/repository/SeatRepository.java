@@ -18,4 +18,6 @@ public interface SeatRepository extends CrudRepository<Seat, Long>{
     Seat findSeatById(Long id);
 
 
+
+
 }

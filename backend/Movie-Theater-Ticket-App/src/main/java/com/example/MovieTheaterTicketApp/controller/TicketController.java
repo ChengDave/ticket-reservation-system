@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.model.Seat;
+import com.example.MovieTheaterTicketApp.service.EmailService;
 import com.example.MovieTheaterTicketApp.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,16 @@ public class TicketController {
     TicketService ticketService;
     SeatService seatService;
     UserService userService;
+    EmailService emailService;
 
     @Autowired
-    public TicketController(TicketService ticketService, SeatService seatService, UserService userService) {
+    public TicketController(TicketService ticketService, SeatService seatService, 
+                            UserService userService,
+                            EmailService emailService) {
         this.ticketService = ticketService;
         this.seatService = seatService;
         this.userService = userService;
+        this.emailService = emailService;
     }
     
     @PostMapping(value = "/user/{userId}/seat/{seatId}")
@@ -34,6 +39,9 @@ public class TicketController {
         seatService.registerSeat(seat); // sets seat to taken
         Ticket ticket = new Ticket(user, seat);
         ticketService.addTicket(ticket);
+
+        // invoke the email service
+        emailService.emailTicket(user, ticket.toString());
         return ticket;
     }
 
