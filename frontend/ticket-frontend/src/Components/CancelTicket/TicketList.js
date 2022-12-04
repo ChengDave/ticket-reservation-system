@@ -12,11 +12,12 @@ const TicketList = (props) => {
 			return;
 
 		//cancel the ticket
-		await fetch("http://localhost:8080/api/v1/ticket/user/" + user + "/seat/" + seat.id, {
+		let response = await fetch("http://localhost:8080/api/v1/ticket/user/" + user + "/seat/" + seat.id, {
 			method: "DELETE",
 			mode:'cors',
 			headers:{'Access-Control-Allow-Origin': '*'},
 		}).catch((e) => console.error(e))
+
 
 
 		// Credit the user
@@ -26,6 +27,7 @@ const TicketList = (props) => {
 			headers:{'Access-Control-Allow-Origin': '*'},
 		}).catch((e) => console.error(e))
 
+		alert(response.status ? "Ticket Canceled Successfully" : "Error Canceling ticket")
 		
 		let newTickets = await getTicketsByUserID(user).catch((e) => console.error(e))
 		props.setTickets(newTickets)
