@@ -1,6 +1,7 @@
 import './TileGrid.css';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext} from 'react';
 import Tile from "./Tile"
+import {UserContext} from '../../UserContext';
 
 
 const TileGrid = (props) => {
@@ -8,9 +9,13 @@ const TileGrid = (props) => {
 	const [movies, setMovies] = useState([])
 	const [searchValue, setSearchValue] = useState("")
 	const searchParameter = useRef("")
+	const {user, setUser} = useContext(UserContext)
+
+	let url = "http://localhost:8080/api/v1/movies/"
+	url += (user === "none") ? "guest" : "registeredUser"
 	
 	useEffect(() => {
-		fetch("http://localhost:8080/api/v1/movies", {
+		fetch(url, {
 			method: "GET",
 			headers:{"Content-Type":"application/json"},
 		})
