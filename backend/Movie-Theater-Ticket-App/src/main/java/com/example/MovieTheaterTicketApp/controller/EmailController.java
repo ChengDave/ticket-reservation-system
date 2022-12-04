@@ -1,17 +1,13 @@
 package com.example.MovieTheaterTicketApp.controller;
 
 
-import com.example.MovieTheaterTicketApp.model.GuestUser;
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
-import com.example.MovieTheaterTicketApp.model.User;
 import com.example.MovieTheaterTicketApp.service.EmailService;
 import com.example.MovieTheaterTicketApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/email")

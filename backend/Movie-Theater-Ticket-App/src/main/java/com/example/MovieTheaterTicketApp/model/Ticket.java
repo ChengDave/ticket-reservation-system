@@ -48,7 +48,17 @@ public class Ticket {
         this.seat = seat;
     }
 
+    
+
     public Ticket(){
+    }
+
+    public Long getTicketNo() {
+        return ticketNo;
+    }
+
+    public void setTicketNo(Long ticketNo) {
+        this.ticketNo = ticketNo;
     }
 
 }

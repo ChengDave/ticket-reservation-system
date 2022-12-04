@@ -32,8 +32,6 @@ const TicketList = (props) => {
 		let tiles = []
 		props.tickets.forEach(ticket => {
 			let showtime = ticket.seat.showtime
-			console.log(ticket)
-
 			let date = showtime.localDateTime.split('T')
 
 			let daysAway = (new Date(showtime.localDateTime) - new Date()) / 86400000

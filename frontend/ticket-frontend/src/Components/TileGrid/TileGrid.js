@@ -10,7 +10,7 @@ const TileGrid = (props) => {
 	const searchParameter = useRef("")
 	
 	useEffect(() => {
-		fetch("http://localhost:8080/api/vi/movies", {
+		fetch("http://localhost:8080/api/v1/movies", {
 			method: "GET",
 			headers:{"Content-Type":"application/json"},
 		})

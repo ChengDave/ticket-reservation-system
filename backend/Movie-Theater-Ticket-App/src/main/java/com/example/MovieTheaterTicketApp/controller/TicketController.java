@@ -28,11 +28,13 @@ public class TicketController {
     }
     
     @PostMapping(value = "/user/{userId}/seat/{seatId}")
-    public void addTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
+    public Ticket addTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
         RegisteredUser user = userService.getUserById(userId);
         Seat seat = seatService.findById(seatId);
         seatService.registerSeat(seat); // sets seat to taken
-        ticketService.addTicket(new Ticket(user, seat));
+        Ticket ticket = new Ticket(user, seat);
+        ticketService.addTicket(ticket);
+        return ticket;
     }
 
 //    @DeleteMapping
