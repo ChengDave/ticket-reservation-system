@@ -1,17 +1,27 @@
 package com.example.MovieTheaterTicketApp.service;
+import com.example.MovieTheaterTicketApp.model.Movie;
 import com.example.MovieTheaterTicketApp.model.Seat;
 import com.example.MovieTheaterTicketApp.model.Showtime;
+import com.example.MovieTheaterTicketApp.repository.MovieRepository;
 import com.example.MovieTheaterTicketApp.repository.SeatRepository;
+import com.example.MovieTheaterTicketApp.repository.ShowtimeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SeatService {
     private final SeatRepository seatRepository;
+    private final ShowtimeRepository showtimeRepository;
 
-    public SeatService(SeatRepository seatRepository) {
+
+    public SeatService(SeatRepository seatRepository,ShowtimeRepository showtimeRepository) {
         this.seatRepository = seatRepository;
+        this.showtimeRepository = showtimeRepository;
     }
 
     public List<Seat> getSeats(){
@@ -27,6 +37,25 @@ public class SeatService {
     }
 
     public List<Seat> findByshowtime_idAndTAndTakenEqualsFalse(Long id){
+        // show all available seats if after public announce, else allow seats to be shown if under 10% are taken
+        Optional<Showtime> showtime = showtimeRepository.findById(id);
+
+        LocalDateTime publicAnnouncement = showtime.get().getMovie().getPublicAnnouncement();
+        LocalDateTime today = LocalDateTime.now();
+
+        if(publicAnnouncement.isBefore(today)){
+            // if public announcement has already past then early return to show all seats available
+            return seatRepository.findByShowtime_idAndTAndIsTakenEqualsFalse(id);
+        }
+
+        List<Seat> allSeats = seatRepository.findByshowtime_id(id);
+        List<Seat> availableSeats = seatRepository.findByShowtime_idAndTAndIsTakenEqualsFalse(id);
+
+        if(availableSeats.size()/allSeats.size()<=0.9){
+            // if number of taken seats is greater than 10% then return empty list
+            return new ArrayList<Seat>();
+        }
+
         return seatRepository.findByShowtime_idAndTAndIsTakenEqualsFalse(id);
     }
 
