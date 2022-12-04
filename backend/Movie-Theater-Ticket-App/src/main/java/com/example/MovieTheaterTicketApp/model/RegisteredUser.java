@@ -105,13 +105,6 @@ public class RegisteredUser implements User{
     private boolean isRegistered;
 
     @Column(
-        name = "refund",
-        nullable = true,
-        columnDefinition = "BOOLEAN"
-    )
-    private boolean refund;
-
-    @Column(
         name = "credit",
         nullable = true,
         columnDefinition = "DOUBLE"
@@ -171,6 +164,32 @@ public class RegisteredUser implements User{
     protected RegisteredUser() {
     }
 
+    public RegisteredUser(String firstName, String creditCard, String lastName, String email, String password,
+            boolean isAdmin, Long creditCardNumber, String nameOnCard,
+            String cardExpirationDate, int cardCVV) {
+        this.firstName = firstName;
+        this.creditCard = creditCard;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.creditCardNumber = creditCardNumber;
+        this.nameOnCard = nameOnCard;
+        this.cardExpirationDate = cardExpirationDate;
+        this.cardCVV = cardCVV;
+
+        this.isRegistered = true;
+        this.credit = 0.0;
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        this.registrationDate = dtf.format(now);
+        this.nextPaymentDue = dtf.format(now);
+
+    }
+
+
+
     public RegisteredUser(String firstName,
                           String lastName,
                           String email,
@@ -184,7 +203,6 @@ public class RegisteredUser implements User{
         this.creditCard = creditCard;
         this.isAdmin = isAdmin;
         this.isRegistered = true;
-        this.refund = false;
         this.credit = 0.0;
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -313,13 +331,6 @@ public class RegisteredUser implements User{
         this.password = password;
     }
 
-    public boolean isRefund() {
-        return refund;
-    }
-
-    public void setRefund(boolean refund) {
-        this.refund = refund;
-    }
 
     public double getCredit() {
         return credit;

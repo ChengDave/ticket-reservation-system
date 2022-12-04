@@ -46,10 +46,11 @@ public class MovieTheaterTicketAppApplication {
 										TicketRepository ticket_repository){
 		return (args) -> {
 			// save a few customers
-			user_repository.save(new RegisteredUser("Jack", "Bauer", "akinbodesola@yahoo.co.uk", "pass1", "3333" ,false));
-			user_repository.save(new RegisteredUser("Chloe", "O'Brian","akinbodesola@yahoo.co.uk", "pass2", "423",false));
-			user_repository.save(new RegisteredUser("Kim", "Bauer","akinbodesola@yahoo.co.uk", "pass3", "523",true));
-			user_repository.save(new RegisteredUser("Garnet", "Crookes","akinbodesola@yahoo.co.uk", "1", "423",true));
+
+			user_repository.save(new RegisteredUser("Garnet", "4444444444444444", "Crookes", "garnet.crookes@ucalgary.ca", "pass", false, 4444444444444444l, "Garnet Crookes", "05/25", 123));
+			user_repository.save(new RegisteredUser("David", "5555555555555555", " Cheng", "david.cheng1@ucalgary.ca", "pass", false, 5555555555555555l, "David Cheng", "05/25", 123));
+			user_repository.save(new RegisteredUser("Sola", "3333333333333333", "Akinbode", "olusola.akinbode@ucalgary.ca", "pass", false, 3333333333333333l, "Sola Akinbode", "05/25", 123));
+			user_repository.save(new RegisteredUser("Usman", "4444444488888888", "Zia", "usman.zia@ucalgary.ca", "pass", false, 4444444488888888l, "Usman Zia", "05/25", 123));
 
 			Theater theater1 = new Theater("Calgary Market Mall");
 			Theater theater2 = new Theater("Crowfoot Crossing");

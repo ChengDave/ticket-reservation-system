@@ -102,7 +102,6 @@ public class UserService {
     }
 
     public void setRefund(RegisteredUser user, boolean refund){
-        user.setRefund(refund);
         userRepository.save(user);
     }
 

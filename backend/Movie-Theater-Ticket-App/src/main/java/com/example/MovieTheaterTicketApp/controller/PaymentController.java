@@ -54,7 +54,7 @@ public class PaymentController {
         // Assign credit card type based on the first digit of the credit card number.
         RegisteredUser user = userService.getUser(payment.getUserId());
 
-        if (user.isRefund() == true){
+        if (user.getCredit() > 0){
             double residue = userService.removeFromCredit(user, payment.getPaymentAmount());
             residue = Math.abs(residue);
             payment.setPaymentAmount(residue);
