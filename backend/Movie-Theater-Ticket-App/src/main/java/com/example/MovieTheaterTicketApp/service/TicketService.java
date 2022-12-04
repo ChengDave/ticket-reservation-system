@@ -34,8 +34,17 @@ public class TicketService {
     public void deleteTicketById(Long id){
         ticketRepository.deleteById(id);
     }
-    public void deleteTicket(Ticket ticket){
+
+    public boolean deleteTicket(Ticket ticket){
+        //returns false if ticket does not exist. If exists then deletes ticket and returns true
+        if (!ticketRepository.existsById(ticket.getTicketNo()))
+        {
+            return false;
+        }
+
         ticketRepository.delete(ticket);
+        return true;
+
     }
 
     public Ticket getTicketBySeatId(Long seatId){

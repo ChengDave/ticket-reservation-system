@@ -8,6 +8,8 @@ import com.example.MovieTheaterTicketApp.model.Seat;
 import com.example.MovieTheaterTicketApp.service.EmailService;
 import com.example.MovieTheaterTicketApp.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.MovieTheaterTicketApp.model.Ticket;
@@ -53,12 +55,19 @@ public class TicketController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(value = "/user/{userId}/seat/{seatId}")
-    public void deleteTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
+    public ResponseEntity<String> deleteTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
 //        RegisteredUser user = userService.getUserById(userId);
         Ticket ticket = ticketService.getTicketBySeatId(seatId);
         Seat seat = seatService.findById(seatId);
+
+        if (ticket==null || seat==null || !ticketService.deleteTicket(ticket)){
+            //delete failed due to ticket not existing, early return
+            return new ResponseEntity<>("FAILURE", HttpStatus.CONFLICT);
+        }
+
+        //successful delete, set seat to not taken
         seatService.unregisterSeat(seat); // sets seat to not taken
-        ticketService.deleteTicket(ticket);
+        return  new ResponseEntity<>("SUCCESS", HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping(path = "/{id}")
