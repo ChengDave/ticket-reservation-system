@@ -57,7 +57,7 @@ public class PaymentController {
             double residue = userService.removeFromCredit(user, payment.getPaymentAmount());
             residue = Math.abs(residue);
             payment.setPaymentAmount(residue);
-            userService.setRefund(user, false);
+            // userService.setRefund(user, false);
         }
 
         paymentService.addPayment(payment);
