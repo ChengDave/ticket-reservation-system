@@ -61,11 +61,11 @@ public class PaymentController {
         }
 
         paymentService.addPayment(payment);
-        Long receiptId = paymentService.genReceipt(payment);
-        Receipt receipt = paymentService.getRecieptById(receiptId).get();
-        
+        Receipt receipt = paymentService.genReceipt(payment);
         // Adding receipt to User
-        userService.addReceipt(user, receiptId);
+        userService.addReceipt(user, receipt.getId());
+        // Receipt receipt = paymentService.getRecieptById(receiptId).get();
+        
 
         // invoke the email service
         emailService.emailReceipt(user, receipt.toString());
