@@ -2,6 +2,7 @@ package com.example.MovieTheaterTicketApp.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import com.example.MovieTheaterTicketApp.model.RegisteredUser;
 import com.example.MovieTheaterTicketApp.model.Seat;
@@ -43,7 +44,7 @@ public class TicketController {
         ticketService.addTicket(ticket);
 
         // invoke the email service
-        emailService.emailTicket(user, ticket.emailText());
+        CompletableFuture.runAsync(() -> emailService.emailTicket(user, ticket.emailText()));
         return ticket;
     }
 

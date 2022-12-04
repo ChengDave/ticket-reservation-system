@@ -34,6 +34,12 @@ public class MovieController {
         return movieService.getRegisteredUserMovies();
     }
 
+    @GetMapping(path = "/registeredUser/exclusive")
+    public List<Movie> getRegisteredUserExclusiveMovies(){
+        // return list of all movies
+        return movieService.getRegisteredUserExclusiveMovies();
+    }
+
     @GetMapping(path = "/guest")
     public List<Movie> getGuestMovies(){
         // return list of movies that are post public announcement

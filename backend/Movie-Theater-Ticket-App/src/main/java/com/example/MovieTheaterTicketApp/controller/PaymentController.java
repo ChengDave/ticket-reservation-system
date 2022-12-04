@@ -3,6 +3,7 @@ package com.example.MovieTheaterTicketApp.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,9 +67,8 @@ public class PaymentController {
         userService.addReceipt(user, receipt.getId());
         // Receipt receipt = paymentService.getRecieptById(receiptId).get();
         
-
         // invoke the email service
-        emailService.emailReceipt(user, receipt.emailText());
+        CompletableFuture.runAsync(() -> emailService.emailReceipt(user, receipt.emailText()));
         
         if (receipt.getAmount() == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");

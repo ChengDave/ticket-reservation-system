@@ -56,10 +56,22 @@ public class MovieTheaterTicketAppApplication {
 			Theater theater3 = new Theater("Chinook");
 
 			List<Movie> movies = new ArrayList<>();
-			movies.add(new Movie("Avatar: The Way of Water",LocalDateTime.of(2022, 12, 1, 0, 0)));
-			movies.add(new Movie("Black Adam",LocalDateTime.of(2022, 12, 1, 0, 0)));
-			movies.add(new Movie("Black Panther: Wakanda Forever",LocalDateTime.of(2022, 12, 1, 0, 0)));
-			movies.add(new Movie("Bones and All",LocalDateTime.of(2023, 3, 1, 0, 0)));// pre public announcement
+
+			Movie movie1 = new Movie("Avatar: The Way of Water",LocalDateTime.of(2022, 12, 1, 0, 0));
+			movie1.setNews("DIRECTOR\r\nJames Cameron\nCAST\nSam Worthington, Zoe Saldaña, Sigourney Weaver, Kate Winslet, Vin Diesel, Stephen Lang, Giovanni Ribisi, Edie Falco, Michelle Yeoh, Joel David Moore, Cliff Curtis, David Thewlis, Oona Chaplin, CCH Pounder, Matt Gerald, Jemaine Clement, Jamie Flatters, Britain Dalton, Jack Champion, Trinity Bliss, Duane Evans Jr., Filip Geljo, Bailey Bass, Dileep Rao, Chloe Chase Coleman, Keston John\nPRODUCERS\nJon Landau, James Cameron, Peter M. Tobyansen\nWRITERS\nJames Cameron, Josh Friedman, Amanda Silver, Rick Jaffa, Shane Salerno");
+
+			Movie movie2 = new Movie("Black Adam",LocalDateTime.of(2022, 12, 1, 0, 0));
+			Movie movie3 = new Movie("Black Panther: Wakanda Forever",LocalDateTime.of(2022, 12, 1, 0, 0));
+			Movie movie4 = new Movie("Bones and All",LocalDateTime.of(2023, 3, 1, 0, 0));// pre public announcement
+
+			movie2.setNews("From New Line Cinema, Dwayne Johnson stars in the action adventure “Black Adam.” The first-ever feature film to explore the story of the DC antihero comes to the big screen under the direction of Jaume Collet-Serra (“Jungle Cruise”). In ancient Kahndaq, the slave Teth Adam was gifted the almighty powers of the gods. But he used those powers for vengeance and was imprisoned. Now, 5,000 years later, he is freed and once again wields his dark sense of justice onto the world. Refusing to surrender, Teth Adam is challenged by a team of modern day heroes known as the Justice Society—Hawkman, Doctor Fate, Atom Smasher and Cyclone—who seek to return him to eternal captivity. Johnson stars alongside Aldis Hodge (“City on a Hill,” “One Night in Miami”) as Hawkman, Noah Centineo (“To All the Boys I’ve Loved Before”) as Atom Smasher, Sarah Shahi (“Sex/Life,” “Rush Hour 3”), Marwan Kenzari (“Murder on the Orient Express,” “Aladdin”), Quintessa Swindell (“Voyagers,” “Trinkets”) as Cyclone, Mo Amer (“Mo,” “Ramy”), Bodhi Sabongui (“A Million Little Things”), and Pierce Brosnan (the James Bond and “Mamma Mia!” franchises) as Doctor Fate.\nDIRECTOR\nJames Collet-Sierra\nCAST\nDwayne Johnson");
+			movie3.setNews("In Marvel Studios’ “Black Panther: Wakanda Forever,” Queen Ramonda (Angela Bassett), Shuri (Letitia Wright), M’Baku (Winston Duke), Okoye (Danai Gurira) and the Dora Milaje (including Florence Kasumba), fight to protect their nation from intervening world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia (Lupita Nyong’o) and Everett Ross (Martin Freeman) and forge a new path for the kingdom of Wakanda. Introducing Tenoch Huerta Mejía as Namor, king of a hidden undersea nation, the film also stars Dominique Thorne, Michaela Coel, Mabel Cadena and Alex Livanalli.\nDIRECTOR\nRyan Coogler\nCAST\nLetitia Wright, Martin Freeman, Daniel Kaluyaa");
+			movie4.setNews("A story of first love between Maren, a young woman learning how to survive on the margins of society, and Lee, an intense and disenfranchised drifter, as they meet and join together for a thousandmile odyssey which takes them through the back roads, hidden passages, and trap doors of Ronald Reagan’s America. But despite their best efforts, all roads lead back to their terrifying pasts and to a final stand which will determine whether their love can survive their otherness.\nDIRECTOR\nLuca Guadagnino\nCAST\nTimothee Chalamet, Taylor Russell, Mark Rylance, Andre Holland, Jessica Harper, Michael Stuhlbarg, David Gordon Green, Francesca Scorsese, Chloe Sevigny\nPRODUCERS\nLuca Guadagnino, Theresa Park, Marco Morabito, Dave Kajganich, Francesco Melzi D'Eril, Lorenzo Mieli, Gabriele Moratti, Peter Spears, Timothée Chalamet\nWRITERS\nDave Kajganich");
+
+			movies.add(movie1);
+			movies.add(movie2);
+			movies.add(movie3);
+			movies.add(movie4);
 			// movies.add(new Movie("Devotion"));
 			// movies.add(new Movie("Glass Onion: A Knives Out Mystery"));
 			// movies.add(new Movie("Guillermo Del Toro's Pinocchio"));

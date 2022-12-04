@@ -19,6 +19,8 @@ public class Movie {
     @Column(name = "local_date_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime publicAnnouncement;
 
+    @Column(name = "news", columnDefinition = "TEXT")
+    private String news;
 
     public Movie() {
     }
@@ -37,6 +39,14 @@ public class Movie {
 
     public void setPublicAnnouncement(LocalDateTime releaseDate) {
         this.publicAnnouncement = releaseDate;
+    }
+
+    public String getNews() {
+        return news;
+    }
+
+    public void setNews(String news) {
+        this.news = news;
     }
 
     public Movie(String movieTitle, LocalDateTime releaseDate) {

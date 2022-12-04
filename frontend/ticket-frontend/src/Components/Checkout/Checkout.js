@@ -39,6 +39,7 @@ function Checkout(props) {
       "userId": userId
     }
 
+    console.log(JSON.stringify(payment))
     // Post the payment
     let response = await fetch("http://localhost:8080/api/v1/payment/", {
       method: "POST",

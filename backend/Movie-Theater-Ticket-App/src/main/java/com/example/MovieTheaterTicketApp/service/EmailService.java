@@ -86,6 +86,7 @@ public class EmailService {
 
     }
 
+
     public void emailReceipt(RegisteredUser user, String Receipt){
 
         String body = "-------Here is your receipt------\n" + Receipt;

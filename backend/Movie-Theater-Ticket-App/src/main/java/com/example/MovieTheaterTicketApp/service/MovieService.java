@@ -26,6 +26,23 @@ public class MovieService {
         return (List<Movie>) movieRepository.findAll();
     }
 
+    public List<Movie> getRegisteredUserExclusiveMovies(){
+        // return movies that have their public announcement after today
+        List<Movie> movieList = (List<Movie>) movieRepository.findAll();
+        List<Movie> prePublicAnnouncementMovies = new ArrayList<>();
+        LocalDateTime today = LocalDateTime.now();
+
+        for(Movie m:movieList){
+            LocalDateTime publicAnnouncement = m.getPublicAnnouncement();
+            //System.out.println(publicAnnouncement.toString());
+            if(!publicAnnouncement.isBefore(today)){
+                prePublicAnnouncementMovies.add(m);
+            }
+        }
+
+        return prePublicAnnouncementMovies;
+    }
+
     public List<Movie> getGuestMovies(){
         // return movies that have their public announcement already past the date of today
         List<Movie> movieList = (List<Movie>) movieRepository.findAll();
