@@ -52,6 +52,8 @@ public class  UserController {
         user.setRegistrationDate(dtf.format(now));
         user.setNextPaymentDue(dtf.format(now));
 
+        user.setRegistered(true);
+
         if (!userService.register(user)){
             return new ResponseEntity<>("FAILURE", HttpStatus.CONFLICT);
         }

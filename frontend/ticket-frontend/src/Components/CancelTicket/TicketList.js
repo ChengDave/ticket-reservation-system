@@ -19,6 +19,11 @@ const TicketList = (props) => {
 		}).catch((e) => console.error(e))
 
 
+		if (!response.status) {
+			alert("Error Canceling ticket")
+			return
+		}
+
 
 		// Credit the user
 		await fetch("http://localhost:8080/api/v1/payment/refund/" + user + "/amount/" + seat.price * 1.05, {
@@ -27,7 +32,8 @@ const TicketList = (props) => {
 			headers:{'Access-Control-Allow-Origin': '*'},
 		}).catch((e) => console.error(e))
 
-		alert(response.status ? "Ticket Canceled Successfully" : "Error Canceling ticket")
+		
+		alert("Ticket Canceled Successfully")
 		
 		let newTickets = await getTicketsByUserID(user).catch((e) => console.error(e))
 		props.setTickets(newTickets)
