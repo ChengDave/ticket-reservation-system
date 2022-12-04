@@ -72,6 +72,7 @@ function Checkout(props) {
 
     props.params.payment = paymentResponse
     props.params.tickets = tickets
+    props.params.total = totals["total"]
     props.setCount(props.count + 1)
     
   }

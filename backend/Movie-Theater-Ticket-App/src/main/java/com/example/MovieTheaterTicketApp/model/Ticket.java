@@ -27,6 +27,16 @@ public class Ticket {
                 '}';
     }
 
+    public String emailText(){
+        String text = "TicketNo: " + ticketNo + "\n" + 
+                    "Ticket Holder: " + user.getFirstName() + user.getLastName() + "\n" +
+                    "Movie Name: " + seat.getShowtime().getMovie().getMovieTitle() + "\n" +
+                    "Theatre: " + seat.getShowtime().getTheater().getTheaterTitle() + "\n" +
+                    "Time: " + seat.getShowtime().getLocalDateTime() + "\n" +
+                    "Seat Number: " + seat.getSeatNumber() + "\n";
+        return text;
+    }
+
     public Ticket(RegisteredUser user, Seat seat) {
         this.user = user;
         this.seat = seat;

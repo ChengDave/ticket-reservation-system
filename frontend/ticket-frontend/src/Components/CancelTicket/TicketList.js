@@ -7,6 +7,10 @@ const TicketList = (props) => {
 
 	const cancel = async (user, seat) => {
 
+		let result = window.confirm("Are you sure you want to Cancel this ticket?")
+      	if (!result)
+			return;
+
 		//cancel the ticket
 		await fetch("http://localhost:8080/api/v1/ticket/user/" + user + "/seat/" + seat.id, {
 			method: "DELETE",

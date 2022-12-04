@@ -37,8 +37,9 @@ const ConfirmationScreen = (props) => {
 				Payment Details:
 			</p>
 			<div className='ticket-item'>
-				<p>Card Number: {props.params.payment.creditCardNo}</p>
-				<p>Total Charged: ${props.params.payment.paymentAmount.toFixed(2)}</p>
+				<p>Payment Date: {props.params.payment.date}</p>
+				<p>Total Charged to Card: ${props.params.payment.amount.toFixed(2)}</p>
+				<p>Total Using Credit: ${(props.params.total - props.params.payment.amount).toFixed(2)}</p>
 			</div>
 
 			<p className='header'>

@@ -43,7 +43,7 @@ public class TicketController {
         ticketService.addTicket(ticket);
 
         // invoke the email service
-        emailService.emailTicket(user, ticket.toString());
+        emailService.emailTicket(user, ticket.emailText());
         return ticket;
     }
 

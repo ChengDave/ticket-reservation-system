@@ -57,7 +57,7 @@ public class PaymentController {
             double residue = userService.removeFromCredit(user, payment.getPaymentAmount());
             residue = Math.abs(residue);
             payment.setPaymentAmount(residue);
-            userService.setRefund(user, false);
+            // userService.setRefund(user, false);
         }
 
         paymentService.addPayment(payment);
@@ -68,7 +68,7 @@ public class PaymentController {
         
 
         // invoke the email service
-        emailService.emailReceipt(user, receipt.toString());
+        emailService.emailReceipt(user, receipt.emailText());
         
         if (receipt.getAmount() == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");

@@ -67,7 +67,13 @@ public class Receipt {
         this.receiptNo = receiptNo;
     }
 
-
+    public String emailText(){
+        String text = "ReceiptNo: " + receiptNo + "\n" + 
+                    "Amount: : " + amount + "\n" +
+                    "Name: " + user + "\n" +
+                    "Date: " + date;
+        return text;
+    }
 
     
     
