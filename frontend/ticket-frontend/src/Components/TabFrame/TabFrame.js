@@ -4,31 +4,13 @@ import TileGrid from "../TileGrid/TileGrid"
 import Checkout from "../Checkout/Checkout"
 import AccordianList from "../ShowtimeSelection/AccordionList"
 import SeatGrid from '../SeatGrid/SeatGrid';
+import ConfirmationScreen from '../ConfirmationScreen/ConfirmationScreen';
 
 function TabFrame() {
 
 	const [count, setCount] = useState(0);
 	const [parameters, setParameters] = useState({movie: '', theater: "", showtime: "", seats: []})
 
-	let movies = []
-	for (let i = 1; i <= 16; i++) {
-		movies.push("Movie " + i)
-	}
-
-	let theaters = []
-	for (let i = 1; i <= 1; i++) {
-		theaters.push("Theater " + i)
-	}
-
-	let showtimes = []
-	for (let i = 1; i <= 4; i++) {
-		showtimes.push("Time " + i)
-	}
-
-	let seats = []
-	for (let i = 1; i <= 100; i++) {
-		seats.push("Seat " + i)
-	}
 	
 
 	return (
@@ -36,7 +18,7 @@ function TabFrame() {
 			<Tabs count = {count} setCount = {setCount}>
 				<Tab label="Movie">
 					<div>
-						<TileGrid count = {count} setCount = {setCount} items = {movies} params = {parameters} setParams = {setParameters}/>
+						<TileGrid count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}/>
 					</div>
 				</Tab>
 				<Tab label="Showtime">
@@ -54,6 +36,11 @@ function TabFrame() {
 						<Checkout count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}/>
 					</div>
 				</Tab>
+				<Tab label="Confirmation">
+					<div>
+						<ConfirmationScreen count = {count} setCount = {setCount} params = {parameters} setParams = {setParameters}></ConfirmationScreen>
+					</div>
+				</Tab>
 			</Tabs>
 		</div>
 	)
@@ -68,7 +55,7 @@ class Tabs extends React.Component{
 
 	nextTab = () => {
 		const next_index = this.props.count + 1
-		if (next_index > 4) return
+		if (next_index > 5) return
 		this.props.setCount(next_index)
 	}
 
@@ -109,7 +96,7 @@ const TabButtons = ({buttons, nextTab, lastTab, activeTab}) => {
 			{buttons.map(button =>{
 				return <button key = {button} className={button === activeTab? 'active': ''}>{button}</button>
 			})}
-			<button className="back-button" onClick={lastTab}>⇐ Back</button>
+			{activeTab !== "Confirmation" ? <button className="back-button" onClick={lastTab}>⇐ Back</button> : <div></div>}
 		</div>
 	)
 }

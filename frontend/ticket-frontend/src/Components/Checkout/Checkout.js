@@ -23,13 +23,6 @@ function Checkout(props) {
       userId = await getGuestUser(info)
     }
 
-    // Make a ticket for each selected seat
-    props.params.seats.forEach(seatid => {
-      fetch("http://localhost:8080/api/v1/ticket/user/" + userId + "/seat/" + seatid, {
-        method: "POST",
-        headers:{"Content-Type":"application/json"},
-      })
-    });
 
     
     let totals = getTotals(props.params)
@@ -46,18 +39,41 @@ function Checkout(props) {
       "userId": userId
     }
 
-    console.log(payment)
-
     // Post the payment
-    await fetch("http://localhost:8080/api/v1/payment/", {
+    let response = await fetch("http://localhost:8080/api/v1/payment/", {
       method: "POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(payment)
     })
     .catch((e) => console.error(e))
 
-    alert("Purchase Confirmed")
+    if (response.status !== 200) {
+      alert("Purchase Failed")
+      return
+    }
 
+    let paymentResponse = await response.json()
+
+    let responses = []
+    let tickets = []
+
+    // Make a ticket for each selected seat
+
+    for (let i = 0; i < props.params.seats.length; i++) {
+      let response = await fetch("http://localhost:8080/api/v1/ticket/user/" + userId + "/seat/" + props.params.seats[i], {
+        method: "POST",
+        headers:{"Content-Type":"application/json"},
+      })
+
+      let ticket = await response.json()
+      tickets.push(ticket)
+
+    }
+
+    props.params.payment = paymentResponse
+    props.params.tickets = tickets
+    props.setCount(props.count + 1)
+    
   }
 
   const canceled = () => {
@@ -75,8 +91,6 @@ function Checkout(props) {
       })
     
       let userInfo = await response.json()
-
-      console.log(userInfo)
 
       let newInfo = {
         "Card Number": userInfo.creditCard,

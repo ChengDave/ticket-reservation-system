@@ -7,7 +7,6 @@ const FeePayment = (props) => {
 	const {user, setUser} = useContext(UserContext)
 
 	const payFee = async () => {
-		console.log(user)
 		await fetch("http://localhost:8080/api/v1/payment/userfee/user/" + user, {
 			method: "POST",
 			headers:{"Content-Type":"application/json"}
