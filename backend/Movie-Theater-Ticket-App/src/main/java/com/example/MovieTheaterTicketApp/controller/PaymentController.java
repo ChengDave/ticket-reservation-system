@@ -68,7 +68,7 @@ public class PaymentController {
         
 
         // invoke the email service
-        emailService.emailReceipt(user, receipt.toString());
+        emailService.emailReceipt(user, receipt.emailText());
         
         if (receipt.getAmount() == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment did not go through");
