@@ -78,12 +78,12 @@ public class PaymentService {
         paymentRepo.deleteById(id);
     }
 
-    public Long genReceipt(Payment payment){
+    public Receipt genReceipt(Payment payment){
         Receipt receipt = new Receipt((long) 1234, payment.getPaymentAmount(), 
             payment.getPaymentDate(), "user", payment.getId());
 
         receiptRepo.save(receipt);
-        return receipt.getId();
+        return receipt;
     }
 
     public Optional<Receipt> getRecieptById(Long id){
