@@ -44,11 +44,16 @@ const Register = (props) => {
 		}
 
 		// Create User
-		await fetch("http://localhost:8080/api/v1/users/registeredUser", {
+		let response = await fetch("http://localhost:8080/api/v1/users/registeredUser", {
 			method: "POST",
 			headers:{"Content-Type":"application/json"},
 			body: JSON.stringify(user)
 		})
+
+		if (!response.ok) {
+			alert("Email Already Taken")
+			return
+		}
 
 		// Log User In
 		let credentials = ""
