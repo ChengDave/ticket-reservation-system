@@ -1,9 +1,6 @@
 
 const ConfirmationScreen = (props) => {
 
-	console.log(props.params.payment)
-	console.log(props.params.tickets)
-
 	let ticketFrames = []
 
 	props.params.tickets.forEach((ticket) => {

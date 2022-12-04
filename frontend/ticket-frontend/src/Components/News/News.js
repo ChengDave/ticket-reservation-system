@@ -53,7 +53,6 @@ const News = () => {
 	movies.forEach((movie) => {
 		movieItems.push(<NewsItem title = {movie.movieTitle} date = {movie.publicAnnouncement} story = {movie.news}/>)
 	})
-	console.log(movies)
 
 	return (
 		<div className="wrapper">

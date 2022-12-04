@@ -15,9 +15,14 @@ const Register = (props) => {
 			return
 		}
 
+		if (validateEmail(info["Email"])) {
+			alert("Enter a valid email")
+			return
+		}
+
 		let start = info["Card Number"].substring(0,1)
 
-		if (start !== "3" && start !== "4" && start !== "5") {
+		if ((start !== "3" && start !== "4" && start !== "5") || info["Card Number"].length !== 16) {
 			alert("Enter a valid card number")
 			return
 		}
@@ -88,5 +93,16 @@ const Register = (props) => {
 		</div>
 	)
 }
+
+const validateEmail = (email) => {
+	let valid = String(email)
+	  .toLowerCase()
+	  .match(
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	  );
+
+	return valid === null
+
+  };
 
 export default Register
