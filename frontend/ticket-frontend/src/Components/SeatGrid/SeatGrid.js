@@ -26,6 +26,9 @@ const SeatGrid = (props) => {
 	
 	seats.forEach((seat, index) => {
 		buttons.push(<Button seat = {seat} selection = {selection} setSelection = {setSelection} key = {index}/>)
+		
+		if ((index+1)%10 === 0)
+		buttons.push(<br></br>)
 	})
 
 	

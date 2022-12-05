@@ -97,7 +97,7 @@ public class MovieTheaterTicketAppApplication {
 				List<Seat> seats = new ArrayList<>();
 
 				for (int hour = 15; hour < 23; hour++) {
-					for (int day = 7; day < 9; day ++) {
+					for (int day = 7; day < 11; day ++) {
 						Showtime showtime1 = (new Showtime(movies.get(i), theater1, LocalDateTime.of(2022, 12, day, hour, 30+i)));
 						Showtime showtime2 = (new Showtime(movies.get(i), theater2, LocalDateTime.of(2022, 12, day, hour, 00+i)));
 						// Showtime showtime3 = (new Showtime(movies.get(i), theater3, LocalDateTime.of(2022, 12, day, hour, 40+i)));
@@ -107,7 +107,7 @@ public class MovieTheaterTicketAppApplication {
 						showtimes.add(showtime2);
 						// showtimes.add(showtime3);
 
-						for(int s=1; s<10; s++){
+						for(int s=1; s<21; s++){
 							seats.add(new Seat(false, (double) 12.5, s, showtime1));
 							seats.add(new Seat(false, (double) 12.5, s, showtime2));
 							// seats.add(new Seat(false, (double) 12.5, s, showtime3));
