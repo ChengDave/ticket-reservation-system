@@ -13,9 +13,10 @@ function Checkout(props) {
   const clicked = async () => {
 
     if (!checkValidInputs(info)) {
-      alert("Missing Required Entries")
       return
     }
+
+
     
     //Get registered user or guest user
     let userId = user
@@ -238,18 +239,44 @@ const checkValidInputs = (info) => {
 
   // Not all feilds filled
   if (Object.keys(info).length !== 12) {
+    alert("Missing Required Entries")
     valid = false
   }
 
   // Not all feilds have a value in them
   for (let key of Object.keys(info)) {
     if (info[key] == "") {
+      
+      alert("Missing Required Entries")
       valid = false
       break
     }
   }
 
+  let start = info["Card Number"].substring(0,1)
+
+  if ((start !== "3" && start !== "4" && start !== "5") || info["Card Number"].length !== 16) {
+    alert("Enter a valid card number")
+    valid = false
+  }
+
+  if (validateEmail(info["Email"])) {
+    alert("Enter a valid email")
+    valid = false
+  }
+
   return valid
 }
+
+const validateEmail = (email) => {
+	let valid = String(email)
+	  .toLowerCase()
+	  .match(
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	  );
+
+	return valid === null
+
+  };
 
 export default Checkout

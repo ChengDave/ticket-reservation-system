@@ -8,6 +8,7 @@ const SeatGrid = (props) => {
 	const [selection, setSelection] = useState([])
 	const [seats, setSeats] = useState([])
 
+
 	useEffect(() => {
 		fetch("http://localhost:8080/api/v1/seat/"+props.params.showtime.id,{})
 		.then((response) => response.json())
@@ -23,9 +24,22 @@ const SeatGrid = (props) => {
 	}, [])
 
 	let buttons = []
-	
+
+	let max_seats = seats.length + 5
+
+	if (!props.params.public) {
+		let taken_seats = 0
+
+		seats.forEach(seat => {
+			if (seat.taken)
+				taken_seats += 1
+		})
+
+		max_seats = seats.length * 0.1 - taken_seats
+	}
+
 	seats.forEach((seat, index) => {
-		buttons.push(<Button seat = {seat} selection = {selection} setSelection = {setSelection} key = {index}/>)
+		buttons.push(<Button seat = {seat} selection = {selection} setSelection = {setSelection} key = {index} max_seats = {max_seats}/>)
 		
 		if ((index+1)%10 === 0)
 		buttons.push(<br></br>)
@@ -82,6 +96,11 @@ const Button = (props) => {
 	const [available, setAvailable] = useState(props.seat.taken ? "taken" : "available")
 
 	const clicked = () => {
+
+		if (props.selection.length >= props.max_seats) {
+			alert("Max number of seats for non public movie has been reached")
+			return;
+		}
 		if (available === "taken") return;
 		
 		

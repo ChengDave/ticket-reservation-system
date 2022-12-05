@@ -13,9 +13,9 @@ class Tile extends React.Component{
 		if (next_index > 3) return
 		this.props.setCount(next_index)
 
-		
 		let p = this.props.params
 		p.movie = this.props.label.movieTitle
+		p.public = new Date(this.props.label.publicAnnouncement) < new Date ()
 		this.props.setParams(p)
 	};
 
