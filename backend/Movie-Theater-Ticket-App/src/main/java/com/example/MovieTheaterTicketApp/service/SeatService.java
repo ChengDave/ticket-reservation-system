@@ -33,11 +33,35 @@ public class SeatService {
     }
 
     public List<Seat> findByShowtime_id(Long id){
-        return seatRepository.findByshowtime_id(id);
+        // show seats if after public announce or if under 10% taken. Else show all seats as taken if before announcement
+        // and 10% or more taken
+        Optional<Showtime> showtime = showtimeRepository.findById(id);
+
+        LocalDateTime publicAnnouncement = showtime.get().getMovie().getPublicAnnouncement();
+        LocalDateTime today = LocalDateTime.now();
+
+        if(publicAnnouncement.isBefore(today)){
+            // if public announcement has already past then early return to show all seats available
+            return seatRepository.findByshowtime_id(id);
+        }
+
+        List<Seat> allSeats = seatRepository.findByshowtime_id(id);
+        List<Seat> availableSeats = seatRepository.findByShowtime_idAndTAndIsTakenEqualsFalse(id);
+
+        if(availableSeats.size()/allSeats.size()<=0.9){
+            // if number of taken seats is greater than 10% then return empty list
+            for(Seat s: allSeats){
+                s.setTaken(true);
+            }
+            return allSeats;
+        }
+
+        return seatRepository.findByshowtime_id(id); // show all seats if less than 10% taken
+
     }
 
     public List<Seat> findByshowtime_idAndTAndTakenEqualsFalse(Long id){
-        // show all available seats if after public announce, else allow seats to be shown if under 10% are taken
+        // return all available seats if after public announce, else allow seats to be shown if under 10% are taken
         Optional<Showtime> showtime = showtimeRepository.findById(id);
 
         LocalDateTime publicAnnouncement = showtime.get().getMovie().getPublicAnnouncement();

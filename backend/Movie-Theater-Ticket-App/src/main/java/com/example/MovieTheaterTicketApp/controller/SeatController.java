@@ -23,33 +23,33 @@ public class SeatController {
 
     @GetMapping()
     public List<Seat> getSeatsByShowtime(@RequestBody Showtime show){
-        //TODO: DEBUG AND FIX
-        // return list of all seats by showtime
+        // return list of all seats by showtime object
         return seatService.getSeatsByShowtime(show);
     }
 
     @GetMapping(path="/{showTimeId}")
     public List<Seat> getSeatsByShowtimeId(@PathVariable("showTimeId") Long showTimeId){
-        // return list of all seats by ShowtimeId
+        // return list of all seats by ShowtimeId. If more than 10% taken and time is before public announcement then show all seats as taken
         return seatService.findByShowtime_id(showTimeId);
     }
 
 
     @GetMapping(path="/available/{showTimeId}")
     public List<Seat> getAvailableSeatsByShowtimeId(@PathVariable("showTimeId") Long showTimeId){
-        // return list of all seats by ShowtimeId
+        // return list of all available seats by ShowtimeId.
+        // If more than 10% taken and time is before public announcement then show all seats as taken
         return seatService.findByshowtime_idAndTAndTakenEqualsFalse(showTimeId);
     }
 
     @PostMapping()
     public void addSeat(@RequestBody Seat seat){
-        // add movie to db
+        // add seat database
         seatService.addSeat(seat);
     }
 
     @DeleteMapping()
     public void removeSeat(@RequestBody Seat seat){
-        // remove movie from db
+        // remove seat from db
         seatService.removeSeat(seat);
     }
 
