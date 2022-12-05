@@ -7,6 +7,7 @@ import { UserContext } from './UserContext';
 import NavBar from "./Components/NavBar/NavBar"
 
 function App() {
+  // main app
 
   const [user, setUser] = useState("none")
 

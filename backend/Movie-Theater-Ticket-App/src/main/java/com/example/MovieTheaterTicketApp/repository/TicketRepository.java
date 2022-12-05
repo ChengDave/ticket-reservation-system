@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long>{
     Ticket getTicketBySeatId(Long id);
-
     boolean existsById(Long id);
     List<Ticket> findByUser_id(Long id);
 

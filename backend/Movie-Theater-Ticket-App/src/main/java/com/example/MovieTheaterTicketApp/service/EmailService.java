@@ -20,7 +20,6 @@ public class EmailService {
     private TicketService ticketService;
     private Ticket ticket;
     private Receipt receipt;
-    // private JavaMailSender mailSender;
     private String status = "Not Sent";
 
     @Autowired
@@ -38,14 +37,6 @@ public class EmailService {
         this.payService = payService;
         this.ticketService = ticketService;
     }
-
-    
-    // public void emailReceiptAndTicket(RegisteredUser user, String email){
-
-    //     EmailTicketAndReceipt emailTicketAndReceipt = new EmailTicketAndReceipt();
-    //     emailTicketAndReceipt.emailUser(user, email);
-
-    // }
 
     public void emailReceiptAndTicket(RegisteredUser user){
 
@@ -127,38 +118,4 @@ public class EmailService {
 
 
     }
-
-    // public void sendNewMail(String to, String subject, String body)
-    // {
-    //     SimpleMailMessage message = new SimpleMailMessage();
-    //     message.setTo(to);
-    //     message.setSubject(subject);
-    //     message.setText(body);
-    //     mailSender.send(message);
-    // }
-
-    /**
-     * This method will send a pre-configured message
-     * */
-    // public void sendPreConfiguredMail(String message)
-    // {
-    //     SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
-    //     mailMessage.setText(message);
-    //     mailSender.send(mailMessage);
-    // }
-
-
-
-
-//    public boolean emailAllRegUsers(String news){
-//        // Need to extract all reg user
-//        Set<String> userEmails = extractRegisteredEmails();
-//
-//        broadcast.emailAll(userEmails);
-//        return false;
-//    }
-
-//    public Set<String> extractRegisteredEmails(){
-//        return ??;
-//    }
 }

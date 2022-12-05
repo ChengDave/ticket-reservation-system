@@ -32,12 +32,10 @@ public class ShowtimeService {
     }
 
     public void addShowtime(Showtime showtime) {
-        //TODO: Need error handling if showtime is already taken
         showtimeRepository.save(showtime);
     }
 
     public void removeShowtime(Showtime showtime) {
-        //TODO: Need error handling if showtime does not exist
         showtimeRepository.delete(showtime);
     }
 }

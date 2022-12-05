@@ -48,16 +48,9 @@ public class TicketController {
         return ticket;
     }
 
-//    @DeleteMapping
-//    public void deleteTicket(@RequestBody Ticket ticket){
-//        Seat seat = ticket.getSeat();
-//        seatService.registerSeat(seat); // sets seat to istaken
-//    }
-
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(value = "/user/{userId}/seat/{seatId}")
     public ResponseEntity<String> deleteTicket(@PathVariable("userId") int userId, @PathVariable("seatId") Long seatId){
-//        RegisteredUser user = userService.getUserById(userId);
         Ticket ticket = ticketService.getTicketBySeatId(seatId);
         Seat seat = seatService.findById(seatId);
 

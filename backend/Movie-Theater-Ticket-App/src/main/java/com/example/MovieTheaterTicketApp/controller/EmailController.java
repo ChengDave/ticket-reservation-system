@@ -34,12 +34,5 @@ public class EmailController {
         return user;
     }
 
-
-
-//    @PostMapping()
-//    public void emailAllRegUsers(String news){
-//        // email all users
-//        emailService.emailAllRegUsers(news);
-//    }
 }
 

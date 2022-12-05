@@ -37,7 +37,6 @@ public class UserService {
         String userEmail = registerUser.getEmail();
 
         if (userRepository.existsByEmail(userEmail)){
-            //System.out.println("CANNOT REGISTER DUE TO EMAIL ALREADY EXISTS");
             return false;
         }
         userRepository.save(registerUser);

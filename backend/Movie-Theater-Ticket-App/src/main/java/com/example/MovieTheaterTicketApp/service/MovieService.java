@@ -17,10 +17,6 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-//    public List<Movie> getMovies(){
-//        return (List<Movie>) movieRepository.findAll();
-//    }
-
     public List<Movie> getRegisteredUserMovies(){
         // return all movies
         return (List<Movie>) movieRepository.findAll();
@@ -34,7 +30,6 @@ public class MovieService {
 
         for(Movie m:movieList){
             LocalDateTime publicAnnouncement = m.getPublicAnnouncement();
-            //System.out.println(publicAnnouncement.toString());
             if(!publicAnnouncement.isBefore(today)){
                 prePublicAnnouncementMovies.add(m);
             }
@@ -51,7 +46,6 @@ public class MovieService {
 
         for(Movie m:movieList){
             LocalDateTime publicAnnouncement = m.getPublicAnnouncement();
-            //System.out.println(publicAnnouncement.toString());
             if(publicAnnouncement.isBefore(today)){
                 postPublicAnnouncementMovies.add(m);
             }
@@ -69,12 +63,10 @@ public class MovieService {
     }
 
     public void addMovie(Movie movie) {
-        //TODO: Need error handling if movie name is already taken
         movieRepository.save(movie);
     }
 
     public void removeMovie(Movie movie) {
-        //TODO: Need error handling if movie name does not exist
         movieRepository.delete(movie);
     }
 

@@ -62,7 +62,6 @@ public class TicketService {
 
         for(Ticket t:allTicketsforUser){
             LocalDateTime showdate = t.getSeat().getShowtime().getLocalDateTime();
-            //System.out.println(showdate.toString());
             if(showdate.minusDays(3).isAfter(today)){
                 allTicketsAvailableToCancel.add(t);
             }

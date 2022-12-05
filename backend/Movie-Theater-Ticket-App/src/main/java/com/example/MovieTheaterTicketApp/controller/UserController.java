@@ -27,25 +27,29 @@ public class  UserController {
     @GetMapping()
     public List<RegisteredUser> getUsers(){
         // return list of all registered users
+
         return userService.getUsers();
     }
 
     @GetMapping(value = "/ID/{id}")
     public RegisteredUser getUserById(@PathVariable("id") int id) {
+        // return user by user id
+
         System.out.println("Here");
         return userService.getUserById(id);
     }
 
     @GetMapping(value = "/USERNAME/{username}/PASSWORD/{password}")
     public RegisteredUser checkCredentials(@PathVariable("username") String username, @PathVariable("password") String password) {
+        // return user if credentials pass
+
         return userService.checkCredentials(username, password);
-        // RegisteredUser user = userService.checkCredentials(username, password);
-        // return user;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path = "/registeredUser")
     public ResponseEntity<String>  registerUser(@RequestBody RegisteredUser user) {
+        // register user and return SUCCESS if succeeded
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
@@ -63,20 +67,20 @@ public class  UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path = "/guestUser")
-    public void guestUser(@RequestBody RegisteredUser user) { 
+    public void guestUser(@RequestBody RegisteredUser user) {
+        // register guest user
+
         user.setRegistered(false);
         userService.register(user);
     }
 
     @GetMapping(value = "email/{email}")
     public List<RegisteredUser> getUserByEmail(@PathVariable("email") String email){
+        // return user with associated email
+
         if (email == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
         }
         return userService.getUserByEmail(email);
     }
-
-
-
-  
 }
