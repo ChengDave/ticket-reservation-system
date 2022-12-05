@@ -27,12 +27,10 @@ public class TheaterService {
     }
 
     public void addTheater(Theater theater) {
-        //TODO: Need error handling if theater name is already taken
         theaterRepository.save(theater);
     }
 
     public void removeTheater(Theater theater) {
-        //TODO: Need error handling if theater name does not exist
         theaterRepository.delete(theater);
     }
 }

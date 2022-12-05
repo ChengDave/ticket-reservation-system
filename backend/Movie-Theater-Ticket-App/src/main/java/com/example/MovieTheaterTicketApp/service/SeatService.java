@@ -65,12 +65,10 @@ public class SeatService {
 
 
     public void addSeat(Seat seat) {
-        //TODO: Need error handling if movie name is already taken
         seatRepository.save(seat);
     }
 
     public void removeSeat(Seat seat) {
-        //TODO: Need error handling if movie name does not exist
         seatRepository.delete(seat);
     }
     public void registerSeat(Seat seat) {

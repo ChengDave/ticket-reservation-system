@@ -39,10 +39,6 @@ public class PaymentController {
     
     @PostMapping
     public Receipt addPayment(@RequestBody Payment payment){
-
-        // TODO: Garnet's Comments. I don't like that this takes the id and userID. I think it should take the user/username and look that up. I currently have 1 hardcoded.
-        // TODO: Need a response confirming the payment was good or not. Might need to hard code it but we are supposed to display that to the user
-
         // Check if the credit card has enough money for the payment to go through 
         
         //generate date and time and add to the created payment object
@@ -143,22 +139,13 @@ public class PaymentController {
         userService.payRegistration(user, date_format.format(now.plusYears(1l)));
 
     }
-
-
-    // @PostMapping(value = "/makePayment", consumes = MediaType.APPLICATION_JSON_VALUE)
-    // public void getPayment(@RequestBody Payment payment){
-    //     paymentService.addPayment(payment);
-    // }
     
-    // @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping
     public List<Payment> getAllPayments(){
         return paymentService.getAllPayments();
     }
+
     
-    
-    
-    // @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping(path = "{id}")
     public Payment getPaymentById(@PathVariable("id") Long id){
         
@@ -178,34 +165,4 @@ public class PaymentController {
         }
         else{return null;}
     }
-    
-    // @CrossOrigin(origins = "http://127.0.0.1:5501")
-    // @DeleteMapping(path = "{id}")
-    // public void deletePaymentById(@PathVariable("id") int id){
-        //     PaymentService.deletePayment (id);
-        // }
-        
-        // @DeleteMapping
-        // public void deleteAll(){
-            //     PaymentService.deleteAll();
-            // }
-            
-            // @PutMapping(path = "{id}")
-            // public void updatePayment (@PathVariable("id") int id, @Valid @NonNull @RequestBody Payment  Payment ToUpdate){
-                //     PaymentService.updatePayment (id, Payment ToUpdate);
-                // }
-                
-                // @GetMapping()
-                // public List<Payment> getAllPayments(){
-                    //     List<Payment> test = new ArrayList<>();
-                    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
-                    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
-                    //     test.add(new Payment(1l, 1l, 0, "123", "123", "123", 10.0, 1l));
-                    //     return (List<Payment>) test;
-                    // }
-                    
-                    
-                    
-                
-                
-            }
+}

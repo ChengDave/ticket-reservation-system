@@ -21,12 +21,6 @@ public class SeatController {
         this.ticketService = ticketService;
     }
 
-//    @GetMapping
-//    public List<Seat> getSeats(){
-//        // return list of all seats
-//        return seatService.getSeats();
-//    }
-
     @GetMapping()
     public List<Seat> getSeatsByShowtime(@RequestBody Showtime show){
         //TODO: DEBUG AND FIX
@@ -65,10 +59,4 @@ public class SeatController {
         seatService.registerSeat(seat);
     }
 
-//    @PostMapping(path = "seatId/{seatId}/TicketId/{ticketId}")
-//    public void selectMovieToView(@PathVariable("seatId") Long seatId,
-//                                @PathVariable("ticketId") Long ticketId){
-//        // choose a movie to view and update that info in the ticket
-//        ticketService.updateTicketMovie(ticketId, seatId);
-//    }
 }

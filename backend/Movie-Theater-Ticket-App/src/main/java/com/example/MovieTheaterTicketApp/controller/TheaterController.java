@@ -10,6 +10,7 @@ import java.util.List;
 @RequestMapping(path = "api/vi/theaters")
 public class TheaterController {
     private final TheaterService TheaterService;
+
     @Autowired
     public TheaterController(TheaterService TheaterService) {
         this.TheaterService = TheaterService;

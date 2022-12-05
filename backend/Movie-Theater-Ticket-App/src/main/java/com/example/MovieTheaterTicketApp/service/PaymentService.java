@@ -27,7 +27,6 @@ public class PaymentService {
         this.receiptRepo = receiptRepo;
     }
 
-
     public List<Payment> getAllPayments() {
         return paymentRepo.findAll();
     }
@@ -91,18 +90,9 @@ public class PaymentService {
         return receiptRepo.findById(id);
     }
 
-    // public void updatePayment(Long id, Payment Payment){
-    //    paymentRepo.deleteById(id);
-    //    paymentRepo.save(new Payment(id, Payment.getName()));
-    // }
-
     public void deleteAll(){
         paymentRepo.deleteAll();
     }
-    
 
-    // A way to verify that the credit card has enough balance to affect the transaction
-    // A way to check that the credit card is valid, is not expired
-    // reduce the balance in credit card
 }
 
