@@ -127,8 +127,18 @@ public class PaymentController {
             payment.setUserId(userId);
     
             paymentService.addPayment(payment);
+        
+
+            // Adding receipt to User
+            Receipt receipt = paymentService.genReceipt(payment);
+            userService.addReceipt(user, receipt.getId());
+            
+            // invoke the email service
+            CompletableFuture.runAsync(() -> emailService.emailReceipt(user, receipt.emailText()));
+
         }
 
+        
         // Update the users Registration Date
         userService.payRegistration(user, date_format.format(now.plusYears(1l)));
 

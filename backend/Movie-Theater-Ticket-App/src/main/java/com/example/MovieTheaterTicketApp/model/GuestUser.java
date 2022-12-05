@@ -15,6 +15,14 @@ public class GuestUser implements User {
     protected GuestUser() {
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public GuestUser(String email) {
         this.email = email;
     }
