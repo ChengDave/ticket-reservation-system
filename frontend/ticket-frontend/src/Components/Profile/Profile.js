@@ -5,7 +5,9 @@ import TicketList from "../CancelTicket/TicketList";
 import { getTicketsByUserID } from "../../APICalls/getTicketsByUserID";
 import UserTable from "./UserTable";
 
-const Display = (props) => {
+
+// Component to display the users profile and their active tickets
+const Profile = (props) => {
 
 	const [userData, setUserData] = useState({firstName: '', lastName: "", credit: 0})
 	const [tickets, setTickets] = useState([])
@@ -51,4 +53,4 @@ const Display = (props) => {
 	)
 }
 
-export default Display
+export default Profile

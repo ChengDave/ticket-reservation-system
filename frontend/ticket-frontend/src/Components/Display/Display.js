@@ -7,6 +7,7 @@ import Profile from "../Profile/Profile"
 import FeePayment from "../Profile/FeePayment"
 
 
+// Main display component that changes out what is shown on the screen
 const Display = (props) => {
 	
 	const getDisplay = () => {

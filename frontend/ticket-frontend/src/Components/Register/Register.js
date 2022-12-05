@@ -3,6 +3,8 @@ import InputField from "../Checkout/InputField"
 import React, {useState, useContext} from "react"
 import { UserContext } from '../../UserContext';
 
+
+// Component for user to enter information to register
 const Register = (props) => {
 
 	const [info, setInfo] = useState({})
@@ -94,6 +96,7 @@ const Register = (props) => {
 	)
 }
 
+// Method to validate email
 const validateEmail = (email) => {
 	let valid = String(email)
 	  .toLowerCase()

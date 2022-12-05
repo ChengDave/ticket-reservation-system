@@ -4,6 +4,7 @@ import { getTicketsByUserID } from "../../APICalls/getTicketsByUserID";
 import { getUserByEmail } from "../../APICalls/GetUser";
 import TicketList from "./TicketList";
 
+// div to display tickets with a cancel window
 const CancelTicket = (props) => {
 	
 	const [tickets, setTickets] = useState([])
@@ -17,6 +18,7 @@ const CancelTicket = (props) => {
 
 }
 
+// Component for user to enter email on cancel page
 const EnterEmail = (props) => {
 
 	const email = useRef()

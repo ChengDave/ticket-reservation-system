@@ -2,6 +2,7 @@ import './AccordionList.css';
 import React, {useState, useEffect} from "react";
 
 
+// Accordian List that contains comopenet to interact with
 const AccordionList = (props) => {
 	
 	const [times, setTimes] = useState([])

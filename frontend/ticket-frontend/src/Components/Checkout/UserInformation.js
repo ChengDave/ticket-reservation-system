@@ -1,5 +1,6 @@
 import InputField from "./InputField"
 
+// Sub component of inputs for payment information
 const UserInformation = (props) => {
 	return (
 		<form>

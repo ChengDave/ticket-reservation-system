@@ -6,6 +6,7 @@ import AccordianList from "../ShowtimeSelection/AccordionList"
 import SeatGrid from '../SeatGrid/SeatGrid';
 import ConfirmationScreen from '../ConfirmationScreen/ConfirmationScreen';
 
+// Main component for selecting a movie that switches between different tabs
 function TabFrame() {
 
 	const [count, setCount] = useState(0);

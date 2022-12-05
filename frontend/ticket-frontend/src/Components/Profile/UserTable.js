@@ -1,4 +1,6 @@
 
+
+// Component to display the users information on profile page
 const UserTable = (props) => {
 	return (
 		<div>

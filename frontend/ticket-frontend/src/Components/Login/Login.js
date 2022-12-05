@@ -2,6 +2,7 @@ import './Login.css';
 import React, {useContext, useRef} from "react"
 import { UserContext } from '../../UserContext';
 
+// Page that displays for the user to login
 const Login = (props) => {
 
 	const {user, setUser} = useContext(UserContext)

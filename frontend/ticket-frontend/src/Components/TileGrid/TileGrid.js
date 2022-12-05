@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState, useContext} from 'react';
 import Tile from "./Tile"
 import {UserContext} from '../../UserContext';
 
-
+// Grid of movies to display
 const TileGrid = (props) => {
 
 	const [movies, setMovies] = useState([])
@@ -71,6 +71,7 @@ const TileGrid = (props) => {
 	)
 }
 
+// Search bar component
 const Search = (props) => {
 	return (
 		<div className='wrapper'>

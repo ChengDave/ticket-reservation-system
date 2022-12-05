@@ -2,6 +2,7 @@ import "./News.css"
 import React, {useEffect, useRef, useState, useContext} from 'react';
 import {UserContext} from '../../UserContext';
 
+// Component that shows the news tab onscreen
 const News = () => {
 	
 	const {user, setUser} = useContext(UserContext)
@@ -65,7 +66,7 @@ const News = () => {
 	)
 }
 
-
+// Component for individual piece of movie news
 const NewsItem = (props) => {
 
 	

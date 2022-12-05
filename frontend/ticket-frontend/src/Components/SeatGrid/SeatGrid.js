@@ -1,6 +1,8 @@
 import "./SeatGrid.css"
 import React, { useState, useEffect } from 'react'
 
+
+// Component to display a grid of seats
 const SeatGrid = (props) => {
 
 	const [selection, setSelection] = useState([])
@@ -71,6 +73,7 @@ const SeatGrid = (props) => {
 	)
 }
 
+// Seat button that changes color when a user selects it
 const Button = (props) => {
 
 	const [available, setAvailable] = useState(props.seat.taken ? "taken" : "available")

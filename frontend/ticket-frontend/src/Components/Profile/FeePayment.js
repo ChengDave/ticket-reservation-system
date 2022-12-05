@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from "react"
 import { UserContext } from '../../UserContext';
 import UserTable from "./UserTable";
 
+
+// Page that displays when a user has to pay for their registration fee
 const FeePayment = (props) => {
 	
 	const {user, setUser} = useContext(UserContext)

@@ -3,6 +3,7 @@ import React, {useState, useContext, useEffect} from 'react';
 import UserInformation from './UserInformation';
 import {UserContext} from '../../UserContext';
 
+// Component for checkout page displays ticket information and user inputs for payment information
 function Checkout(props) {
 
   const [info, setInfo] = useState({})

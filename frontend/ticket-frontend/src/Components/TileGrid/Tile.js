@@ -1,6 +1,7 @@
 import './TileGrid.css';
 import React from 'react';
 
+// Tile component to display a movie on
 class Tile extends React.Component{
 
 	state = {

@@ -3,6 +3,7 @@ import './NavBar.css';
 import React, {useContext} from "react"
 import { UserContext } from '../../UserContext';
 
+// Component that shows the navbar at the top of the screen
 const NavBar = (props) => {
 
 	const {user, setUser} = useContext(UserContext)

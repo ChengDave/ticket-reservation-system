@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { getTicketsByUserID } from "../../APICalls/getTicketsByUserID";
 
+// List of active tickets for a user to cancel
 const TicketList = (props) => {
 
 	const [ticketTiles, setTiles] = useState([])

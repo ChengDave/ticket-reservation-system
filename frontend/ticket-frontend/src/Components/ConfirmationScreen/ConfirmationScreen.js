@@ -1,4 +1,5 @@
 
+// Component that is displayed when the payment tab is active onscreen
 const ConfirmationScreen = (props) => {
 
 	let ticketFrames = []

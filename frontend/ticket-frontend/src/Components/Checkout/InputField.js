@@ -1,5 +1,7 @@
 import { useRef } from "react"
 
+
+// Component for user to enter information
 const InputField = (props) => {
 
 	let classes = 'field_input-wrapper ' + props.className
